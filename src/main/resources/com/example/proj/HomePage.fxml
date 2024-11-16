@@ -53,10 +53,10 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button layoutX="-4.0" layoutY="126.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Register as Patient" textFill="#fffdfd" />
-            <Button layoutY="169.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Register as Doctor" textFill="WHITE" />
-            <Button fx:id="aboutSyntegrityButton" onAction="#handleAboutSyntegrity" layoutY="345.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="About Syntegrity" textFill="WHITE" />
-            <Button layoutY="302.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="FAQs" textFill="#ececec" />
+            <Button fx:id="registerPatientButton" layoutX="-4.0" layoutY="126.0" mnemonicParsing="false" onAction="#handleRegisterPatient" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Register as Patient" textFill="#fffdfd" />
+            <Button fx:id="registerDoctorButton" layoutY="169.0" mnemonicParsing="false" onAction="#handleRegisterDoctor" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Register as Doctor" textFill="WHITE" />
+            <Button fx:id="aboutSyntegrityButton" layoutY="345.0" mnemonicParsing="false" onAction="#handleAboutSyntegrity" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="About Syntegrity" textFill="WHITE" />
+            <Button fx:id="faqsButton" layoutY="302.0" mnemonicParsing="false" onAction="#handleFaqs" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="FAQs" textFill="#ececec" />
             <Button layoutY="214.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Register as Staff Member" textFill="WHITE" />
             <Button layoutY="257.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Register as Admin" textFill="WHITE" />
          </children>

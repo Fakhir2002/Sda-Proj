@@ -10,9 +10,9 @@ import java.io.IOException;
 public class Faq extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("video-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("Faq-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 430);
-        stage.setTitle("Hello!");
+        stage.setTitle("FAQs!");
         stage.setScene(scene);
         stage.show();
     }

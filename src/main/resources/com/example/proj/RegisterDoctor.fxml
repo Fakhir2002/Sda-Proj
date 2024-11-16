@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.RegisterDoctorController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -55,115 +55,104 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="400.0" prefWidth="533.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="445.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="107.0" prefHeight="33.0" prefWidth="264.0" text="Register Doctor Form" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="20.0" />
-                    </font>
-                    <effect>
-                        <Bloom />
-                    </effect>
-                </Label>
-                <Label layoutX="29.0" layoutY="68.0" text="Name" textFill="WHITE">
+                <Label layoutX="25.0" layoutY="68.0" text="Name" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="30.0" layoutY="102.0" text="DOB" textFill="WHITE">
+                <Label layoutX="29.0" layoutY="101.0" text="DOB" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="10.0" layoutY="140.0" text="Username" textFill="#fffdfd">
+                <Label layoutX="17.0" layoutY="289.0" text="Username" textFill="#fffdfd">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField layoutX="92.0" layoutY="68.0" promptText=" Name">
+                <TextField layoutX="109.0" layoutY="68.0" promptText=" Name">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="90.0" layoutY="104.0" promptText="DOB">
+                <TextField layoutX="109.0" layoutY="103.0" promptText="DOB">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="90.0" layoutY="139.0" promptText="Username">
+                <TextField layoutX="109.0" layoutY="291.0" promptText="Username">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <Button layoutX="98.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
-                <Button layoutX="282.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
-                <Label layoutX="106.0" layoutY="33.0" prefHeight="20.0" prefWidth="225.0" text="Docy Docy, Get registered Docy" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-                <Label layoutX="233.0" layoutY="67.0" text="Hospital" textFill="WHITE">
+                <Button layoutX="307.0" layoutY="212.0" mnemonicParsing="false" onAction="#HandelDocCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
+                <Button fx:id="docRegCancel" layoutX="307.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
+                <Label layoutX="25.0" layoutY="140.0" text="Hospital" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="227.0" layoutY="101.0" text="Specialty" textFill="WHITE">
+                <Label layoutX="21.0" layoutY="174.0" text="Specialty" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="225.0" layoutY="136.0" text="Password" textFill="#fffdfd">
+                <Label layoutX="19.0" layoutY="324.0" text="Password" textFill="#fffdfd">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField layoutX="301.0" layoutY="67.0" promptText="Hospital">
+                <TextField layoutX="109.0" layoutY="140.0" promptText="Hospital">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="299.0" layoutY="103.0" promptText="Specialty">
+                <TextField layoutX="109.0" layoutY="176.0" promptText="Specialty">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="299.0" layoutY="138.0" promptText="Password">
+                <TextField layoutX="109.0" layoutY="326.0" promptText="Password">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <Label layoutX="19.0" layoutY="176.0" text="Contact" textFill="WHITE">
+                <Label layoutX="20.0" layoutY="217.0" text="Contact" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="230.0" layoutY="174.0" text="Address" textFill="WHITE">
+                <Label layoutX="17.0" layoutY="250.0" text="Address" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="121.0" layoutY="215.0" text="Age" textFill="#fffdfd">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <TextField layoutX="87.0" layoutY="176.0" promptText="Contact">
+                <TextField layoutX="109.0" layoutY="217.0" promptText="Contact">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="299.0" layoutY="176.0" promptText="Address">
+                <TextField layoutX="109.0" layoutY="252.0" promptText="Address">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="178.0" layoutY="217.0" promptText="Age">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
+            <Label layoutX="148.0" layoutY="14.0" text="Register Doctor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="19.0" />
+               </font>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <Button layoutX="281.0" layoutY="292.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="124.0" text="Already have an account?">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </center>
 </BorderPane>
-

@@ -39,15 +39,45 @@ public class HomePageController {
     // Method for "Register as Patient" button
     @FXML
     void handleRegisterPatient(ActionEvent event) {
-        System.out.println("Register as Patient button clicked.");
-        // Add your logic here
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientRegister.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) registerPatientButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("HomePage");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 
     // Method for "Register as Doctor" button
     @FXML
     void handleRegisterDoctor(ActionEvent event) {
-        System.out.println("Register as Doctor button clicked.");
-        // Add your logic here
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterDoctor.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) registerDoctorButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Register Doctor");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 
     // Method for "Register as Staff Member" button
@@ -60,15 +90,29 @@ public class HomePageController {
     // Method for "Register as Admin" button
     @FXML
     void handleRegisterAdmin(ActionEvent event) {
-        System.out.println("Register as Admin button clicked.");
-        // Add your logic here
+
     }
 
     // Method for "FAQs" button
     @FXML
     void handleFaqs(ActionEvent event) {
-        System.out.println("FAQs button clicked.");
-        // Add your logic here
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Faq-view.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) faqsButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("FAQs");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 
     @FXML
