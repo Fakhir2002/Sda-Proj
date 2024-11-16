@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.SubmitFeedbackController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -128,6 +128,7 @@
                 </TextField>
             <ChoiceBox layoutX="224.0" layoutY="174.0" prefHeight="24.0" prefWidth="125.0" />
             <Button layoutX="164.0" layoutY="360.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #d7e1e5;" text="Submit" />
+            <Button fx:id="BackButton" onAction="#HandleBack" layoutX="164.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #d7e1e5;" text="Back" />
             </children>
         </AnchorPane>
     </center>

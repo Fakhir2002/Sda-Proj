@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.proj.ManageInventoryController" xmlns:fx="http://javafx.com/fxml/1">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: #d7e1e5; -fx-background-color: ;" BorderPane.alignment="CENTER" />
     </left>
@@ -134,6 +134,11 @@
                   <Font size="10.0" />
                </font>
             </TextField>
+            <Button fx:id="InventoryButton" onAction="#Handleback" layoutX="27.0" layoutY="29.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Back">
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
    </center>
