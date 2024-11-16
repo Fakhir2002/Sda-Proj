@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.BookAppointmentController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -122,6 +122,7 @@
                </children>
             </AnchorPane>
             <ComboBox layoutX="263.0" layoutY="270.0" prefHeight="27.0" prefWidth="59.0" />
+            <Button fx:id="PatientHome"  onAction="#HandleBack" layoutX="196.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Back" />
             </children>
         </AnchorPane>
    </center>
