@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.VideoController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -85,7 +85,7 @@
                     </font>
                 </TextField>
                 <Button layoutX="98.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
-                <Button layoutX="282.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
+                <Button fx:id="backfromvid" layoutX="282.0" layoutY="333.0" mnemonicParsing="false" onAction="#handlebackvid" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <DatePicker layoutX="155.0" layoutY="226.0" prefHeight="10.0" prefWidth="127.0" />
                 <Label layoutX="38.0" layoutY="226.0" text="Date" textFill="#fffdfd">
                     <font>

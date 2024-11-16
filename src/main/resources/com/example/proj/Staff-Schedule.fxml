@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.StaffScheduleController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -71,7 +71,7 @@
                     </font>
                 </Label>
                 <Button layoutX="62.0" layoutY="339.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="66.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
-                <Button layoutX="282.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
+                <Button fx:id="backfromss" layoutX="282.0" layoutY="338.0" mnemonicParsing="false" onAction="#handlebackfromss" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <DatePicker layoutX="156.0" layoutY="100.0" prefHeight="10.0" prefWidth="127.0" />
                 <Label layoutX="30.0" layoutY="143.0" text="Time" textFill="#fffdfd">
                     <font>

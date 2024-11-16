@@ -12,7 +12,7 @@ public class DoctorHome extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(RegisterPatientApplication.class.getResource("DoctorHome.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 650, 450);
-        stage.setTitle("Home Page");
+        stage.setTitle("Doctor's Home Page");
         stage.setScene(scene);
         stage.show();
     }

@@ -24,7 +24,7 @@ public class FaqController {
     public void cancellation(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) cancelFAQ.getScene().getWindow();
@@ -32,7 +32,7 @@ public class FaqController {
             // Create a new stage
 
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Home Page");
+            currentStage.setTitle("Doctor's Home Page");
             currentStage.sizeToScene();
             currentStage.show();
 
