@@ -49,7 +49,7 @@ public class HomePageController {
             // Create a new stage
 
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("HomePage");
+            currentStage.setTitle("Register Patient");
             currentStage.sizeToScene();
             currentStage.show();
 
@@ -83,13 +83,45 @@ public class HomePageController {
     // Method for "Register as Staff Member" button
     @FXML
     void handleRegisterStaff(ActionEvent event) {
-        System.out.println("Register as Staff Member button clicked.");
-        // Add your logic here
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffRegister.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) registerDoctorButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Register Staff");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 
     // Method for "Register as Admin" button
     @FXML
     void handleRegisterAdmin(ActionEvent event) {
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminRegister.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) registerAdminButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Register Admin");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
 
     }
 
