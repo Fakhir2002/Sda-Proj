@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Faq extends Application {
+public class SubmitFeedback extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("video-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SubmitFeedback.class.getResource("Submit-Feedback.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 430);
-        stage.setTitle("Hello!");
+        stage.setTitle("Submit Feedback");
         stage.setScene(scene);
         stage.show();
     }

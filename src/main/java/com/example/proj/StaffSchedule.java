@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Faq extends Application {
+public class StaffSchedule extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("video-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StaffSchedule.class.getResource("Staff-Schedule.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 430);
-        stage.setTitle("Hello!");
+        stage.setTitle("Staff Schedule");
         stage.setScene(scene);
         stage.show();
     }
