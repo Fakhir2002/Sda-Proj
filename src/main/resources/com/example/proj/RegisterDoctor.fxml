@@ -87,7 +87,7 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <Button layoutX="307.0" layoutY="212.0" mnemonicParsing="false" onAction="#HandelDocCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
+                <Button fx:id="docRegCancel" layoutX="307.0" layoutY="212.0" mnemonicParsing="false" onAction="#HandelDocCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <Button fx:id="docreg" layoutX="307.0" layoutY="125.0" mnemonicParsing="false" onAction="#handledocreg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Label layoutX="25.0" layoutY="140.0" text="Hospital" textFill="WHITE">
                     <font>
