@@ -12,8 +12,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegisterDoctorController {
-    public Button docRegCancel;
-    public Button doctoralready;
+    @FXML
+    private Button docRegCancel;
+    @FXML
+    private Button doctoralready;
     @FXML
     private Button docreg;
     private Label welcomeText;
@@ -69,7 +71,7 @@ public class RegisterDoctorController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
-            Stage currentStage = (Stage)docreg .getScene().getWindow();
+            Stage currentStage = (Stage)docreg.getScene().getWindow();
 
             // Create a new stage
 

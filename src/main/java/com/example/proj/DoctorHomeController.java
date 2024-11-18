@@ -16,6 +16,7 @@ public class DoctorHomeController
     public Button docfaq;
     public Button feed;
     public Button staff;
+    public Button LogoutButton;
 
     public void handleAppointment(ActionEvent actionEvent) {
         try {
@@ -98,6 +99,27 @@ public class DoctorHomeController
 
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Staff Scheduling");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+
+    }
+
+    public void HandleLogout(ActionEvent actionEvent) {
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) LogoutButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
 

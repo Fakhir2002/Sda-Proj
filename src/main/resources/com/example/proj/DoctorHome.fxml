@@ -59,6 +59,7 @@
                 <Button fx:id="docfaq" layoutX="-2.0" layoutY="322.0" mnemonicParsing="false" onAction="#handledocfaq" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="FAQs" textFill="#ececec" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Button fx:id="feed" layoutY="229.0" mnemonicParsing="false" onAction="#handlefeedback" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Feedback" textFill="WHITE" />
                 <Button fx:id="staff" layoutY="274.0" mnemonicParsing="false" onAction="#handlestaff" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Availability" textFill="WHITE" />
+            <Button fx:id="LogoutButton" layoutX="64.0" layoutY="395.0" mnemonicParsing="false" onAction="#HandleLogout" text="Log Out" />
             </children>
         </AnchorPane>
         <Text fill="WHITE" layoutX="286.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
