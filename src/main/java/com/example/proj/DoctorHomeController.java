@@ -61,7 +61,7 @@ public class DoctorHomeController
     public void handledocfaq(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Faq-view.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFaq.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) docfaq.getScene().getWindow();
