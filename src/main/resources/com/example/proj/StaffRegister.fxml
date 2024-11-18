@@ -122,7 +122,7 @@
                         <Font size="10.0" />
                     </font>
                 </PasswordField>
-                <Button layoutX="332.0" layoutY="172.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
+                <Button fx:id="StaffRegButton" layoutX="332.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleStaffReg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Button fx:id="staffRegCancel" layoutX="333.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleStaffRegCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <Button fx:id="staffalready" layoutX="138.0" layoutY="344.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
             </children>
