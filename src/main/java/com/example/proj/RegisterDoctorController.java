@@ -15,6 +15,7 @@ public class RegisterDoctorController {
     public Button docRegCancel;
     public Button doctoralready;
     @FXML
+    private Button docreg;
     private Label welcomeText;
 
     @FXML
@@ -49,6 +50,26 @@ public class RegisterDoctorController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage)doctoralready .getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Doctor Login");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+    }
+
+    public void handledocreg(ActionEvent actionEvent) {
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage)docreg .getScene().getWindow();
 
             // Create a new stage
 
