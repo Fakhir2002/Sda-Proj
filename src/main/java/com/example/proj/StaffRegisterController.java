@@ -60,7 +60,7 @@ public class StaffRegisterController {
     public void handleStaffReg(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) StaffRegButton.getScene().getWindow();
@@ -68,7 +68,7 @@ public class StaffRegisterController {
             // Create a new stage
 
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Staff Home Page");
+            currentStage.setTitle("Staff Login Page");
             currentStage.sizeToScene();
             currentStage.show();
 

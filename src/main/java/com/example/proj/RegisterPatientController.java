@@ -15,7 +15,9 @@ public class RegisterPatientController {
     public Button PatRegCancel;
     public Button patientalready;
     @FXML
+    private Button patreg;
     private Label welcomeText;
+
 
     @FXML
     protected void onHelloButtonClick() {
@@ -49,6 +51,26 @@ public class RegisterPatientController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) PatRegCancel.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Patient Login");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+    }
+
+    public void handlepatreg(ActionEvent actionEvent) {
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) patreg.getScene().getWindow();
 
             // Create a new stage
 
