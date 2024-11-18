@@ -32,10 +32,12 @@ public class PatientHomeController {
     @FXML
     private Button payment;
 
+
     @FXML
     private Button aboutSyntegrityButton;
 
-
+    @FXML
+    private Button patlogout;
 
     public void HandleBookAppointment(ActionEvent actionEvent) {
         try {
@@ -166,6 +168,25 @@ public class PatientHomeController {
 
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("About");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+    }
+
+    public void handlepatlogout(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) patlogout.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
 
