@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Faq extends Application {
+public class DoctorFaq extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("Faq-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("DoctorFaq-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 430);
         stage.setTitle("FAQs!");
         stage.setScene(scene);

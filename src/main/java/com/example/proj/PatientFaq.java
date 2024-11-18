@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PatientHome extends Application {
+public class PatientFaq extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(RegisterPatientApplication.class.getResource("PatientHome.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 650, 450);
-        stage.setTitle("Patient's Home Page");
+        FXMLLoader fxmlLoader = new FXMLLoader(Video.class.getResource("DoctorFaq-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 430);
+        stage.setTitle("FAQs!");
         stage.setScene(scene);
         stage.show();
     }

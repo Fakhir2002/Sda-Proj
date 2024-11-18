@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class FaqController {
+public class DoctorFaqController {
     public Button cancelFAQ;
     @FXML
     private Label welcomeText;
