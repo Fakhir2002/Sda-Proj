@@ -33,7 +33,7 @@
                     <effect>
                         <Bloom />
                     </effect></Line>
-                <Label layoutX="27.0" layoutY="265.0" text="Rgister">
+                <Label layoutX="27.0" layoutY="265.0" text="Register">
                     <font>
                         <Font name="System Bold" size="28.0" />
                     </font>

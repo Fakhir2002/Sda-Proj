@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.proj.RoomAllocationController" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.RoomAllocationController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -34,7 +34,7 @@
                     <effect>
                         <Bloom />
                     </effect></Line>
-                <Label layoutX="27.0" layoutY="265.0" text="AAAooo">
+                <Label layoutX="27.0" layoutY="265.0">
                     <font>
                         <Font name="System Bold" size="28.0" />
                     </font>
@@ -42,7 +42,7 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Label layoutX="27.0" layoutY="305.0" text="NOW !">
+                <Label layoutX="27.0" layoutY="305.0">
                     <font>
                         <Font name="System Bold" size="28.0" />
                     </font>
@@ -79,7 +79,7 @@
                         <TableColumn prefWidth="117.33331298828125" text="Status" />
                     </columns>
                 </TableView>
-            <Button fx:id="BackButton" onAction="#HandleBack" layoutX="292.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Back" />
+            <Button fx:id="BackButton" layoutX="292.0" layoutY="333.0" mnemonicParsing="false" onAction="#HandleBack" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Back" />
             </children>
         </AnchorPane>
     </center>
