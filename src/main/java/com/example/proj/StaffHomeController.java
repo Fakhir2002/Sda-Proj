@@ -20,6 +20,8 @@ public class StaffHomeController {
     private Button aboutSyntegrityButton;
     @FXML
     private Button RoomAllocationButton;
+    @FXML
+    private Button StaffLogoutButton;
 
     public void HandleManageInventory(ActionEvent actionEvent) {
         try {
@@ -54,6 +56,26 @@ public class StaffHomeController {
 
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Room Allocation Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+    }
+
+    public void HandleStaffLogout(ActionEvent actionEvent) {
+        try {
+            // Load the FXML for the About Us application
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) StaffLogoutButton.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Home Allocation Page");
             currentStage.sizeToScene();
             currentStage.show();
 
