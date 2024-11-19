@@ -98,7 +98,7 @@ public class PatientHomeController {
 
     public void HandleEmergency(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AllocateResources.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Emergency.fxml"));
             Parent newPage = loader.load();
 
 
