@@ -1,12 +1,12 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.PatientRegister_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,71 +16,98 @@ public class RegisterPatientController {
     public Button patientalready;
     @FXML
     private Button patreg;
-    private Label welcomeText;
-
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField contactNoField;
+    @FXML
+    private TextField dobField;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private PasswordField passwordField;
+
+    private PatientRegister_Handler patientRegisterHandler = new PatientRegister_Handler();
 
     public void handlePatientRegCancel(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) PatRegCancel.getScene().getWindow();
-
-            // Create a new stage
-
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
     public void PatientAlreadyAccount(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) PatRegCancel.getScene().getWindow();
-
-            // Create a new stage
-
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Patient Login");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
     public void handlepatreg(ActionEvent actionEvent) {
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
+        // Gather input from fields
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String contactNo = contactNoField.getText();
+        String dob = dobField.getText();
+        String address = addressField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-            Stage currentStage = (Stage) patreg.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Patient Login");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        // Validate input
+        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() || dob.isEmpty() ||
+                address.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
+            return;
         }
+
+        // Attempt to insert data into the database
+        boolean success = patientRegisterHandler.registerPatient(firstName, lastName, contactNo, dob, address, username, password);
+
+        if (success) {
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Patient registered successfully.");
+            try {
+                // Navigate to the PatientLogin page
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml"));
+                Parent newPage = loader.load();
+
+                Stage currentStage = (Stage) patreg.getScene().getWindow();
+                currentStage.setScene(new Scene(newPage));
+                currentStage.setTitle("Patient Login");
+                currentStage.sizeToScene();
+                currentStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to register patient. Please try again.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
