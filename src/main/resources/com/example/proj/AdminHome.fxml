@@ -26,7 +26,7 @@
                 <Image url="@images/logo.png" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="-2.0" prefHeight="400.0" prefWidth="166.0" style="-fx-background-color: #d7e1e5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane layoutX="-2.0" prefHeight="457.0" prefWidth="183.0" style="-fx-background-color: #d7e1e5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="48.0" fitWidth="70.0" layoutX="60.0" layoutY="7.0">
                     <image>
@@ -54,10 +54,10 @@
                         <Font size="18.0" />
                     </font>
                 </Text>
-                <Button layoutY="207.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Remove Doctor" textFill="#fffdfd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button layoutY="250.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Remove Patient" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button layoutY="164.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Add Healthcare packages" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button layoutY="294.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Remove Staff" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Button fx:id="removedoc" layoutY="207.0" mnemonicParsing="false" onAction="#handleremovedoc" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Remove Doctor" textFill="#fffdfd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Button fx:id="removepatient" layoutY="250.0" mnemonicParsing="false" onAction="#handleremovepatient" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Remove Patient" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+
+                <Button fx:id="removestaff" layoutY="294.0" mnemonicParsing="false" onAction="#handleremovestaff" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Remove Staff" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Button fx:id="Adminlogout" layoutX="64.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleAdminlogout" text="Logout" />
             </children>
         </AnchorPane>
