@@ -83,4 +83,23 @@ public class StaffHomeController {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
+
+    public void AllocateResourceButton(ActionEvent actionEvent) { try {
+        // Load the FXML for the About Us application
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllocateResources.fxml")); // Ensure AboutUs.fxml exists in the same directory
+        Parent newPage = loader.load();
+
+        Stage currentStage = (Stage) ResourcesButton.getScene().getWindow();
+
+        // Create a new stage
+
+        currentStage.setScene(new Scene(newPage));
+        currentStage.setTitle("Allocation Page");
+        currentStage.sizeToScene();
+        currentStage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace(); // Debugging in case of issues loading the FXML
+    }
+    }
 }
