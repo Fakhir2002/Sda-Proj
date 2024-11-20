@@ -8,7 +8,7 @@ public class PatientRegister_Handler {
 
 
     // Database credentials
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/user";
+    private static final String URL = "jdbc:mysql://localhost:3306/user";
     private static final String USER = "root";
     private static final String PASSWORD = "12345678";
 
