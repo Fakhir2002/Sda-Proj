@@ -18,7 +18,11 @@ public class AdminHomeController {
     @FXML
     private Button Adminlogout;
     @FXML
-    private Button AHPButton;
+    private Button removedoc;
+    @FXML
+    private Button removepatient;
+    @FXML
+    private Button removestaff;
 
     public void handleAdminlogout(ActionEvent actionEvent) {
         try {
@@ -39,22 +43,67 @@ public class AdminHomeController {
         }
     }
 
-    public void HandleAHP(ActionEvent actionEvent) {
+    public void handlepackages(ActionEvent actionEvent) {
+
+    }
+
+    public void handleremovedoc(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHealthcarePackages.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveDoctor.fxml"));
             Parent newPage = loader.load();
 
-            Stage currentStage = (Stage) AHPButton.getScene().getWindow();
+            Stage currentStage = (Stage) removedoc.getScene().getWindow();
 
             // Create a new stage
 
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Home Page");
+            currentStage.setTitle("Remove Doctor");
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
+
+    }
+
+    public void handleremovepatient(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemovePatient.fxml"));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) removepatient.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Remove Patient");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+
+    }
+
+    public void handleremovestaff(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveStaff.fxml"));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) removestaff.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Remove Staff");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+
     }
 }
