@@ -9,7 +9,7 @@ import java.io.IOException;
 public class HomePageApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(RegisterPatientApplication.class.getResource("HomePage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HomePageApplication.class.getResource("HomePage.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 620, 400);
         stage.setTitle("Home Page");
         stage.setScene(scene);
