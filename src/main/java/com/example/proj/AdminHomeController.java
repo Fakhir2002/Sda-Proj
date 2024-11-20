@@ -23,6 +23,8 @@ public class AdminHomeController {
     private Button removepatient;
     @FXML
     private Button removestaff;
+    @FXML
+    private Button healthcare;
 
     public void handleAdminlogout(ActionEvent actionEvent) {
         try {
@@ -98,6 +100,26 @@ public class AdminHomeController {
 
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Remove Staff");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+
+    }
+
+    public void handlehealthcare(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHealthcarePackages.fxml"));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) healthcare.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Healthcare Packages");
             currentStage.sizeToScene();
             currentStage.show();
 

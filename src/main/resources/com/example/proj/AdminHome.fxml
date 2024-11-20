@@ -59,6 +59,7 @@
 
                 <Button fx:id="removestaff" layoutY="294.0" mnemonicParsing="false" onAction="#handleremovestaff" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Remove Staff" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             <Button fx:id="Adminlogout" layoutX="64.0" layoutY="405.0" mnemonicParsing="false" onAction="#handleAdminlogout" text="Logout" />
+            <Button fx:id="healthcare" layoutX="-4.0" layoutY="158.0" mnemonicParsing="false" onAction="#handlehealthcare" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Add Healthcare Packages" textFill="#fffdfd" />
             </children>
         </AnchorPane>
         <Text fill="WHITE" layoutX="286.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
