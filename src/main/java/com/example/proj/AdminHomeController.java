@@ -17,6 +17,8 @@ public class AdminHomeController {
 
     @FXML
     private Button Adminlogout;
+    @FXML
+    private Button AHPButton;
 
     public void handleAdminlogout(ActionEvent actionEvent) {
         try {
@@ -24,6 +26,25 @@ public class AdminHomeController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) Adminlogout.getScene().getWindow();
+
+            // Create a new stage
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Home Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
+    }
+
+    public void HandleAHP(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHealthcarePackages.fxml"));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) AHPButton.getScene().getWindow();
 
             // Create a new stage
 
