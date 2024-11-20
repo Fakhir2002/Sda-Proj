@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AllocateResourcesController {
+public class EmergencyController {
     @FXML
     private Label welcomeText;
 

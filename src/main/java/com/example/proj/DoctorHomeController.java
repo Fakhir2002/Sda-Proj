@@ -17,7 +17,7 @@ public class DoctorHomeController
     public Button feed;
     public Button staff;
     public Button LogoutButton;
-
+public Button Feedback;
     public void handleAppointment(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
@@ -127,5 +127,24 @@ public class DoctorHomeController
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
 
+    }
+
+    public void Gofeedback(ActionEvent actionEvent) { try {
+        // Load the FXML for the About Us application
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFeedback.fxml")); // Ensure AboutUs.fxml exists in the same directory
+        Parent newPage = loader.load();
+
+        Stage currentStage = (Stage) Feedback.getScene().getWindow();
+
+        // Create a new stage
+
+        currentStage.setScene(new Scene(newPage));
+        currentStage.setTitle("Doctor Feedback Page");
+        currentStage.sizeToScene();
+        currentStage.show();
+
+    } catch (IOException e) {
+        e.printStackTrace(); // Debugging in case of issues loading the FXML
+    }
     }
 }
