@@ -20,14 +20,14 @@ public class DoctorRegister_Handler {
     /**
      * Saves doctor data to the database.
      *
-     * @param name      Doctor's full name
-     * @param dob       Doctor's date of birth
-     * @param hospital  Doctor's affiliated hospital
-     * @param specialty Doctor's specialty
-     * @param contact   Doctor's contact number
-     * @param address   Doctor's address
-     * @param username  Doctor's username
-     * @param password  Doctor's password
+     * @param Name      Doctor's full name
+     * @param DOB       Doctor's date of birth
+     * @param Hospital  Doctor's affiliated hospital
+     * @param Specialty Doctor's specialty
+     * @param Contact   Doctor's contact number
+     * @param Address   Doctor's address
+     * @param Username  Doctor's username
+     * @param PasswordHash  Doctor's password
      * @return true if the data was successfully inserted, false otherwise
      */
     public boolean registerDoctor(String Name, String DOB, String Hospital, String Specialty,
