@@ -1,87 +1,139 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.DoctorRegister_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RegisterDoctorController {
+
     @FXML
     private Button docRegCancel;
     @FXML
     private Button doctoralready;
     @FXML
     private Button docreg;
-    private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private TextField nameField;
+    @FXML
+    private DatePicker dobPicker;
+    @FXML
+    private TextField hospitalField;
+    @FXML
+    private TextField specialtyField;
+    @FXML
+    private TextField contactField;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private TextField usernameField;
+    @FXML
+    private TextField passwordField;
 
+    private DoctorRegister_Handler doctorRegisterHandler = new DoctorRegister_Handler();
+
+    /**
+     * Handles the cancel action and navigates back to the home page.
+     */
     public void HandelDocCancel(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
 
-            Stage currentStage = (Stage)docRegCancel .getScene().getWindow();
-
-            // Create a new stage
-
+            Stage currentStage = (Stage) docRegCancel.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("HomePage");
+            currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
+    /**
+     * Navigates to the doctor login page for users with an existing account.
+     */
     public void DoctorAlreadyAccount(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml"));
             Parent newPage = loader.load();
 
-            Stage currentStage = (Stage)doctoralready .getScene().getWindow();
-
-            // Create a new stage
-
+            Stage currentStage = (Stage) doctoralready.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Doctor Login");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
+
     }
 
+
+    /**
+     * Handles the doctor registration process and navigates to the login page on success.
+     */
     public void handledocreg(ActionEvent actionEvent) {
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
+        // Gather input from fields
+        String name = nameField.getText();
+        LocalDate dob = dobPicker.getValue();
+        String hospital = hospitalField.getText();
+        String specialty = specialtyField.getText();
+        String contact = contactField.getText();
+        String address = addressField.getText();
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-            Stage currentStage = (Stage)docreg.getScene().getWindow();
+        // Validate input
+        if (name.isEmpty() || dob==null || hospital.isEmpty() || specialty.isEmpty() ||
+                contact.isEmpty() || address.isEmpty() || username.isEmpty() || password.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
+            return;
+        }
 
-            // Create a new stage
+        // Attempt to insert data into the database
+        String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        boolean success = doctorRegisterHandler.registerDoctor(name, dobString, hospital, specialty, contact, address, username, password);
 
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Doctor Login");
-            currentStage.sizeToScene();
-            currentStage.show();
+        if (success) {
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Doctor registered successfully.");
+            try {
+                // Navigate to the DoctorLogin page
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml"));
+                Parent newPage = loader.load();
 
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+                Stage currentStage = (Stage) docreg.getScene().getWindow();
+                currentStage.setScene(new Scene(newPage));
+                currentStage.setTitle("Doctor Login");
+                currentStage.sizeToScene();
+                currentStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to register doctor. Please try again.");
         }
     }
+
+    /**
+     * Utility method to show alert dialogs.
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 }
