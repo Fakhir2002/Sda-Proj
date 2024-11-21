@@ -1,55 +1,94 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.PatientLogin_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class PatientLoginController {
-    public Button hello2;
-@FXML
-     private Button patientlog;
+    @FXML
+    private Button hello2; // Back button
+
+    @FXML
+    private Button patientlog; // Login button
+
+    @FXML
+    private TextField usernameField; // Username input field
+
+    @FXML
+    private PasswordField passwordField; // Password input field
+
+    // Handles the "Back" button action
     public void patientgoback(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            // Load the FXML for the Home Page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) hello2.getScene().getWindow();
 
-            // Create a new stage
-
+            // Update the current stage with the new scene
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace(); // Log the error for debugging
         }
     }
 
-    public void HandlePatientLog(ActionEvent actionEvent) {try {
-        // Load the FXML for the About Us application
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
-        Parent newPage = loader.load();
+    // Handles the "Login" button action
+    public void HandlePatientLog(ActionEvent actionEvent) {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-        Stage currentStage = (Stage) patientlog.getScene().getWindow();
+        // Validate input fields
+        if (username.isEmpty() || password.isEmpty()) {
+            showAlert("Validation Error", "Username or password cannot be empty.");
+            return;
+        }
 
-        // Create a new stage
+        // Use PatientLogin_Handler to validate credentials
+        PatientLogin_Handler loginHandler = new PatientLogin_Handler();
+        if (loginHandler.validateLogin(username, password)) {
+            try {
+                // Load the FXML for the Patient Home Page
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
+                Parent newPage = loader.load();
 
-        currentStage.setScene(new Scene(newPage));
-        currentStage.setTitle("Patient Home Page");
-        currentStage.sizeToScene();
-        currentStage.show();
+                Stage currentStage = (Stage) patientlog.getScene().getWindow();
 
-    } catch (IOException e) {
-        e.printStackTrace(); // Debugging in case of issues loading the FXML
+                // Update the current stage with the new scene
+                currentStage.setScene(new Scene(newPage));
+                currentStage.setTitle("Patient Home Page");
+                currentStage.sizeToScene();
+                currentStage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace(); // Log the error for debugging
+            }
+        } else {
+            // Show an error alert if credentials are invalid
+            showAlert("Login Failed", "Invalid username or password. Please try again.");
+        }
     }
+
+    // Utility method to display an alert dialog
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
