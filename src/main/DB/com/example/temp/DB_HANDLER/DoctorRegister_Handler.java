@@ -30,20 +30,20 @@ public class DoctorRegister_Handler {
      * @param password  Doctor's password
      * @return true if the data was successfully inserted, false otherwise
      */
-    public boolean registerDoctor(String name, String dob, String hospital, String specialty,
-                                  String contact, String address, String username, String password) {
+    public boolean registerDoctor(String Name, String DOB, String Hospital, String Specialty,
+                                  String Contact, String Address, String Username, String PasswordHash) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_DOCTOR_QUERY)) {
 
             // Set parameters for the prepared statement
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, dob); // Ensure DOB is in 'YYYY-MM-DD' format
-            preparedStatement.setString(3, hospital);
-            preparedStatement.setString(4, specialty);
-            preparedStatement.setString(5, contact);
-            preparedStatement.setString(6, address);
-            preparedStatement.setString(7, username);
-            preparedStatement.setString(8, password); // Consider hashing the password for security
+            preparedStatement.setString(1, Name);
+            preparedStatement.setString(2, DOB); // Ensure DOB is in 'YYYY-MM-DD' format
+            preparedStatement.setString(3, Hospital);
+            preparedStatement.setString(4, Specialty);
+            preparedStatement.setString(5, Contact);
+            preparedStatement.setString(6, Address);
+            preparedStatement.setString(7, Username);
+            preparedStatement.setString(8, PasswordHash); // Consider hashing the password for security
 
             // Execute the query
             int rowsInserted = preparedStatement.executeUpdate();
