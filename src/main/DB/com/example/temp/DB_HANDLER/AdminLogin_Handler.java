@@ -15,7 +15,7 @@ public class AdminLogin_Handler {
 
     // SQL query for verifying patient login credentials
     private static final String LOGIN_QUERY =
-            "SELECT * FROM patients WHERE username = ? AND password = ?";
+            "SELECT * FROM admin WHERE username = ? AND password = ?";
 
     /**
      * Verifies patient login credentials.
