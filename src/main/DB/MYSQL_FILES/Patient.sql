@@ -1,5 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `user`;
+
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: user
@@ -43,9 +42,9 @@ CREATE TABLE `patients` (
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
+LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Fakhir','Ali','033333','22102002','add','fakhir2002','password',NULL),(2,'munhim','hussain','033358558','2210220','nalla lai','moni22','black',NULL),(3,'11','1','1','11','1','1','1',NULL),(4,'Ayna','Sulaiman','03200855111','shhshs','12 G DHA ','hi','ayna123',NULL);
+INSERT INTO `patients` VALUES (1,'Fakhir','Ali','033333','22102002','add','fakhir2002','password',NULL),(2,'munhim','hussain','033358558','2210220','nalla lai','moni22','black',NULL),(3,'11','1','1','11','1','1','1',NULL),(4,'Ayna','Sulaiman','03200855111','shhshs','12 G DHA ','hi','ayna123',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
