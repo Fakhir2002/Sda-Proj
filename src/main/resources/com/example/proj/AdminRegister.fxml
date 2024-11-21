@@ -88,32 +88,32 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField layoutX="157.0" layoutY="73.0" promptText="First Name">
+                <TextField fx:id="firstNameField" layoutX="157.0" layoutY="73.0" promptText="First Name">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="157.0" layoutY="107.0" promptText="Last Name">
+                <TextField fx:id="lastNameField" layoutX="157.0" layoutY="107.0" promptText="Last Name">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="157.0" layoutY="148.0" promptText="Contact No">
+                <TextField fx:id="contactNoField" layoutX="157.0" layoutY="148.0" promptText="Contact No">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="157.0" layoutY="224.0" promptText="Address">
+                <TextField fx:id="addressField" layoutX="158.0" layoutY="224.0" promptText="Address">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="157.0" layoutY="260.0" promptText="Username">
+                <TextField fx:id="usernameField" layoutX="157.0" layoutY="260.0" promptText="Username">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <PasswordField layoutX="157.0" layoutY="299.0" promptText="Password">
+                <PasswordField fx:id="passwordField" layoutX="157.0" layoutY="299.0" promptText="Password">
                     <font>
                         <Font size="10.0" />
                     </font>
@@ -121,7 +121,7 @@
                 <Button fx:id="adminreg" layoutX="332.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleadminreg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Button fx:id="adminRegCancel" layoutX="333.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleAdminRegCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <Button fx:id="adminalready" layoutX="138.0" layoutY="344.0" mnemonicParsing="false" onAction="#AdminAlreadyAccount" prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
-            <DatePicker layoutX="157.0" layoutY="187.0" prefHeight="12.0" prefWidth="125.0" />
+            <DatePicker fx:id="dobField" layoutX="159.0" layoutY="187.0" prefHeight="26.0" prefWidth="121.0" />
             </children>
         </AnchorPane>
     </center>
