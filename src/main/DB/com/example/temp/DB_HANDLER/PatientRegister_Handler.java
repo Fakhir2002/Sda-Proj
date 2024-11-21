@@ -14,7 +14,7 @@ public class PatientRegister_Handler {
 
     // SQL query for inserting patient data
     private static final String INSERT_PATIENT_QUERY =
-            "INSERT INTO users (first_name, last_name, contact_no, dob, address, username, password) " +
+            "INSERT INTO patients (first_name, last_name, contact_no, dob, address, username, password) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     /**
