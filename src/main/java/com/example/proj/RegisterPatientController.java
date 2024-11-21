@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class RegisterPatientController {
     public Button PatRegCancel;
@@ -24,7 +26,7 @@ public class RegisterPatientController {
     @FXML
     private TextField contactNoField;
     @FXML
-    private TextField dobField;
+    private DatePicker dobField;
     @FXML
     private TextField addressField;
     @FXML
@@ -69,20 +71,21 @@ public class RegisterPatientController {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String contactNo = contactNoField.getText();
-        String dob = dobField.getText();
+        LocalDate dob = dobField.getValue();
         String address = addressField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         // Validate input
-        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() || dob.isEmpty() ||
+        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() || dob==null ||
                 address.isEmpty() || username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
             return;
         }
 
+        String Sdob = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         // Attempt to insert data into the database
-        boolean success = patientRegisterHandler.registerPatient(firstName, lastName, contactNo, dob, address, username, password);
+        boolean success = patientRegisterHandler.registerPatient(firstName, lastName, contactNo, Sdob, address, username, password);
 
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Patient registered successfully.");
