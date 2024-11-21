@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `user`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: localhost    Database: user
@@ -34,7 +36,7 @@ CREATE TABLE `users` (
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +45,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Fakhir','Ali','033333','22102002','add','fakhir2002','password',NULL),(2,'munhim','hussain','033358558','2210220','nalla lai','moni22','black',NULL),(3,'11','1','1','11','1','1','1',NULL);
+INSERT INTO `users` VALUES (1,'Fakhir','Ali','033333','22102002','add','fakhir2002','password',NULL),(2,'munhim','hussain','033358558','2210220','nalla lai','moni22','black',NULL),(3,'11','1','1','11','1','1','1',NULL),(4,'Ayna','Sulaiman','03200855111','shhshs','12 G DHA ','hi','ayna123',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-21 18:38:21
+-- Dump completed on 2024-11-21 13:56:22
