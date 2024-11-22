@@ -119,10 +119,9 @@ CREATE TABLE `patients` (
   `address` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +130,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (5,'dummy','data','0333','dob','add','username','password',NULL);
+INSERT INTO `patients` VALUES (5,'dummy','data','0333','dob','add','username','password'),(6,'Fakhir','Ali','03333','2024-11-22','addy','fakhir','password');
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -175,4 +174,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22 12:35:18
+-- Dump completed on 2024-11-22 20:37:05
