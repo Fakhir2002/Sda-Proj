@@ -110,6 +110,7 @@ public class Patient_Handler {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     // Retrieve data from the ResultSet
+                    int id = resultSet.getInt("id");
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String contactNo = resultSet.getString("contact_no");
@@ -118,7 +119,7 @@ public class Patient_Handler {
                     String password = resultSet.getString("password");
 
                     // Create and return a Patient object
-                    return new Patient(firstName, lastName, contactNo, dob, address, username, password);
+                    return new Patient(id,firstName, lastName, contactNo, dob, address, username, password);
                 }
             }
 

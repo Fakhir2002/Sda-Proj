@@ -1,20 +1,25 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.Appointment_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookAppointmentController {
 
+    @FXML
+    private Button Confirm;
     @FXML
     private Button PatientHome;
 
@@ -26,6 +31,7 @@ public class BookAppointmentController {
 
     @FXML
     private ComboBox<String> DoctorBox;
+
     @FXML
     private ComboBox<String> timeBox;
 
@@ -44,64 +50,51 @@ public class BookAppointmentController {
         appointment = new Appointment();
         populateHospitalComboBox();  // Populate Hospital ComboBox first
         populateSpecialityComboBox();  // Populate Speciality ComboBox
+
+        // Attach listener to DatePicker for populating timeBox
+        datebox.setOnAction(event -> handleDateSelection());
     }
 
-    // Populate the Hospital ComboBox with the hospital names
     private void populateHospitalComboBox() {
-
         List<String> hospitals = appointment.getHospitals().stream()
                 .map(Hospital::getName)  // Assuming Hospital class has a getName() method
                 .collect(Collectors.toList());
         HospitalBox.getItems().addAll(hospitals);
 
-        // Optional: Set default selection
         if (!hospitals.isEmpty()) {
-            HospitalBox.setValue(hospitals.get(0));  // Set the first hospital by default
+            HospitalBox.setValue(hospitals.get(0));
         }
     }
 
-    // Populate the Speciality ComboBox with doctor specialties
     private void populateSpecialityComboBox() {
         List<String> specialities = appointment.getSpecialities();
         SpecialityBox.getItems().addAll(specialities);
 
-        // Optional: Set default selection
         if (!specialities.isEmpty()) {
-            SpecialityBox.setValue(specialities.get(0));  // Set the first specialty by default
+            SpecialityBox.setValue(specialities.get(0));
         }
 
-        // Add a listener to update the Doctor ComboBox when a speciality is selected
         SpecialityBox.setOnAction(event -> populateDoctorComboBox());
     }
 
-    // Populate the Doctor ComboBox based on the selected speciality
     private void populateDoctorComboBox() {
-        System.out.println("Doctors available: " + appointment.getDoctors().size());  // Debugging to check if doctors exist
-
-        String selectedSpeciality = SpecialityBox.getValue();  // Get the selected specialty from the dropdown
-        System.out.println("Selected Speciality: " + selectedSpeciality);  // Debugging to check the selected specialty
-
+        String selectedSpeciality = SpecialityBox.getValue();
         if (selectedSpeciality != null) {
-            // Filter doctors based on the selected specialty
             List<String> filteredDoctors = appointment.getDoctors().stream()
-                    .filter(doctor -> selectedSpeciality.equals(doctor.getSpecialty())) // Filter by specialty
-                    .map(Doctor::getName)  // Map to doctor names
+                    .filter(doctor -> selectedSpeciality.equals(doctor.getSpecialty()))
+                    .map(Doctor::getName)
                     .collect(Collectors.toList());
 
-            DoctorBox.getItems().clear(); // Clear the current items in the combo box
-            DoctorBox.getItems().addAll(filteredDoctors); // Add the filtered doctor names
+            DoctorBox.getItems().clear();
+            DoctorBox.getItems().addAll(filteredDoctors);
 
-            // Optional: Set default selection
             if (!filteredDoctors.isEmpty()) {
-                DoctorBox.setValue(filteredDoctors.get(0));  // Set the first doctor by default
+                DoctorBox.setValue(filteredDoctors.get(0));
             } else {
-                System.out.println("No doctors found for the selected speciality.");  // Debugging if no doctors are found
-                DoctorBox.setValue(null); // Clear the selection if no doctors are available
+                DoctorBox.setValue(null);
             }
         }
     }
-
-
 
     public void HandleBack(ActionEvent actionEvent) {
         try {
@@ -109,19 +102,95 @@ public class BookAppointmentController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) PatientHome.getScene().getWindow();
-
-            // Create a new stage and set it to the scene
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("PatientHome");
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
     public void setPatient(Patient currentPatient) {
         this.currentPatient = currentPatient;
     }
+
+    private void handleDateSelection() {
+        if (datebox.getValue() != null) {
+            System.out.println("Selected Date: " + datebox.getValue());
+            populateTimeBox();
+        }
+    }
+
+    private void populateTimeBox() {
+        timeBox.getItems().clear(); // Clear any existing items in the ComboBox
+
+        // Define morning and evening time slots
+        List<String> timeSlots = List.of(
+                "09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM",  // Morning slots
+                "03:00 PM - 04:00 PM", "04:00 PM - 05:00 PM", "05:00 PM - 06:00 PM"   // Evening slots
+        );
+
+        timeBox.getItems().addAll(timeSlots);
+
+        if (!timeSlots.isEmpty()) {
+            timeBox.setValue(timeSlots.get(0)); // Set the first slot by default
+        }
+        System.out.println("TimeBox populated with: " + timeSlots); // Debugging to ensure the ComboBox is populated
+    }
+
+
+
+
+
+    @FXML
+    public void handleConfirm(ActionEvent event) {
+        // Validate input fields
+        if (DoctorBox.getValue() == null || timeBox.getValue() == null || datebox.getValue() == null) {
+            showAlert("Error", "Please fill all fields before confirming the appointment.");
+            return;
+        }
+
+        // Get selected values
+        String selectedDate = datebox.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String selectedTime = timeBox.getValue();
+        String selectedDoctorName = DoctorBox.getValue();
+
+        // Lookup doctor_id using the selected doctor's name
+        int doctorId = appointment.getDoctors().stream()
+                .filter(doctor -> doctor.getName().equals(selectedDoctorName))
+                .map(Doctor::getId) // Assuming Doctor class has a getId() method
+                .findFirst()
+                .orElse(-1);
+
+        if (doctorId == -1) {
+            showAlert("Error", "Selected doctor is invalid. Please try again.");
+            return;
+        }
+
+        // Get patient ID
+        int patientId = currentPatient.getId(); // Assuming Patient class has a getId() method
+
+        // Save appointment to DB
+        Appointment_Handler appointmentHandler = new Appointment_Handler();
+        boolean isSaved = appointmentHandler.saveAppointment("Pending", selectedDate, selectedTime, doctorId, patientId);
+
+        if (isSaved) {
+            showAlert("Success", "Appointment confirmed successfully.");
+        } else {
+            showAlert("Error", "Failed to save the appointment. Please try again.");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }
+
+
+

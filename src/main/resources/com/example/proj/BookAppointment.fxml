@@ -68,7 +68,7 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button layoutX="98.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
+                <Button fx:id="Confirm"  onAction="#handleConfirm" layoutX="98.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
             <Label layoutX="74.0" layoutY="58.0" prefHeight="18.0" prefWidth="315.0" text="Book your slot right now and save your time!" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />

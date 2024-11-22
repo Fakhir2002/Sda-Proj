@@ -3,6 +3,7 @@ package com.example.proj;
 import com.example.temp.DB_HANDLER.Doctor_Handler;
 
 public class Doctor {
+    private int id; // Unique identifier for the doctor
     private String name;
     private String dob;
     private String hospital;
@@ -19,8 +20,9 @@ public class Doctor {
     }
 
     // Constructor to initialize Doctor with all details (for creation)
-    public Doctor(String name, String dob, String hospital, String specialty,
+    public Doctor(int id, String name, String dob, String hospital, String specialty,
                   String contact, String address, String username, String passwordHash) {
+        this.id = id;
         this.name = name;
         this.dob = dob;
         this.hospital = hospital;
@@ -38,6 +40,7 @@ public class Doctor {
 
         // If doctor details are found, update the fields
         if (doctorDetails != null) {
+            this.id = doctorDetails.getId(); // Set the doctor's ID
             this.name = doctorDetails.getName();
             this.dob = doctorDetails.getDob();
             this.hospital = doctorDetails.getHospital();
@@ -51,6 +54,7 @@ public class Doctor {
     }
 
     // Getter methods for doctor data
+    public int getId() { return id; }
     public String getName() { return name; }
     public String getDob() { return dob; }
     public String getHospital() { return hospital; }
@@ -63,6 +67,6 @@ public class Doctor {
     // Optional: Override the toString method for better logging/debugging
     @Override
     public String toString() {
-        return "Doctor{name='" + name + "', specialty='" + specialty + "', hospital='" + hospital + "'}";
+        return "Doctor{id=" + id + ", name='" + name + "', specialty='" + specialty + "', hospital='" + hospital + "'}";
     }
 }

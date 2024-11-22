@@ -155,6 +155,7 @@ public class Doctor_Handler {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     // Fetch doctor details
+                    int id = resultSet.getInt("DoctorID");
                     String name = resultSet.getString("name");
                     String dob = resultSet.getString("dob");
                     String hospital = resultSet.getString("hospital");
@@ -164,7 +165,7 @@ public class Doctor_Handler {
                     String passwordHash = resultSet.getString("password");
 
                     // Create and return a Doctor object with the fetched details
-                    return new Doctor(name, dob, hospital, specialty, contact, address, username, passwordHash);
+                    return new Doctor(id,name, dob, hospital, specialty, contact, address, username, passwordHash);
                 } else {
                     return null; // No doctor found with the given username
                 }
@@ -187,6 +188,7 @@ public class Doctor_Handler {
 
             // Iterate through the result set and create Doctor objects
             while (resultSet.next()) {
+                int id = resultSet.getInt("DoctorID");
                 String name = resultSet.getString("name");
                 String dob = resultSet.getString("dob");
                 String hospital = resultSet.getString("hospital");
@@ -197,7 +199,7 @@ public class Doctor_Handler {
                 String passwordHash = resultSet.getString("password");
 
                 // Create a new Doctor object
-                Doctor doctor = new Doctor(name, dob, hospital, specialty, contact, address, username, passwordHash);
+                Doctor doctor = new Doctor(id,name, dob, hospital, specialty, contact, address, username, passwordHash);
                 doctors.add(doctor);
             }
 
@@ -213,6 +215,7 @@ public class Doctor_Handler {
 
         return doctors;
     }
+
 
 
 }

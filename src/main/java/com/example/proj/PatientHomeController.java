@@ -155,7 +155,7 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
 
-            currentPatient=null;
+
             System.out.println("Patient logged out");
 
             Stage currentStage = (Stage) patlogout.getScene().getWindow();
