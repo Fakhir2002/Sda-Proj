@@ -176,6 +176,47 @@ public class Doctor_Handler {
             return null;
         }
     }
+    public List<Doctor> getDoctorsByHospital(String hospitalName) {
+        List<Doctor> doctors = new ArrayList<>();
+        String query = "SELECT * FROM doctors WHERE hospital = ?"; // SQL query to get doctors for the specific hospital
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the hospital name in the query
+            preparedStatement.setString(1, hospitalName);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+
+                // Iterate through the result set and create Doctor objects
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("DoctorID");
+                    String name = resultSet.getString("name");
+                    String dob = resultSet.getString("dob");
+                    String hospital = resultSet.getString("hospital");
+                    String specialty = resultSet.getString("specialty");
+                    String contact = resultSet.getString("contact");
+                    String address = resultSet.getString("address");
+                    String username = resultSet.getString("username");
+                    String passwordHash = resultSet.getString("password");
+
+                    // Create a new Doctor object
+                    Doctor doctor = new Doctor(id, name, dob, hospital, specialty, contact, address, username, passwordHash);
+                    doctors.add(doctor);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return doctors;
+    }
+
 
 
     public List<Doctor> getAllDoctorsDetails() {
@@ -214,7 +255,9 @@ public class Doctor_Handler {
         }
 
         return doctors;
+
     }
+
 
 
 

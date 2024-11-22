@@ -91,6 +91,8 @@ public class PatientHomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Submit-Feedback.fxml"));
             Parent newPage = loader.load();
+            SubmitFeedbackController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
 
             Stage currentStage = (Stage) Feedback.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
