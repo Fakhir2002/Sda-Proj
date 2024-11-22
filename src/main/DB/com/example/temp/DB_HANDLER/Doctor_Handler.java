@@ -1,11 +1,8 @@
 package com.example.temp.DB_HANDLER;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class DoctorRegister_Handler {
+public class Doctor_Handler {
 
     // Database credentials
     private static final String URL = "jdbc:mysql://localhost:3306/user"; // Replace 'user' with your database name
@@ -16,6 +13,10 @@ public class DoctorRegister_Handler {
     private static final String INSERT_DOCTOR_QUERY =
             "INSERT INTO doctors (name, dob, hospital, specialty, contact, address, username, passwordhash) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // SQL query for verifying patient login credentials
+    private static final String LOGIN_QUERY =
+            "SELECT * FROM doctors WHERE username = ? AND password = ?";
 
     /**
      * Saves doctor data to the database.
@@ -50,6 +51,28 @@ public class DoctorRegister_Handler {
             return rowsInserted > 0; // Return true if insertion was successful
 
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean validateLogin(String username, String password) {
+        // Establish database connection
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_QUERY)) {
+
+            // Set parameters for the prepared statement
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Check if a record was found
+                return resultSet.next();
+            }
+
+        } catch (SQLException e) {
+            // Log the exception for debugging
             e.printStackTrace();
             return false;
         }

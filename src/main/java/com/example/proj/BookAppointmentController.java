@@ -19,6 +19,9 @@ public class BookAppointmentController {
     @FXML
     private Button PatientHome;
 
+    @FXML
+    private Patient currentPatient;
+
     public void HandleBack(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));

@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.DoctorLogin_Handler;
+import com.example.temp.DB_HANDLER.Doctor_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +28,7 @@ public class DoctorLoginController {
     private PasswordField passwordField; // Field to enter password
 
     // Login handler for validating credentials
-    private final DoctorLogin_Handler loginHandler = new DoctorLogin_Handler();
+    private final Doctor_Handler loginHandler = new Doctor_Handler();
 
     /**
      * Handles the "Back" button action.

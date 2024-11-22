@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.DoctorRegister_Handler;
+import com.example.temp.DB_HANDLER.Doctor_Handler;
 import com.example.temp.DB_HANDLER.addHospital_Handler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -42,7 +42,7 @@ public class RegisterDoctorController {
     @FXML
     private TextField passwordField;
 
-    private final DoctorRegister_Handler doctorRegisterHandler = new DoctorRegister_Handler();
+    private final Doctor_Handler doctorRegisterHandler = new Doctor_Handler();
     private final addHospital_Handler hospitalHandler = new addHospital_Handler();
     /**
      * Initializes the controller.
