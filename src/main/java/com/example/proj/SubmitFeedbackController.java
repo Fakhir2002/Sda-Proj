@@ -120,6 +120,7 @@ public class SubmitFeedbackController {
     @FXML
     public void handleSubmit(ActionEvent actionEvent) {
         // Get input values from the form
+        int patientid = current.getId();
         String patientName = current.getFirstName();  // Assuming you have a TextField for patient name
         String doctorName = doctorComboBox.getValue();
         String hospitalName = hospitalComboBox1.getValue();
@@ -140,7 +141,7 @@ public class SubmitFeedbackController {
         Feedback_Handler feedbackHandler = new Feedback_Handler();
 
         // Call the insertFeedback method and check if the operation was successful
-        boolean success = feedbackHandler.insertFeedback(patientName, doctorName, hospitalName, experienceRating, recommendations, comments);
+        boolean success = feedbackHandler.insertFeedback(patientid,patientName, doctorName, hospitalName, experienceRating, recommendations, comments);
 
         // Show success or failure message
         if (success) {
