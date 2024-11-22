@@ -127,6 +127,7 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientFaq.fxml"));
             Parent newPage = loader.load();
 
+
             PatientFaqController controller = loader.getController();
             controller.initialize(currentPatient.getUsername());
 
