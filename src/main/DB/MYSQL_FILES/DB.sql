@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: user
+-- Host: localhost    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -164,6 +164,34 @@ INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not co
 UNLOCK TABLES;
 
 --
+-- Table structure for table `healthcare_packages`
+--
+
+DROP TABLE IF EXISTS `healthcare_packages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `healthcare_packages` (
+  `package_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `hospital_name` varchar(255) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `price` double NOT NULL,
+  `description` text,
+  PRIMARY KEY (`package_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `healthcare_packages`
+--
+
+LOCK TABLES `healthcare_packages` WRITE;
+/*!40000 ALTER TABLE `healthcare_packages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `healthcare_packages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hospitals`
 --
 
@@ -259,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-23  4:00:16
+-- Dump completed on 2024-11-23  4:07:04
