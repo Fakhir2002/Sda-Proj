@@ -119,6 +119,15 @@ public class BookAppointmentController {
     private void handleDateSelection() {
         if (datebox.getValue() != null) {
             System.out.println("Selected Date: " + datebox.getValue());
+
+            // Validate if the selected date is in the past
+            if (datebox.getValue().isBefore(java.time.LocalDate.now())) {
+                showAlert("Invalid Date", "You cannot select a date that has already passed.");
+                datebox.setValue(java.time.LocalDate.now());  // Reset to current date
+                return;
+            }
+
+            // Proceed to populate time slots if the date is valid
             populateTimeBox();
         }
     }
@@ -182,6 +191,7 @@ public class BookAppointmentController {
             showAlert("Error", "Failed to save the appointment. Please try again.");
         }
     }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
