@@ -61,11 +61,11 @@ CREATE TABLE `doctors` (
   `Specialty` varchar(100) NOT NULL,
   `Contact` varchar(15) NOT NULL,
   `Address` text NOT NULL,
-  `Username` varchar(50) NOT NULL,
-  `PasswordHash` varchar(255) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`DoctorID`),
-  UNIQUE KEY `Username` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `Username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,8 +74,33 @@ CREATE TABLE `doctors` (
 
 LOCK TABLES `doctors` WRITE;
 /*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
-INSERT INTO `doctors` VALUES (1,'dummy','2024-11-21','hospital','cool','033','add','username','password');
+INSERT INTO `doctors` VALUES (1,'dummy','2024-11-21','hospital','cool','033','add','username','password'),(2,'doc','2024-11-22','CMH','crazy','033','addy','crazy','doc');
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hospitals`
+--
+
+DROP TABLE IF EXISTS `hospitals`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `hospitals` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `Name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hospitals`
+--
+
+LOCK TABLES `hospitals` WRITE;
+/*!40000 ALTER TABLE `hospitals` DISABLE KEYS */;
+INSERT INTO `hospitals` VALUES (1,'CMH');
+/*!40000 ALTER TABLE `hospitals` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -150,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22  2:07:45
+-- Dump completed on 2024-11-22 12:35:18
