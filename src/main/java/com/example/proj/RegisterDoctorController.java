@@ -150,7 +150,7 @@ public class RegisterDoctorController {
 
         // Validate password (minimum length check, you can modify as needed)
         if (password.isEmpty() || password.length() < 8) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 6 characters long.");
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long.");
             return;
         }
 

@@ -123,6 +123,8 @@ public class AdminRegisterController {
             return;
         }
 
+        // Validate address (not empty)
+        // Validate date of birth (must be in the past and a valid date)
 
         // Validate address (not empty)
         if (address.isEmpty()) {
@@ -139,25 +141,6 @@ public class AdminRegisterController {
         // Validate password (at least 6 characters)
         if (password.isEmpty() || password.length() < 8) {
             showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long.");
-            return;
-        }
-        // Validate date of birth (must be in the past and a valid date)
-
-        // Validate address (not empty)
-        if (address.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Address cannot be empty.");
-            return;
-        }
-
-        // Validate username (only alphanumeric characters and not empty)
-        if (username.isEmpty() || !username.matches("[a-zA-Z0-9_]+")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Username must be alphanumeric and cannot be empty.");
-            return;
-        }
-
-        // Validate password (at least 6 characters)
-        if (password.isEmpty() || password.length() < 6) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 6 characters long.");
             return;
         }
 

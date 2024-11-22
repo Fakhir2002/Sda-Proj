@@ -124,7 +124,7 @@ public class StaffRegisterController {
 
         // Validate password (at least 6 characters)
         if (password.isEmpty() || password.length() < 8) {
-            showAlert("Error", "Password must be at least 6 characters long.", Alert.AlertType.ERROR);
+            showAlert("Error", "Password must be at least 8 characters long.", Alert.AlertType.ERROR);
             return;
         }
 
