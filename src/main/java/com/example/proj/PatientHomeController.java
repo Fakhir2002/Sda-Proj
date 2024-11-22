@@ -54,8 +54,12 @@ public class PatientHomeController {
         if (currentPatient != null) {
             // Display the patient's name on the home page
             PatientName.setText("Welcome, " + currentPatient.getFirstName() + " " + currentPatient.getLastName() + "!");
+
+            // Print the details of the current patient
+            System.out.println("Patient Created: " + currentPatient);
         } else {
             PatientName.setText("Welcome, Guest!"); // Fallback in case of an error
+            System.out.println("No patient data available for username: " + username);
         }
     }
 
@@ -162,6 +166,10 @@ public class PatientHomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
+
+            // Clear the current patient details
+            System.out.println("Logging out patient: " + currentPatient);
+            currentPatient = null; // Delete the reference
 
             Stage currentStage = (Stage) patlogout.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
