@@ -1,6 +1,8 @@
 package com.example.proj;
 
 import com.example.temp.DB_HANDLER.DoctorRegister_Handler;
+import com.example.temp.DB_HANDLER.addHospital_Handler;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class RegisterDoctorController {
 
@@ -28,7 +30,7 @@ public class RegisterDoctorController {
     @FXML
     private DatePicker dobPicker;
     @FXML
-    private TextField hospitalField;
+    private ComboBox<String> hospitalField; // Updated to ComboBox<String>
     @FXML
     private TextField specialtyField;
     @FXML
@@ -40,7 +42,31 @@ public class RegisterDoctorController {
     @FXML
     private TextField passwordField;
 
-    private DoctorRegister_Handler doctorRegisterHandler = new DoctorRegister_Handler();
+    private final DoctorRegister_Handler doctorRegisterHandler = new DoctorRegister_Handler();
+    private final addHospital_Handler hospitalHandler = new addHospital_Handler();
+    /**
+     * Initializes the controller.
+     * Populates the hospital ComboBox with hospital names.
+     */
+    @FXML
+    public void initialize() {
+        populateHospitalComboBox();
+    }
+
+    /**
+     * Populates the hospital ComboBox with hospital names from the database.
+     */
+    private void populateHospitalComboBox() {
+        try {
+            // Fetch the list of hospital names from the database
+            List<String> hospitalNames = hospitalHandler.getHospitalNames();
+            // Populate the ComboBox with hospital names
+            hospitalField.setItems(FXCollections.observableArrayList(hospitalNames));
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to load hospital names.");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Handles the cancel action and navigates back to the home page.
@@ -76,9 +102,7 @@ public class RegisterDoctorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 
     /**
      * Handles the doctor registration process and navigates to the login page on success.
@@ -87,7 +111,7 @@ public class RegisterDoctorController {
         // Gather input from fields
         String name = nameField.getText();
         LocalDate dob = dobPicker.getValue();
-        String hospital = hospitalField.getText();
+        String hospital = hospitalField.getValue(); // Retrieve selected hospital name
         String specialty = specialtyField.getText();
         String contact = contactField.getText();
         String address = addressField.getText();
@@ -95,7 +119,7 @@ public class RegisterDoctorController {
         String password = passwordField.getText();
 
         // Validate input
-        if (name.isEmpty() || dob==null || hospital.isEmpty() || specialty.isEmpty() ||
+        if (name.isEmpty() || dob == null || hospital == null || specialty.isEmpty() ||
                 contact.isEmpty() || address.isEmpty() || username.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
             return;
@@ -134,6 +158,4 @@ public class RegisterDoctorController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
 }
