@@ -1,6 +1,5 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Patient_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,29 +37,16 @@ public class PatientHomeController {
     @FXML
     private Label PatientName;
 
-    private Patient_Handler patientHandler = new Patient_Handler(); // Handler to interact with the database
-    private Patient currentPatient; // Stores the logged-in patient's details
+    @FXML
+    private Patient currentPatient;
 
-    /**
-     * Setter to initialize the patient data based on the username.
-     * Fetches the patient's details from the database and sets up the home page.
-     *
-     * @param username The username of the logged-in patient.
-     */
-    public void setPatientName(String username) {
-        // Retrieve patient details using the handler
-        currentPatient = patientHandler.getPatientDetails(username);
+    // Setter to pass the username from the login screen to this controller
+    public void initilize(String username) {
+        // Variable to store the username
+        PatientName.setText("Welcome, " + username); // Set the label text to display the username
+        currentPatient= new Patient(username);
+        System.out.println("Patient logged in with username: " + currentPatient.getUsername());
 
-        if (currentPatient != null) {
-            // Display the patient's name on the home page
-            PatientName.setText("Welcome, " + currentPatient.getFirstName() + " " + currentPatient.getLastName() + "!");
-
-            // Print the details of the current patient
-            System.out.println("Patient Created: " + currentPatient);
-        } else {
-            PatientName.setText("Welcome, Guest!"); // Fallback in case of an error
-            System.out.println("No patient data available for username: " + username);
-        }
     }
 
     public void HandleBookAppointment(ActionEvent actionEvent) {
@@ -68,17 +54,14 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
             Parent newPage = loader.load();
 
-            // Pass the patient object to the next controller if needed
-            // Example: ((BookAppointmentController) loader.getController()).setPatient(currentPatient);
-
             Stage currentStage = (Stage) BookAppointment.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Book Appointment");
+            currentStage.setTitle("BookAppointment");
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -94,7 +77,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -110,7 +93,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -126,7 +109,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -142,7 +125,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -158,7 +141,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
@@ -167,9 +150,8 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
 
-            // Clear the current patient details
-            System.out.println("Logging out patient: " + currentPatient);
-            currentPatient = null; // Delete the reference
+            currentPatient=null;
+            System.out.println("Patient logged out");
 
             Stage currentStage = (Stage) patlogout.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
@@ -178,7 +160,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 }

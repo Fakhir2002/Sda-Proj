@@ -43,4 +43,8 @@ public class ComparisonController {
         }
 
     }
+
+    public void setPatient(Patient currentPatient) {
+
+    }
 }

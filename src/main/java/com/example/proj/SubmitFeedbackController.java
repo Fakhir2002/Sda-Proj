@@ -45,4 +45,8 @@ public class SubmitFeedbackController {
         }
 
     }
+
+    public void setPatient(Patient currentPatient) {
+
+    }
 }

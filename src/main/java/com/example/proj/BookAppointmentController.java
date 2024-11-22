@@ -37,5 +37,9 @@ public class BookAppointmentController {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
+
+    public void setPatient(Patient currentPatient) {
+
+    }
 }
 

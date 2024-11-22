@@ -4,6 +4,7 @@ import com.example.proj.Patient;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Patient_Handler {
 
@@ -24,6 +25,11 @@ public class Patient_Handler {
     // SQL query for retrieving all patient details by username
     private static final String GET_PATIENT_DETAILS_QUERY =
             "SELECT first_name, last_name, contact_no, dob, address, username, password FROM patients WHERE username = ?";
+
+    // SQL query for retrieving patient's username
+    private static final String GET_USERNAME_QUERY =
+            "SELECT username FROM patients WHERE username = ? AND password = ?";
+
 
     /**
      * Saves patient data to the database.
@@ -107,7 +113,7 @@ public class Patient_Handler {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String contactNo = resultSet.getString("contact_no");
-                    LocalDate dob = resultSet.getDate("dob").toLocalDate();
+                    LocalDate dob = resultSet.getDate("dob").toLocalDate();  // Using LocalDate here
                     String address = resultSet.getString("address");
                     String password = resultSet.getString("password");
 
@@ -121,4 +127,30 @@ public class Patient_Handler {
         }
         return null; // Return null if no matching patient is found
     }
+
+
+    public String getPatientUsername(String username, String password) {
+        // Establish database connection
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_USERNAME_QUERY)) {
+
+            // Set parameters for the prepared statement
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Check if a record was found
+                if (resultSet.next()) {
+                    return resultSet.getString("username");
+                }
+            }
+
+        } catch (SQLException e) {
+            // Log the exception for debugging
+            e.printStackTrace();
+        }
+        return null; // Return null if no matching username is found
+    }
+
 }

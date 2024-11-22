@@ -59,7 +59,7 @@ public class PatientLoginController {
             return;
         }
 
-
+        // Use PatientLogin_Handler to validate credentials
         Patient_Handler loginHandler = new Patient_Handler();
         if (loginHandler.validateLogin(username, password)) {
             try {
@@ -67,12 +67,11 @@ public class PatientLoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
                 Parent newPage = loader.load();
 
-
                 // Get the controller for the PatientHome screen
                 PatientHomeController controller = loader.getController();
 
                 // Pass the username to the PatientHomeController
-                controller.setPatientName(username); // Set the username on the home page label
+                controller.initilize(username);
 
 
                 Stage currentStage = (Stage) patientlog.getScene().getWindow();
