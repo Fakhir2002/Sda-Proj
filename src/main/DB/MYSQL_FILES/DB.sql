@@ -63,7 +63,7 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`appointmentID`),
   KEY `doctor_id` (`doctor_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (8,'confirmed','2024-11-23','10:00 AM - 11:00 AM',3,9),(9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9);
+INSERT INTO `appointment` VALUES (8,'confirmed','2024-11-23','10:00 AM - 11:00 AM',3,9),(9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'Pending','2024-11-27','11:00 AM - 12:00 PM',3,9);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,6 +106,31 @@ LOCK TABLES `doctors` WRITE;
 /*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
 INSERT INTO `doctors` VALUES (3,'munhim','2002-02-20','CMH','surgeon','03349556848','RaceCourse','doctor','password');
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `faq`
+--
+
+DROP TABLE IF EXISTS `faq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `faq` (
+  `patientID` int NOT NULL,
+  `doctorID` int NOT NULL,
+  `Question` varchar(500) NOT NULL,
+  `Answer` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`patientID`,`doctorID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `faq`
+--
+
+LOCK TABLES `faq` WRITE;
+/*!40000 ALTER TABLE `faq` DISABLE KEYS */;
+/*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -233,4 +258,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-23  1:35:30
+-- Dump completed on 2024-11-23  2:05:23
