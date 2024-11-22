@@ -71,7 +71,7 @@ public class PatientLoginController {
                 PatientHomeController controller = loader.getController();
 
                 // Pass the username to the PatientHomeController
-                controller.initilize(username);
+                controller.initialize(username);
 
 
                 Stage currentStage = (Stage) patientlog.getScene().getWindow();

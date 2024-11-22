@@ -4,7 +4,6 @@ import com.example.proj.Patient;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Patient_Handler {
 
@@ -13,38 +12,25 @@ public class Patient_Handler {
     private static final String USER = "root";
     private static final String PASSWORD = "12345678";
 
-    // SQL query for inserting patient data
+    // SQL queries
     private static final String INSERT_PATIENT_QUERY =
             "INSERT INTO patients (first_name, last_name, contact_no, dob, address, username, password) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-    // SQL query for verifying patient login credentials
     private static final String LOGIN_QUERY =
             "SELECT * FROM patients WHERE username = ? AND password = ?";
-
-    // SQL query for retrieving all patient details by username
     private static final String GET_PATIENT_DETAILS_QUERY =
-            "SELECT first_name, last_name, contact_no, dob, address, username, password FROM patients WHERE username = ?";
-
-    // SQL query for retrieving patient's username
+            "SELECT id, first_name, last_name, contact_no, dob, address, username, password FROM patients WHERE username = ?";
     private static final String GET_USERNAME_QUERY =
             "SELECT username FROM patients WHERE username = ? AND password = ?";
 
-
     /**
      * Saves patient data to the database.
-     *
-     * @param firstName  Patient's first name
-     * @param lastName   Patient's last name
-     * @param contactNo  Patient's contact number
-     * @param dob        Patient's date of birth
-     * @param address    Patient's address
-     * @param username   Patient's username
-     * @param password   Patient's password
-     * @return true if the data was successfully inserted, false otherwise
      */
     public boolean registerPatient(String firstName, String lastName, String contactNo,
                                    String dob, String address, String username, String password) {
+        System.out.println("registerPatient method called with parameters:");
+        System.out.println("First Name: " + firstName + ", Last Name: " + lastName + ", Contact No: " + contactNo +
+                ", DOB: " + dob + ", Address: " + address + ", Username: " + username + ", Password: " + password);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PATIENT_QUERY)) {
 
@@ -59,6 +45,7 @@ public class Patient_Handler {
 
             // Execute the query
             int rowsInserted = preparedStatement.executeUpdate();
+            System.out.println("Number of rows inserted: " + rowsInserted);
             return rowsInserted > 0; // Return true if insertion was successful
 
         } catch (SQLException e) {
@@ -69,12 +56,9 @@ public class Patient_Handler {
 
     /**
      * Validates the patient's login credentials.
-     *
-     * @param username Patient's username
-     * @param password Patient's password
-     * @return true if the credentials are valid, false otherwise
      */
     public boolean validateLogin(String username, String password) {
+        System.out.println("validateLogin method called with Username: " + username + " and Password: " + password);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_QUERY)) {
 
@@ -84,7 +68,9 @@ public class Patient_Handler {
 
             // Execute the query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                return resultSet.next(); // Check if a record was found
+                boolean isValid = resultSet.next(); // Check if a record was found
+                System.out.println("Login validation result: " + isValid);
+                return isValid;
             }
 
         } catch (SQLException e) {
@@ -95,11 +81,9 @@ public class Patient_Handler {
 
     /**
      * Retrieves all patient details by username to create a Patient object.
-     *
-     * @param username Patient's username
-     * @return Patient object with retrieved data, or null if not found
      */
     public Patient getPatientDetails(String username) {
+        System.out.println("getPatientDetails method called for Username: " + username);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(GET_PATIENT_DETAILS_QUERY)) {
 
@@ -114,12 +98,23 @@ public class Patient_Handler {
                     String firstName = resultSet.getString("first_name");
                     String lastName = resultSet.getString("last_name");
                     String contactNo = resultSet.getString("contact_no");
-                    LocalDate dob = resultSet.getDate("dob").toLocalDate();  // Using LocalDate here
+                    String dob = resultSet.getString("dob");  // Using LocalDate here
                     String address = resultSet.getString("address");
                     String password = resultSet.getString("password");
 
+                    // Print all patient details to the console
+                    System.out.println("Patient Details:");
+                    System.out.println("ID: " + id);
+                    System.out.println("First Name: " + firstName);
+                    System.out.println("Last Name: " + lastName);
+                    System.out.println("Contact No: " + contactNo);
+                    System.out.println("Date of Birth: " + dob);
+                    System.out.println("Address: " + address);
+                    System.out.println("Username: " + username);  // Assuming username is also a field to print
+                    System.out.println("Password: " + password);
+
                     // Create and return a Patient object
-                    return new Patient(id,firstName, lastName, contactNo, dob, address, username, password);
+                    return new Patient(id, firstName, lastName, contactNo, dob, address, username, password);
                 }
             }
 
@@ -129,8 +124,11 @@ public class Patient_Handler {
         return null; // Return null if no matching patient is found
     }
 
-
+    /**
+     * Retrieves patient's username based on username and password.
+     */
     public String getPatientUsername(String username, String password) {
+        System.out.println("getPatientUsername method called with Username: " + username + " and Password: " + password);
         // Establish database connection
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(GET_USERNAME_QUERY)) {
@@ -143,7 +141,9 @@ public class Patient_Handler {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 // Check if a record was found
                 if (resultSet.next()) {
-                    return resultSet.getString("username");
+                    String user = resultSet.getString("username");
+                    System.out.println("Retrieved Username: " + user);
+                    return user;
                 }
             }
 
@@ -153,5 +153,4 @@ public class Patient_Handler {
         }
         return null; // Return null if no matching username is found
     }
-
 }

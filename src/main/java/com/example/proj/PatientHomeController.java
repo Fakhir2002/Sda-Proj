@@ -41,7 +41,7 @@ public class PatientHomeController {
     private Patient currentPatient;
 
     // Setter to pass the username from the login screen to this controller
-    public void initilize(String username) {
+    public void initialize(String username) {
         // Variable to store the username
         PatientName.setText("Welcome, " + username); // Set the label text to display the username
         currentPatient= new Patient(username);
@@ -91,6 +91,7 @@ public class PatientHomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Submit-Feedback.fxml"));
             Parent newPage = loader.load();
+
             SubmitFeedbackController controller = loader.getController();
             controller.initialize(currentPatient.getUsername());
 

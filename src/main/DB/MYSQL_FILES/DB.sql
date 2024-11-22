@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: user
+-- Host: 127.0.0.1    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -63,7 +63,7 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`appointmentID`),
   KEY `doctor_id` (`doctor_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (2,'Pending','2024-11-23','10:00 AM - 11:00 AM',2,0),(3,'Pending','2024-11-23','03:00 PM - 04:00 PM',2,0);
+INSERT INTO `appointment` VALUES (2,'Pending','2024-11-23','10:00 AM - 11:00 AM',2,0),(3,'Pending','2024-11-23','03:00 PM - 04:00 PM',2,0),(4,'Pending','2024-11-23','09:00 AM - 10:00 AM',1,0);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,11 +120,11 @@ CREATE TABLE `feedback` (
   `patient_name` varchar(255) NOT NULL,
   `doctor_name` varchar(255) NOT NULL,
   `hospital_name` varchar(255) NOT NULL,
-  `experience_rating` tinyint(1) DEFAULT NULL,
+  `experience_rating` varchar(255) DEFAULT NULL,
   `recommendations` text,
   `feedback_comments` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +133,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
+INSERT INTO `feedback` VALUES (1,'dummy','doc','CMH','0','ewfsd','sfdsdf');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +180,7 @@ CREATE TABLE `patients` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -232,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-22 23:53:35
+-- Dump completed on 2024-11-23  0:58:05

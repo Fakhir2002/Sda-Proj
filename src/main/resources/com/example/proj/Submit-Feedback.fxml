@@ -80,7 +80,7 @@
                     </font>
                 </Label>
             <ChoiceBox fx:id="experienceChoiceBox" layoutX="224.0" layoutY="174.0" prefHeight="24.0" prefWidth="125.0" />
-            <Button fx:id="submitted" onAction="#" layoutX="243.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #d7e1e5;" text="Submit" />
+            <Button fx:id="submitted" onAction="#handleSubmit" layoutX="243.0" layoutY="317.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #d7e1e5;" text="Submit" />
             <Button fx:id="BackButton" layoutX="118.0" layoutY="317.0" mnemonicParsing="false" onAction="#HandleBack" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #d7e1e5;" text="Back" />
             <ComboBox fx:id="hospitalComboBox1" layoutX="138.0" layoutY="98.0" prefHeight="22.0" prefWidth="84.0" promptText="hospital" />
             <ComboBox fx:id="doctorComboBox" layoutX="138.0" layoutY="138.0" prefHeight="22.0" prefWidth="82.0" promptText="doctor" />

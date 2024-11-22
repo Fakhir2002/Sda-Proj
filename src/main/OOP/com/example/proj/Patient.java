@@ -4,24 +4,23 @@ import com.example.temp.DB_HANDLER.Patient_Handler;
 import java.time.LocalDate;
 
 public class Patient {
-    private int id;  // Unique identifier for the patient
+    private int id;
     private String firstName;
     private String lastName;
     private String contactNo;
-    private LocalDate dob;  // LocalDate for date of birth
+    private String dob; // LocalDate for date of birth
     private String address;
     private String username;
     private String password;
 
-    // Constructor to initialize patient data based on username
+    // Constructor to initialize patient data by username
     public Patient(String username) {
         this.username = username;
-        updatePatientDetails();  // Fetch details from the database
+        updatePatientDetails();  // Update details when the Patient object is created
     }
 
-    // Constructor to initialize patient data for creation (including all fields)
-    public Patient(int id, String firstName, String lastName, String contactNo, LocalDate dob,
-                   String address, String username, String password) {
+    // Constructor to initialize all patient data (id, first name, last name, etc.)
+    public Patient(int id, String firstName, String lastName, String contactNo, String dob, String address, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,7 +38,6 @@ public class Patient {
 
         // If patient details are found, update the fields
         if (patientDetails != null) {
-            this.id = patientDetails.getId();
             this.firstName = patientDetails.getFirstName();
             this.lastName = patientDetails.getLastName();
             this.contactNo = patientDetails.getContactNo();
@@ -56,25 +54,18 @@ public class Patient {
     public String getFirstName() { return firstName; }
     public String getLastName() { return lastName; }
     public String getContactNo() { return contactNo; }
-    public LocalDate getDob() { return dob; }
+    public String getDob() { return dob; }  // LocalDate for date of birth
     public String getAddress() { return address; }
     public String getUsername() { return username; }
     public String getPassword() { return password; }
 
-    // Setter methods (if needed for updates)
+    // Optional: Setter methods if needed
+    public void setId(int id) { this.id = id; }
     public void setFirstName(String firstName) { this.firstName = firstName; }
     public void setLastName(String lastName) { this.lastName = lastName; }
     public void setContactNo(String contactNo) { this.contactNo = contactNo; }
-    public void setDob(LocalDate dob) { this.dob = dob; }
+    public void setDob(String dob) { this.dob = dob; }
     public void setAddress(String address) { this.address = address; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; }
-
-    // Optional: Override the toString method for better logging/debugging
-    @Override
-    public String toString() {
-        return "Patient{id=" + id + ", firstName='" + firstName + "', lastName='" + lastName +
-                "', contactNo='" + contactNo + "', dob=" + dob + ", address='" + address +
-                "', username='" + username + "'}";
-    }
 }

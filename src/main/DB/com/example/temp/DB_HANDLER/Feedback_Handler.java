@@ -14,7 +14,7 @@ public class Feedback_Handler {
 
     // SQL query for inserting feedback data with patient_id
     private static final String INSERT_FEEDBACK_QUERY =
-            "INSERT INTO feedback (patient_id, patient_name, doctor_name, hospital_name, experience_rating, recommendations, feedback_comments) " +
+            "INSERT INTO feedback (id, patient_name, doctor_name, hospital_name, experience_rating, recommendations, feedback_comments) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
     /**
