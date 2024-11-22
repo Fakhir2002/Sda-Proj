@@ -53,16 +53,16 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button layoutX="177.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
+                <Button fx:id="Confirm" onAction="#HandleConfirm" layoutX="170.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
                 <Button fx:id="backfromapp" layoutX="282.0" layoutY="333.0" mnemonicParsing="false" onAction="#handlebackfromApp" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
-                <Button layoutX="71.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Modify" />
-                <TableView layoutX="11.0" layoutY="85.0" prefHeight="238.0" prefWidth="417.0">
+                <Button layoutX="56.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Modify" />
+                <TableView fx:id="appointmentTable" layoutX="11.0" layoutY="85.0" prefHeight="238.0" prefWidth="417.0">
                     <columns>
-                        <TableColumn prefWidth="75.0" text="Pateint ID" />
-                        <TableColumn prefWidth="92.0" text="Patient Name" />
-                        <TableColumn prefWidth="85.99993896484375" text="Specialty" />
-                        <TableColumn prefWidth="73.3333740234375" text="Date" />
-                        <TableColumn prefWidth="75.33331298828125" text="Time" />
+                        <TableColumn fx:id="ID" prefWidth="75.0" text="Pateint ID" />
+                        <TableColumn fx:id="Name" prefWidth="92.0" text="Patient Name" />
+                        <TableColumn fx:id="Date" prefWidth="85.99993896484375" text="Date" />
+                        <TableColumn fx:id="time" prefWidth="73.3333740234375" text="time" />
+                        <TableColumn fx:id="status" prefWidth="75.33331298828125" text="status" />
                     </columns>
                 </TableView>
             </children>

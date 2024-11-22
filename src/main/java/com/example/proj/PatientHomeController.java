@@ -45,7 +45,7 @@ public class PatientHomeController {
         // Variable to store the username
         PatientName.setText("Welcome, " + username); // Set the label text to display the username
         currentPatient= new Patient(username);
-        System.out.println("Patient logged in with username: " + currentPatient.getUsername());
+        System.out.println("Patient logged in with username: " + currentPatient.getUsername() +" "+ currentPatient.getFirstName());
 
     }
 
@@ -57,6 +57,7 @@ public class PatientHomeController {
             BookAppointmentController controller = loader.getController();
 
             // Pass the username to the BookController
+
             controller.initialize(currentPatient.getUsername());
 
             Stage currentStage = (Stage) BookAppointment.getScene().getWindow();
