@@ -194,9 +194,9 @@ public class Doctor_Handler {
                 String contact = resultSet.getString("contact");
                 String address = resultSet.getString("address");
                 String username = resultSet.getString("username");
-                String passwordHash = resultSet.getString("passwordhash");
+                String passwordHash = resultSet.getString("password");
 
-                // Create a new Doctor object and add it to the list
+                // Create a new Doctor object
                 Doctor doctor = new Doctor(name, dob, hospital, specialty, contact, address, username, passwordHash);
                 doctors.add(doctor);
             }
@@ -204,7 +204,15 @@ public class Doctor_Handler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Debugging: Print all doctors in the list before returning
+        System.out.println("List of doctors:");
+        for (Doctor doctor : doctors) {
+            System.out.println(doctor);  // Assuming your Doctor class has a meaningful toString() method
+        }
+
         return doctors;
     }
+
 
 }

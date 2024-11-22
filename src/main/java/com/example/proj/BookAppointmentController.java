@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,11 @@ public class BookAppointmentController {
 
     @FXML
     private ComboBox<String> DoctorBox;
+    @FXML
+    private ComboBox<String> timeBox;
+
+    @FXML
+    private DatePicker datebox;
 
     private Patient currentPatient;
     private Appointment appointment;
@@ -42,6 +48,7 @@ public class BookAppointmentController {
 
     // Populate the Hospital ComboBox with the hospital names
     private void populateHospitalComboBox() {
+
         List<String> hospitals = appointment.getHospitals().stream()
                 .map(Hospital::getName)  // Assuming Hospital class has a getName() method
                 .collect(Collectors.toList());
@@ -69,25 +76,31 @@ public class BookAppointmentController {
 
     // Populate the Doctor ComboBox based on the selected speciality
     private void populateDoctorComboBox() {
-        String selectedSpeciality = SpecialityBox.getValue();
-        System.out.println("Selected Speciality: " + selectedSpeciality);  // Debugging to check the selected speciality
+        System.out.println("Doctors available: " + appointment.getDoctors().size());  // Debugging to check if doctors exist
+
+        String selectedSpeciality = SpecialityBox.getValue();  // Get the selected specialty from the dropdown
+        System.out.println("Selected Speciality: " + selectedSpeciality);  // Debugging to check the selected specialty
 
         if (selectedSpeciality != null) {
-            // Filter doctors based on selected speciality
-            List<String> doctors = appointment.getDoctors().stream()
-                    .map(Doctor::getName)  // Assuming Doctor class has getName() and getSpecialty() methods
+            // Filter doctors based on the selected specialty
+            List<String> filteredDoctors = appointment.getDoctors().stream()
+                    .filter(doctor -> selectedSpeciality.equals(doctor.getSpecialty())) // Filter by specialty
+                    .map(Doctor::getName)  // Map to doctor names
                     .collect(Collectors.toList());
 
-            DoctorBox.getItems().addAll(doctors);
+            DoctorBox.getItems().clear(); // Clear the current items in the combo box
+            DoctorBox.getItems().addAll(filteredDoctors); // Add the filtered doctor names
 
             // Optional: Set default selection
-            if (!doctors.isEmpty()) {
-                DoctorBox.setValue(doctors.get(0));  // Set the first doctor by default
+            if (!filteredDoctors.isEmpty()) {
+                DoctorBox.setValue(filteredDoctors.get(0));  // Set the first doctor by default
             } else {
                 System.out.println("No doctors found for the selected speciality.");  // Debugging if no doctors are found
+                DoctorBox.setValue(null); // Clear the selection if no doctors are available
             }
         }
     }
+
 
 
     public void HandleBack(ActionEvent actionEvent) {

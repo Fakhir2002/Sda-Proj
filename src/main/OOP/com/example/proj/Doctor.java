@@ -60,5 +60,9 @@ public class Doctor {
     public String getUsername() { return username; }
     public String getPasswordHash() { return passwordHash; }
 
-
+    // Optional: Override the toString method for better logging/debugging
+    @Override
+    public String toString() {
+        return "Doctor{name='" + name + "', specialty='" + specialty + "', hospital='" + hospital + "'}";
+    }
 }
