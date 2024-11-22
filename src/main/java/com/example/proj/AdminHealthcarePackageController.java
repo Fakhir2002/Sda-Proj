@@ -1,20 +1,17 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.HealthCarePackage_Handler;
+import com.example.temp.DB_HANDLER.Hospital_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdminHealthcarePackageController {
@@ -34,145 +31,26 @@ public class AdminHealthcarePackageController {
     @FXML
     private TableColumn<HealthCarePackages, String> descriptionColumn;
 
-    // Text fields for user input
     @FXML
     private TextField nameField;
     @FXML
     private TextField priceField;
     @FXML
     private TextField descriptionField;
-
-    // ComboBox for selecting hospitals
     @FXML
-    private ComboBox<String> hospitalComboBox;
-
+    private ComboBox<Hospital> hospitalComboBox; // Update to use Hospital objects
     @FXML
-    private javafx.scene.control.Button PackageBackButton;
+    private Button PackageBackButton;
 
-    private List<HealthCarePackages> packageList = new ArrayList<>();
+    private final HealthCarePackage_Handler packageHandler = new HealthCarePackage_Handler();
+    private final Hospital_Handler hospitalHandler = new Hospital_Handler(); // New handler for hospitals
 
-    private Connection connection;
-
-    // Establish database connection
-    private Connection getConnection() throws SQLException {
-        try {
-            if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "username", "12345678");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLException("Failed to connect to the database.");
-        }
-        return connection;
-    }
-
-    // Load healthcare packages from the database into the table
-    private void loadHealthCarePackages() {
-        try (Connection conn = getConnection()) {
-            String query = "SELECT * FROM healthcare_packages";
-            try (PreparedStatement statement = conn.prepareStatement(query);
-                 ResultSet resultSet = statement.executeQuery()) {
-                packageList.clear();
-                while (resultSet.next()) {
-                    String name = resultSet.getString("name");
-                    String hospitalName = resultSet.getString("hospital_name");
-                    LocalDate startDate = resultSet.getDate("start_date").toLocalDate();
-                    LocalDate endDate = resultSet.getDate("end_date").toLocalDate();
-                    double price = resultSet.getDouble("price");
-                    String description = resultSet.getString("description");
-                    HealthCarePackages packageItem = new HealthCarePackages(name, hospitalName, startDate, endDate, price, description);
-                    packageList.add(packageItem);
-                }
-                packagesTable.getItems().setAll(packageList); // Update the table view
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Load hospital names from the database into the ComboBox
-    private void loadHospitalNames() {
-        try (Connection conn = getConnection()) {
-            String query = "SELECT Name FROM hospitals";
-            try (PreparedStatement statement = conn.prepareStatement(query);
-                 ResultSet resultSet = statement.executeQuery()) {
-                List<String> hospitalNames = new ArrayList<>();
-                while (resultSet.next()) {
-                    String hospitalName = resultSet.getString("Name");
-                    System.out.println("Found hospital: " + hospitalName); // Debug print
-                    hospitalNames.add(hospitalName);
-                }
-                hospitalComboBox.getItems().setAll(hospitalNames);
-                System.out.println("ComboBox populated with: " + hospitalNames); // Debug print
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    // Add new healthcare package to the database
-    public void addPackage(ActionEvent event) {
-        String name = nameField.getText();
-        String hospitalName = hospitalComboBox.getValue(); // Get the selected hospital name
-        double price = Double.parseDouble(priceField.getText());
-        String description = descriptionField.getText();
-        LocalDate startDate = LocalDate.now(); // Example, you can add a date picker for start date
-        LocalDate endDate = startDate.plusMonths(1); // Example, add your own logic for end date
-
-        // Insert into database
-        try (Connection conn = getConnection()) {
-            String insertQuery = "INSERT INTO healthcare_packages (name, hospital_name, start_date, end_date, price, description) VALUES (?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = conn.prepareStatement(insertQuery)) {
-                statement.setString(1, name);
-                statement.setString(2, hospitalName); // Use the selected hospital name
-                statement.setDate(3, Date.valueOf(startDate));
-                statement.setDate(4, Date.valueOf(endDate));
-                statement.setDouble(5, price);
-                statement.setString(6, description);
-                int rowsInserted = statement.executeUpdate();
-                if (rowsInserted > 0) {
-                    System.out.println("Package added successfully!");
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // Refresh table with updated data from database
-        loadHealthCarePackages();
-    }
-
-    // Event handler for the back button
-    public void handlePackageBackButton(ActionEvent actionEvent) {
-        try {
-            // Load the AdminHome.fxml page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHome.fxml"));
-            Parent newPage = loader.load();
-
-            // Get the current stage (window)
-            Stage currentStage = (Stage) PackageBackButton.getScene().getWindow();
-
-            // Set the new scene in the current stage
-            currentStage.setScene(new Scene(newPage));
-
-            // Set the title for the new scene (optional)
-            currentStage.setTitle("Admin Home Page");
-
-            // Resize the window to fit the new scene's content
-            currentStage.sizeToScene();
-
-            // Show the window
-            currentStage.show();
-        } catch (IOException e) {
-            e.printStackTrace(); // Handle any issues loading the FXML file
-        }
-    }
-
-    // Initialize method to set up the table columns and load hospitals
+    /**
+     * Initialize the UI components and load data.
+     */
     @FXML
     public void initialize() {
+        // Configure table columns
         nameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
         hospitalNameColumn.setCellValueFactory(data -> data.getValue().hospitalNameProperty());
         startDateColumn.setCellValueFactory(data -> data.getValue().startDateProperty());
@@ -180,10 +58,118 @@ public class AdminHealthcarePackageController {
         priceColumn.setCellValueFactory(data -> data.getValue().priceProperty().asObject());
         descriptionColumn.setCellValueFactory(data -> data.getValue().descriptionProperty());
 
-        // Load healthcare packages from the database into the table
+        // Load data into the UI components
         loadHealthCarePackages();
-
-        // Load hospital names into the ComboBox
         loadHospitalNames();
+    }
+
+    /**
+     * Load all healthcare packages from the database into the table.
+     */
+    private void loadHealthCarePackages() {
+        List<HealthCarePackages> packageList = packageHandler.getAllPackages();
+        packagesTable.getItems().setAll(packageList);
+    }
+
+    /**
+     * Load all hospital names into the ComboBox.
+     */
+    private void loadHospitalNames() {
+        List<Hospital> hospitals = hospitalHandler.getAllHospitals(); // Fetch all hospitals
+
+        if (!hospitals.isEmpty()) {
+            hospitalComboBox.getItems().setAll(hospitals); // Add hospitals to ComboBox
+        } else {
+            System.out.println("No hospitals found in the database.");
+        }
+    }
+
+    /**
+     * Add a new healthcare package using input fields.
+     *
+     * @param event The action event.
+     */
+    public void addPackage(ActionEvent event) {
+        try {
+            // Collect data from input fields
+            String name = nameField.getText();
+            Hospital selectedHospital = hospitalComboBox.getValue(); // Get selected hospital
+            double price = Double.parseDouble(priceField.getText());
+            String description = descriptionField.getText();
+            LocalDate startDate = LocalDate.now(); // Example start date
+            LocalDate endDate = startDate.plusMonths(1); // Example end date
+
+            if (selectedHospital == null) {
+                showAlert("Validation Error", "Please select a hospital.", Alert.AlertType.WARNING);
+                return;
+            }
+
+            // Create a new package object
+            HealthCarePackages newPackage = new HealthCarePackages(
+                    name,
+                    selectedHospital.getName(),
+                    startDate,
+                    endDate,
+                    price,
+                    description
+            );
+
+            // Add the package to the database using the handler
+            boolean isAdded = packageHandler.addPackage(newPackage);
+
+            if (isAdded) {
+                // Refresh the table if the package is successfully added
+                loadHealthCarePackages();
+                clearInputFields();
+                showAlert("Success", "Package added successfully!", Alert.AlertType.INFORMATION);
+            } else {
+                showAlert("Error", "Failed to add package.", Alert.AlertType.ERROR);
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Validation Error", "Please enter valid data for all fields.", Alert.AlertType.WARNING);
+        }
+    }
+
+    /**
+     * Handle the back button click event to navigate to the previous screen.
+     *
+     * @param actionEvent The action event.
+     */
+    public void handlePackageBackButton(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHome.fxml"));
+            Parent newPage = loader.load();
+            Stage currentStage = (Stage) PackageBackButton.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Admin Home Page");
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Failed to load the admin home page.", Alert.AlertType.ERROR);
+        }
+    }
+
+    /**
+     * Clear all input fields.
+     */
+    private void clearInputFields() {
+        nameField.clear();
+        priceField.clear();
+        descriptionField.clear();
+        hospitalComboBox.getSelectionModel().clearSelection();
+    }
+
+    /**
+     * Show an alert dialog with the specified title and message.
+     *
+     * @param title   The alert title.
+     * @param message The alert message.
+     * @param type    The alert type.
+     */
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

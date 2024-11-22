@@ -15,7 +15,7 @@ public class HealthCarePackage_Handler {
 
     // SQL queries
     private static final String INSERT_PACKAGE_QUERY =
-            "INSERT INTO healthcare_packages (name, hospital_ame, start_date, end_date, price, description) VALUES (?, ?, ?, ?, ?, ?)";
+            "INSERT INTO healthcare_packages (name, hospital_name, start_date, end_date, price, description) VALUES (?, ?, ?, ?, ?, ?)";
 
     private static final String GET_ALL_PACKAGES_QUERY =
             "SELECT * FROM healthcare_packages";
@@ -69,9 +69,9 @@ public class HealthCarePackage_Handler {
                 // Create a new HealthCarePackages object from the result set
                 HealthCarePackages healthCarePackage = new HealthCarePackages(
                         resultSet.getString("name"),
-                        resultSet.getString("hospitalName"),
-                        resultSet.getDate("startDate").toLocalDate(),
-                        resultSet.getDate("endDate").toLocalDate(),
+                        resultSet.getString("hospital_name"),
+                        resultSet.getDate("start_date").toLocalDate(),
+                        resultSet.getDate("end_date").toLocalDate(),
                         resultSet.getDouble("price"),
                         resultSet.getString("description")
                 );
@@ -103,9 +103,9 @@ public class HealthCarePackage_Handler {
                 while (resultSet.next()) {
                     HealthCarePackages healthCarePackage = new HealthCarePackages(
                             resultSet.getString("name"),
-                            resultSet.getString("hospitalName"),
-                            resultSet.getDate("startDate").toLocalDate(),
-                            resultSet.getDate("endDate").toLocalDate(),
+                            resultSet.getString("hospital_name"),
+                            resultSet.getDate("start_date").toLocalDate(),
+                            resultSet.getDate("end_date").toLocalDate(),
                             resultSet.getDouble("price"),
                             resultSet.getString("description")
                     );

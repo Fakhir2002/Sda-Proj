@@ -34,4 +34,10 @@ public class Hospital {
     // Getter methods for hospital data
     public String getId() { return id; }
     public String getName() { return name; }
+
+    // Override toString to display the hospital name in ComboBox
+    @Override
+    public String toString() {
+        return name; // This will be shown in the ComboBox
+    }
 }
