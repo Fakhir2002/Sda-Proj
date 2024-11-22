@@ -15,23 +15,23 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class DoctorLoginController {
+    @FXML
+    private Button hello1; // Back button
 
     @FXML
-    private Button hello1;
+    private Button DocLog; // Login button
 
     @FXML
-    private Button DocLog;
+    private TextField usernameField; // Field to enter username
 
     @FXML
-    private TextField usernameField;
+    private PasswordField passwordField; // Field to enter password
 
-    @FXML
-    private PasswordField passwordField;
-
-    private DoctorLogin_Handler doctorLoginHandler = new DoctorLogin_Handler();  // Instantiate the login handler
+    // Login handler for validating credentials
+    private final DoctorLogin_Handler loginHandler = new DoctorLogin_Handler();
 
     /**
-     * Handles the "Go back" action to the home page.
+     * Handles the "Back" button action.
      */
     public void doctorgoback(ActionEvent actionEvent) {
         try {
@@ -43,32 +43,30 @@ public class DoctorLoginController {
             currentStage.setTitle("Home Page");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
 
     /**
-     * Handles the doctor login process.
-     * Verifies the credentials and navigates to the doctor's home page if successful.
+     * Handles the login process by validating credentials.
      */
     public void handleDocLogin(ActionEvent actionEvent) {
-        // Gather input from fields
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        // Get input from text fields
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
 
-        // Validate if both fields are filled
+        // Validate input
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please enter both username and password.");
+            showAlert(Alert.AlertType.ERROR, "Validation Error", "Username and password cannot be empty.");
             return;
         }
 
-        // Attempt to validate login credentials
-        boolean loginSuccess = doctorLoginHandler.validateLogin(username, password);
+        // Verify credentials with the database
+        boolean isValid = loginHandler.validateLogin(username, password);
 
-        if (loginSuccess) {
-            // If login is successful, navigate to the Doctor Home page
+        if (isValid) {
+            // If credentials are valid, navigate to DoctorHome.fxml
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
                 Parent newPage = loader.load();
@@ -78,23 +76,22 @@ public class DoctorLoginController {
                 currentStage.setTitle("Doctor Home Page");
                 currentStage.sizeToScene();
                 currentStage.show();
-
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // Debugging in case of issues loading the FXML
             }
         } else {
-            // If login fails, show an error alert
-            showAlert(Alert.AlertType.ERROR, "Login Failed", "Invalid username or password. Please try again.");
+            // Show error alert for invalid credentials
+            showAlert(Alert.AlertType.ERROR, "Login Error", "Invalid username or password.");
         }
     }
 
     /**
-     * Utility method to show alert dialogs.
+     * Utility method to show alerts.
      */
-    private void showAlert(Alert.AlertType alertType, String title, String message) {
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setContentText(message);
+        alert.setContentText(content);
         alert.showAndWait();
     }
 }

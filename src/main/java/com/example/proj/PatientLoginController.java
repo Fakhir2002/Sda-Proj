@@ -66,6 +66,14 @@ public class PatientLoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
                 Parent newPage = loader.load();
 
+
+                // Get the controller for the PatientHome screen
+                PatientHomeController controller = loader.getController();
+
+                // Pass the username to the PatientHomeController
+                controller.setPatientName(username); // Set the username on the home page label
+
+
                 Stage currentStage = (Stage) patientlog.getScene().getWindow();
 
                 // Update the current stage with the new scene
