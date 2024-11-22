@@ -30,8 +30,6 @@ public class HomePageController {
     @FXML
     private Button registerAdminButton;
 
-    @FXML
-    private Button faqsButton;
 
     @FXML
     private Button aboutSyntegrityButton;
@@ -88,7 +86,7 @@ public class HomePageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffRegister.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
-            Stage currentStage = (Stage) registerDoctorButton.getScene().getWindow();
+            Stage currentStage = (Stage) registerStaffButton.getScene().getWindow();
 
             // Create a new stage
 
@@ -125,27 +123,6 @@ public class HomePageController {
 
     }
 
-    // Method for "FAQs" button
-    @FXML
-    void handleFaqs(ActionEvent event) {
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Faq-view.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) faqsButton.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("FAQs");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
-    }
 
     @FXML
     private void handleAboutSyntegrity(ActionEvent event) {

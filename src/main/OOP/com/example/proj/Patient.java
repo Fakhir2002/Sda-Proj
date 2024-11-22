@@ -1,8 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.PatientRegister_Handler;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Patient {
     private String firstName;
@@ -34,12 +32,5 @@ public class Patient {
     public String getUsername() { return username; }
     public String getPassword() { return password; }
 
-    // Register the patient by calling the DB handler
-    public boolean register() {
-        // Convert LocalDate to String
-        String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        PatientRegister_Handler handler = new PatientRegister_Handler();
-        return handler.registerPatient(firstName, lastName, contactNo, dobString, address, username, password);
-    }
 }

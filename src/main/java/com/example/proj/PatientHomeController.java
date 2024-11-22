@@ -1,5 +1,6 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.Patient_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,12 +38,25 @@ public class PatientHomeController {
     @FXML
     private Label PatientName;
 
-    private String patientUsername; // Variable to store the username
+    private Patient_Handler patientHandler = new Patient_Handler(); // Handler to interact with the database
+    private Patient currentPatient; // Stores the logged-in patient's details
 
-    // Setter to pass the username from the login screen to this controller
+    /**
+     * Setter to initialize the patient data based on the username.
+     * Fetches the patient's details from the database and sets up the home page.
+     *
+     * @param username The username of the logged-in patient.
+     */
     public void setPatientName(String username) {
-        this.patientUsername = username;
-        PatientName.setText("Welcome, " + username + "!"); // Set the label text to display the username
+        // Retrieve patient details using the handler
+        currentPatient = patientHandler.getPatientDetails(username);
+
+        if (currentPatient != null) {
+            // Display the patient's name on the home page
+            PatientName.setText("Welcome, " + currentPatient.getFirstName() + " " + currentPatient.getLastName() + "!");
+        } else {
+            PatientName.setText("Welcome, Guest!"); // Fallback in case of an error
+        }
     }
 
     public void HandleBookAppointment(ActionEvent actionEvent) {
@@ -50,14 +64,17 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
             Parent newPage = loader.load();
 
+            // Pass the patient object to the next controller if needed
+            // Example: ((BookAppointmentController) loader.getController()).setPatient(currentPatient);
+
             Stage currentStage = (Stage) BookAppointment.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("BookAppointment");
+            currentStage.setTitle("Book Appointment");
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -73,7 +90,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -89,7 +106,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -105,7 +122,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -121,7 +138,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -137,7 +154,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 
@@ -153,7 +170,7 @@ public class PatientHomeController {
             currentStage.show();
 
         } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
+            e.printStackTrace();
         }
     }
 }

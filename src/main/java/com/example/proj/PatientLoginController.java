@@ -1,6 +1,7 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.PatientLogin_Handler;
+
+import com.example.temp.DB_HANDLER.Patient_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,8 +59,8 @@ public class PatientLoginController {
             return;
         }
 
-        // Use PatientLogin_Handler to validate credentials
-        PatientLogin_Handler loginHandler = new PatientLogin_Handler();
+
+        Patient_Handler loginHandler = new Patient_Handler();
         if (loginHandler.validateLogin(username, password)) {
             try {
                 // Load the FXML for the Patient Home Page
