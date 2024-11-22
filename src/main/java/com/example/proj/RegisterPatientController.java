@@ -77,9 +77,32 @@ public class RegisterPatientController {
         String password = passwordField.getText();
 
         // Validate input
-        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() || dob==null ||
-                address.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
+        if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "First Name must contain only letters and cannot be empty.");
+            return;
+        }
+        if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Last Name must contain only letters and cannot be empty.");
+            return;
+        }
+        if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) { // assuming an 11-digit number
+            showAlert(Alert.AlertType.ERROR, "Error", "Contact Number must be an 11-digit number.");
+            return;
+        }
+        if (dob == null || dob.isAfter(LocalDate.now())) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Please enter a valid Date of Birth.");
+            return;
+        }
+        if (address.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Address cannot be empty.");
+            return;
+        }
+        if (username.isEmpty()) { // Check if the username is empty
+            showAlert(Alert.AlertType.ERROR, "Error", "Username cannot be empty.");
+            return;
+        }
+        if (password.isEmpty() || password.length() < 8) { // Assuming password must be at least 8 characters
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long.");
             return;
         }
 

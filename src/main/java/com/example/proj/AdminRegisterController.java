@@ -83,9 +83,81 @@ public class AdminRegisterController {
         String password = passwordField.getText();
 
         // Validate inputs (basic validation)
-        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() || dob==null
-                || address.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            showAlert(Alert.AlertType.ERROR, "Error", "All fields are required!");
+        if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "First name should only contain alphabetic characters.");
+            return;
+        }
+        if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Last name should only contain alphabetic characters.");
+            return;
+        }
+
+        // Validate contact number (must be 10 digits)
+        if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Contact number must be a 11-digit number.");
+            return;
+        }
+        if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "First name should only contain alphabetic characters.");
+            return;
+        }
+        if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Last name should only contain alphabetic characters.");
+            return;
+        }
+
+        // Validate contact number (must be 10 digits)
+        if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Contact number must be a 11-digit number.");
+            return;
+        }
+
+        // Validate date of birth (must be in the past and a valid date)
+        if (dob == null) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Date of birth is required.");
+            return;
+        }
+        LocalDate currentDate = LocalDate.now();
+        if (dob.isAfter(currentDate)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Date of Birth cannot be in the future!");
+            return;
+        }
+
+
+        // Validate address (not empty)
+        if (address.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Address cannot be empty.");
+            return;
+        }
+
+        // Validate username (only alphanumeric characters and not empty)
+        if (username.isEmpty() || !username.matches("[a-zA-Z0-9_]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Username must be alphanumeric and cannot be empty.");
+            return;
+        }
+
+        // Validate password (at least 6 characters)
+        if (password.isEmpty() || password.length() < 8) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 8 characters long.");
+            return;
+        }
+        // Validate date of birth (must be in the past and a valid date)
+
+        // Validate address (not empty)
+        if (address.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Address cannot be empty.");
+            return;
+        }
+
+        // Validate username (only alphanumeric characters and not empty)
+        if (username.isEmpty() || !username.matches("[a-zA-Z0-9_]+")) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Username must be alphanumeric and cannot be empty.");
+            return;
+        }
+
+        // Validate password (at least 6 characters)
+        if (password.isEmpty() || password.length() < 6) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 6 characters long.");
             return;
         }
 

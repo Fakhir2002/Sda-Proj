@@ -125,6 +125,35 @@ public class RegisterDoctorController {
             return;
         }
 
+        // Validate specialty (ensure it's not empty)
+        if (!specialty.matches("[a-zA-Z ]+")) { // Allows only letters and spaces
+            showAlert(Alert.AlertType.ERROR, "Error", "Specialty cannot contain numbers.");
+            return;
+        }
+        // Validate contact number (assuming it should be a 10-digit number)
+        if (!contact.matches("[0-9]{11}")) { // Assuming 10-digit contact number
+            showAlert(Alert.AlertType.ERROR, "Error", "Contact number must be 11 digits.");
+            return;
+        }
+        LocalDate currentDate = LocalDate.now();
+        if (dob.isAfter(currentDate)) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Date of Birth cannot be in the future!");
+            return;
+        }
+
+
+        // Validate username (if you want it to be alphanumeric)
+        if (username.isEmpty() || !username.matches("[a-zA-Z0-9_]+")) { // Assuming alphanumeric username
+            showAlert(Alert.AlertType.ERROR, "Error", "Username must be alphanumeric and cannot be empty.");
+            return;
+        }
+
+        // Validate password (minimum length check, you can modify as needed)
+        if (password.isEmpty() || password.length() < 8) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Password must be at least 6 characters long.");
+            return;
+        }
+
         // Attempt to insert data into the database
         String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         boolean success = doctorRegisterHandler.registerDoctor(name, dobString, hospital, specialty, contact, address, username, password);

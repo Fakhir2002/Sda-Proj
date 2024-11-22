@@ -8,10 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class StaffRegisterController {
     @FXML
@@ -28,7 +31,7 @@ public class StaffRegisterController {
     @FXML
     private TextField contactNoField;
     @FXML
-    private TextField dobField;
+    private DatePicker dobField;
     @FXML
     private TextField addressField;
     @FXML
@@ -76,21 +79,61 @@ public class StaffRegisterController {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String contactNo = contactNoField.getText();
-        String dob = dobField.getText();
+        LocalDate dob = dobField.getValue();
         String address = addressField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         // Validate inputs
-        if (firstName.isEmpty() || lastName.isEmpty() || contactNo.isEmpty() ||
-                dob.isEmpty() || address.isEmpty() || username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "All fields are required!", Alert.AlertType.ERROR);
+        if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
+            showAlert("Error", "First name should only contain alphabetic characters.", Alert.AlertType.ERROR);
+            return;
+        }
+        if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
+            showAlert("Error", "Last name should only contain alphabetic characters.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validate contact number (must be 10 digits)
+        if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) {
+            showAlert("Error", "Contact number must be a 11-digit number.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validate date of birth (basic check for format, could be enhanced to validate age)
+        if (dob == null) {
+            showAlert("Error", "Date of Birth is required!", Alert.AlertType.ERROR);
+            return;
+        }
+        LocalDate currentDate = LocalDate.now();
+        if (dob.isAfter(currentDate)) {
+            showAlert("Error", "Date of Birth cannot be in the future!",Alert.AlertType.ERROR);
+            return;
+        }
+        // Validate address (not empty)
+        if (address.isEmpty()) {
+            showAlert("Error", "Address cannot be empty.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validate username (only alphanumeric characters and not empty)
+        if (username.isEmpty() || !username.matches("[a-zA-Z0-9_]+")) {
+            showAlert("Error", "Username must be alphanumeric and cannot be empty.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validate password (at least 6 characters)
+        if (password.isEmpty() || password.length() < 8) {
+            showAlert("Error", "Password must be at least 6 characters long.", Alert.AlertType.ERROR);
             return;
         }
 
         // Register staff in the database
         StaffRegister_Handler handler = new StaffRegister_Handler();
-        boolean isRegistered = handler.registerStaff(firstName, lastName, contactNo, dob, address, username, password);
+        // Convert LocalDate to String in the "yyyy-MM-dd" format
+        String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        boolean isRegistered = handler.registerStaff(firstName, lastName, contactNo, dobString, address, username, password);
+
 
         if (isRegistered) {
             showAlert("Success", "Staff registered successfully!", Alert.AlertType.INFORMATION);
