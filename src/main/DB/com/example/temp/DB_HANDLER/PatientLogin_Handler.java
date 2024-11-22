@@ -17,6 +17,10 @@ public class PatientLogin_Handler {
     private static final String LOGIN_QUERY =
             "SELECT * FROM patients WHERE username = ? AND password = ?";
 
+    // SQL query for retrieving patient's username
+    private static final String GET_USERNAME_QUERY =
+            "SELECT username FROM patients WHERE username = ? AND password = ?";
+
     /**
      * Verifies patient login credentials.
      *
@@ -44,5 +48,36 @@ public class PatientLogin_Handler {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Retrieves the patient's username if the login is valid.
+     *
+     * @param username Patient's username
+     * @param password Patient's password
+     * @return The patient's username if valid, null otherwise
+     */
+    public String getPatientUsername(String username, String password) {
+        // Establish database connection
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_USERNAME_QUERY)) {
+
+            // Set parameters for the prepared statement
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Check if a record was found
+                if (resultSet.next()) {
+                    return resultSet.getString("username");
+                }
+            }
+
+        } catch (SQLException e) {
+            // Log the exception for debugging
+            e.printStackTrace();
+        }
+        return null; // Return null if no matching username is found
     }
 }
