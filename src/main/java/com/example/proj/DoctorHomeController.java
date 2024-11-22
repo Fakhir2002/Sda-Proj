@@ -1,10 +1,12 @@
 package com.example.proj;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,7 +19,22 @@ public class DoctorHomeController
     public Button feed;
     public Button staff;
     public Button LogoutButton;
-public Button Feedback;
+    public Button Feedback;
+    @FXML
+    private Label DoctorName;
+
+
+@FXML
+private Doctor currentDoctor;
+
+
+    public void initialize(String username) {
+        DoctorName.setText("Welcome, " + username); // Set the label text to display the username
+        currentDoctor= new Doctor(username);
+        System.out.println("Patient logged in with username: " + currentDoctor.getUsername() +" "+ currentDoctor.getName());
+
+    }
+
     public void handleAppointment(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
@@ -64,6 +81,10 @@ public Button Feedback;
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFaq.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
+
+            DoctorFaqController controller = loader.getController();
+
+            controller.initialize(currentDoctor.getUsername());
 
             Stage currentStage = (Stage) docfaq.getScene().getWindow();
 
@@ -147,4 +168,6 @@ public Button Feedback;
         e.printStackTrace(); // Debugging in case of issues loading the FXML
     }
     }
+
+
 }

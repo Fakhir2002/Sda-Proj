@@ -83,7 +83,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="40.0" prefHeight="30.0" prefWidth="215.0" text="Doctor Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+        <Label fx:id="DoctorName" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="40.0" prefHeight="30.0" prefWidth="215.0" text="Doctor Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>

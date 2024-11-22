@@ -127,6 +127,9 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientFaq.fxml"));
             Parent newPage = loader.load();
 
+            PatientFaqController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
+
             Stage currentStage = (Stage) faqsButton.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("FAQs");

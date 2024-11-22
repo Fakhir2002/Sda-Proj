@@ -30,6 +30,8 @@ public class DoctorLoginController {
     // Login handler for validating credentials
     private final Doctor_Handler loginHandler = new Doctor_Handler();
 
+
+
     /**
      * Handles the "Back" button action.
      */
@@ -71,6 +73,11 @@ public class DoctorLoginController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
                 Parent newPage = loader.load();
 
+                DoctorHomeController controller = loader.getController();
+
+                // Pass the username to the PatientHomeController
+                controller.initialize(username);
+
                 Stage currentStage = (Stage) DocLog.getScene().getWindow();
                 currentStage.setScene(new Scene(newPage));
                 currentStage.setTitle("Doctor Home Page");
@@ -84,6 +91,8 @@ public class DoctorLoginController {
             showAlert(Alert.AlertType.ERROR, "Login Error", "Invalid username or password.");
         }
     }
+
+
 
     /**
      * Utility method to show alerts.

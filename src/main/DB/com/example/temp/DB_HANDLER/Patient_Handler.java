@@ -3,7 +3,8 @@ package com.example.temp.DB_HANDLER;
 import com.example.proj.Patient;
 
 import java.sql.*;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Patient_Handler {
 
@@ -22,15 +23,14 @@ public class Patient_Handler {
             "SELECT id, first_name, last_name, contact_no, dob, address, username, password FROM patients WHERE username = ?";
     private static final String GET_USERNAME_QUERY =
             "SELECT username FROM patients WHERE username = ? AND password = ?";
+    private static final String GET_ALL_PATIENTS_QUERY =
+            "SELECT id, first_name, last_name, contact_no, dob, address, username, password FROM patients";
 
     /**
      * Saves patient data to the database.
      */
     public boolean registerPatient(String firstName, String lastName, String contactNo,
                                    String dob, String address, String username, String password) {
-        System.out.println("registerPatient method called with parameters:");
-        System.out.println("First Name: " + firstName + ", Last Name: " + lastName + ", Contact No: " + contactNo +
-                ", DOB: " + dob + ", Address: " + address + ", Username: " + username + ", Password: " + password);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PATIENT_QUERY)) {
 
@@ -41,12 +41,10 @@ public class Patient_Handler {
             preparedStatement.setString(4, dob);
             preparedStatement.setString(5, address);
             preparedStatement.setString(6, username);
-            preparedStatement.setString(7, password); // Consider hashing the password
+            preparedStatement.setString(7, password);
 
             // Execute the query
-            int rowsInserted = preparedStatement.executeUpdate();
-            System.out.println("Number of rows inserted: " + rowsInserted);
-            return rowsInserted > 0; // Return true if insertion was successful
+            return preparedStatement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,7 +56,6 @@ public class Patient_Handler {
      * Validates the patient's login credentials.
      */
     public boolean validateLogin(String username, String password) {
-        System.out.println("validateLogin method called with Username: " + username + " and Password: " + password);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_QUERY)) {
 
@@ -68,9 +65,7 @@ public class Patient_Handler {
 
             // Execute the query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                boolean isValid = resultSet.next(); // Check if a record was found
-                System.out.println("Login validation result: " + isValid);
-                return isValid;
+                return resultSet.next(); // Check if a record was found
             }
 
         } catch (SQLException e) {
@@ -83,7 +78,6 @@ public class Patient_Handler {
      * Retrieves all patient details by username to create a Patient object.
      */
     public Patient getPatientDetails(String username) {
-        System.out.println("getPatientDetails method called for Username: " + username);
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(GET_PATIENT_DETAILS_QUERY)) {
 
@@ -93,28 +87,16 @@ public class Patient_Handler {
             // Execute the query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    // Retrieve data from the ResultSet
-                    int id = resultSet.getInt("id");
-                    String firstName = resultSet.getString("first_name");
-                    String lastName = resultSet.getString("last_name");
-                    String contactNo = resultSet.getString("contact_no");
-                    String dob = resultSet.getString("dob");  // Using LocalDate here
-                    String address = resultSet.getString("address");
-                    String password = resultSet.getString("password");
-
-                    // Print all patient details to the console
-                    System.out.println("Patient Details:");
-                    System.out.println("ID: " + id);
-                    System.out.println("First Name: " + firstName);
-                    System.out.println("Last Name: " + lastName);
-                    System.out.println("Contact No: " + contactNo);
-                    System.out.println("Date of Birth: " + dob);
-                    System.out.println("Address: " + address);
-                    System.out.println("Username: " + username);  // Assuming username is also a field to print
-                    System.out.println("Password: " + password);
-
-                    // Create and return a Patient object
-                    return new Patient(id, firstName, lastName, contactNo, dob, address, username, password);
+                    return new Patient(
+                            resultSet.getInt("id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name"),
+                            resultSet.getString("contact_no"),
+                            resultSet.getString("dob"),
+                            resultSet.getString("address"),
+                            resultSet.getString("username"),
+                            resultSet.getString("password")
+                    );
                 }
             }
 
@@ -128,8 +110,6 @@ public class Patient_Handler {
      * Retrieves patient's username based on username and password.
      */
     public String getPatientUsername(String username, String password) {
-        System.out.println("getPatientUsername method called with Username: " + username + " and Password: " + password);
-        // Establish database connection
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(GET_USERNAME_QUERY)) {
 
@@ -139,18 +119,42 @@ public class Patient_Handler {
 
             // Execute the query
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                // Check if a record was found
                 if (resultSet.next()) {
-                    String user = resultSet.getString("username");
-                    System.out.println("Retrieved Username: " + user);
-                    return user;
+                    return resultSet.getString("username");
                 }
             }
 
         } catch (SQLException e) {
-            // Log the exception for debugging
             e.printStackTrace();
         }
         return null; // Return null if no matching username is found
+    }
+
+    /**
+     * Retrieves all patients from the database.
+     */
+    public List<Patient> getAllPatientDetails() {
+        List<Patient> patients = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_PATIENTS_QUERY);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                patients.add(new Patient(
+                        resultSet.getInt("id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"),
+                        resultSet.getString("contact_no"),
+                        resultSet.getString("dob"),
+                        resultSet.getString("address"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return patients;
     }
 }
