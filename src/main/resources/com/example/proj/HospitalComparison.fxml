@@ -63,8 +63,8 @@
                 </Label>
             <Button layoutX="311.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Proceed" />
             <Button fx:id="backk" layoutX="118.0" layoutY="319.0" mnemonicParsing="false" onAction="#backfromhos" prefHeight="30.0" prefWidth="77.0" text="Back" />
-            <ComboBox layoutX="161.0" layoutY="108.0" prefWidth="150.0" />
-            <ComboBox layoutX="161.0" layoutY="160.0" prefWidth="150.0" />
+            <ComboBox fx:id="hospitalComboBox1" layoutX="161.0" layoutY="108.0" prefWidth="150.0" />
+            <ComboBox fx:id="hospitalComboBox2" layoutX="161.0" layoutY="160.0" prefWidth="150.0" />
             </children>
         </AnchorPane>
     </center>
