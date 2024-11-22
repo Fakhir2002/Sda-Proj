@@ -54,6 +54,11 @@ public class PatientHomeController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
             Parent newPage = loader.load();
 
+            BookAppointmentController controller = loader.getController();
+
+            // Pass the username to the BookController
+            controller.initialize(currentPatient.getUsername());
+
             Stage currentStage = (Stage) BookAppointment.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("BookAppointment");

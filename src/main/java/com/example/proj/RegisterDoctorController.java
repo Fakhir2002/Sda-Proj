@@ -1,7 +1,7 @@
 package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Doctor_Handler;
-import com.example.temp.DB_HANDLER.addHospital_Handler;
+import com.example.temp.DB_HANDLER.Hospital_Handler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,7 +43,7 @@ public class RegisterDoctorController {
     private TextField passwordField;
 
     private final Doctor_Handler doctorRegisterHandler = new Doctor_Handler();
-    private final addHospital_Handler hospitalHandler = new addHospital_Handler();
+    private final Hospital_Handler hospitalHandler = new Hospital_Handler();
     /**
      * Initializes the controller.
      * Populates the hospital ComboBox with hospital names.

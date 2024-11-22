@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.addHospital_Handler;
+import com.example.temp.DB_HANDLER.Hospital_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class addHospitalController {
+public class HospitalController {
 
     @FXML
     private Button backButton; // Back button for returning to the previous page
@@ -23,11 +23,11 @@ public class addHospitalController {
     private TextField Name; // TextField for entering the hospital name
 
     // Hospital handler for managing hospital database operations
-    private final addHospital_Handler hospitalHandler;
+    private final Hospital_Handler hospitalHandler;
 
     // Constructor to initialize the handler
-    public addHospitalController() {
-        hospitalHandler = new addHospital_Handler(); // Initialize the handler
+    public HospitalController() {
+        hospitalHandler = new Hospital_Handler(); // Initialize the handler
     }
 
     /**
@@ -54,7 +54,7 @@ public class addHospitalController {
 
     /**
      * Handles the action for the "Add" button.
-     * Adds a hospital to the database using the addHospital_Handler.
+     * Adds a hospital to the database using the Hospital_Handler.
      */
     public void handleAdd(ActionEvent actionEvent) {
         String hospitalName = Name.getText().trim(); // Get and trim the input
