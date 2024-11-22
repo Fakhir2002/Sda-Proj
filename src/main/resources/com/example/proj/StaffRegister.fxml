@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -102,12 +103,7 @@
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="dobField" layoutX="157.0" layoutY="187.0" promptText="DOB">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="addressField" layoutX="157.0" layoutY="220.0" promptText="Address">
+                <TextField fx:id="addressField" layoutX="157.0" layoutY="224.0" promptText="Address">
                     <font>
                         <Font size="10.0" />
                     </font>
@@ -125,6 +121,7 @@
                 <Button fx:id="StaffRegButton" layoutX="332.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleStaffReg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Button fx:id="staffRegCancel" layoutX="333.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleStaffRegCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <Button fx:id="staffalready" layoutX="138.0" layoutY="344.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
+            <DatePicker fx:id="dobField" layoutX="156.0" layoutY="187.0" prefHeight="26.0" prefWidth="126.0" />
             </children>
         </AnchorPane>
     </center>

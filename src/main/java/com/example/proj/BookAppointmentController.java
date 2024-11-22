@@ -44,12 +44,13 @@ public class BookAppointmentController {
     public void initialize(String username) {
         // Create Patient object
         currentPatient = new Patient(username);
-        System.out.println("Patient Object in Book Appointments with username: " + currentPatient.getUsername());
+        System.out.println("Patient Object in Book Appointments with username: " + currentPatient.getId() +" "+ currentPatient.getFirstName());
 
         // Initialize the Appointment object and populate the ComboBoxes
         appointment = new Appointment();
         populateHospitalComboBox();  // Populate Hospital ComboBox first
         populateSpecialityComboBox();  // Populate Speciality ComboBox
+        populateDoctorComboBox();
 
         // Attach listener to DatePicker for populating timeBox
         datebox.setOnAction(event -> handleDateSelection());
@@ -185,6 +186,7 @@ public class BookAppointmentController {
         }
 
         // Get patient ID
+        System.out.println(currentPatient.getId());
         int patientId = currentPatient.getId(); // Assuming Patient class has a getId() method
 
         // Save appointment to DB

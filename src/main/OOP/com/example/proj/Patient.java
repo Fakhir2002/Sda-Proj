@@ -38,6 +38,7 @@ public class Patient {
 
         // If patient details are found, update the fields
         if (patientDetails != null) {
+            this.id = patientDetails.getId();
             this.firstName = patientDetails.getFirstName();
             this.lastName = patientDetails.getLastName();
             this.contactNo = patientDetails.getContactNo();
