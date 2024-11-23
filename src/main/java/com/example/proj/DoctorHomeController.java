@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DoctorHomeController
-{
+public class DoctorHomeController {
+
     public Button appoint;
     public Button VidCon;
     public Button docfaq;
@@ -23,163 +23,65 @@ public class DoctorHomeController
     @FXML
     private Label DoctorName;
     private String username;
-
-@FXML
-private Doctor currentDoctor;
-
+    @FXML
+    private Doctor currentDoctor;
 
     public void initialize(String username) {
-        this.username=username;
+        this.username = username;
+        currentDoctor = new Doctor(username);
         DoctorName.setText("Welcome, " + username); // Set the label text to display the username
-        currentDoctor= new Doctor(username);
-        System.out.println("Doctor logged in with username: " + currentDoctor.getUsername() +" and name: "+ currentDoctor.getName());
+        System.out.println("Doctor logged in with username: " + currentDoctor.getUsername() +
+                " and name: " + currentDoctor.getName());
+    }
 
+    private void loadPage(String fxmlFile, String title, Button sourceButton) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent newPage = loader.load();
+
+            // Pass username to controllers implementing InitializeUsername
+            Object controller = loader.getController();
+            if (controller instanceof InitializeUsername) {
+                ((InitializeUsername) controller).initialize(currentDoctor.getUsername());
+            }
+
+            Stage currentStage = (Stage) sourceButton.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle(title);
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 
     public void handleAppointment(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageAppointment.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            ManageAppointmentController controller = loader.getController();
-
-            controller.initialize(currentDoctor.getUsername());
-
-            Stage currentStage = (Stage) appoint.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Manage Appointment");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("ManageAppointment.fxml", "Manage Appointment", appoint);
     }
 
     public void handlevid(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("video-view.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) VidCon.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Video Consulttion");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
-
+        loadPage("video-view.fxml", "Video Consultation", VidCon);
     }
 
     public void handledocfaq(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFaq.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            DoctorFaqController controller = loader.getController();
-
-            controller.initialize(currentDoctor.getUsername());
-
-            Stage currentStage = (Stage) docfaq.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("FAQs");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
-
+        loadPage("DoctorFaq.fxml", "FAQs", docfaq);
     }
 
     public void handlefeedback(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-
-
-
-
+        loadPage("DoctorFeedback.fxml", "Doctor Feedback Page", Feedback);
     }
 
     public void handlestaff(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Staff-Schedule.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) staff.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Staff Scheduling");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
-
+        loadPage("Staff-Schedule.fxml", "Staff Scheduling", staff);
     }
 
     public void HandleLogout(ActionEvent actionEvent) {
-        currentDoctor= new Doctor(username);
-        try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) LogoutButton.getScene().getWindow();
-
-            // Create a new stage
-
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Home Page");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
-
+        loadPage("HomePage.fxml", "Home Page", LogoutButton);
+        System.out.println("Doctor logged out");
     }
 
-    public void Gofeedback(ActionEvent actionEvent) { try {
-        currentDoctor= new Doctor(username);
-        // Load the FXML for the About Us application
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFeedback.fxml")); // Ensure AboutUs.fxml exists in the same directory
-        Parent newPage = loader.load();
-
-        Stage currentStage = (Stage) Feedback.getScene().getWindow();
-
-        // Create a new stage
-
-        currentStage.setScene(new Scene(newPage));
-        currentStage.setTitle("Doctor Feedback Page");
-        currentStage.sizeToScene();
-        currentStage.show();
-
-    } catch (IOException e) {
-        e.printStackTrace(); // Debugging in case of issues loading the FXML
+    public void Gofeedback(ActionEvent actionEvent) {
+        loadPage("DoctorFeedback.fxml", "Doctor Feedback Page", Feedback);
     }
-    }
-
-
 }

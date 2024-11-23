@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ManageAppointmentController {
+public class ManageAppointmentController implements InitializeUsername{
 
     @FXML
     private TableColumn<Object[], Integer> ID;

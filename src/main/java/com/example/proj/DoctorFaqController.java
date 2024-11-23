@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class DoctorFaqController {
+public class DoctorFaqController implements InitializeUsername{
 
     @FXML
     private Button cancelFAQ;
