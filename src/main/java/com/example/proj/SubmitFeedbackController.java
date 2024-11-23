@@ -178,8 +178,6 @@ public class SubmitFeedbackController implements InitializeUsername{
             Parent newPage = loader.load();
             // Get the controller for the PatientHome screen
             PatientHomeController controller = loader.getController();
-
-            // Pass the username to the PatientHomeController
             controller.initialize(current.getUsername());
 
             // Get the current stage and set the new scene

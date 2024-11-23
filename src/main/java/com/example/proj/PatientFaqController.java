@@ -1,7 +1,5 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
-import com.example.temp.DB_HANDLER.Faq_Handler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,9 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PatientFaqController {
+public class PatientFaqController implements InitializeUsername {
 
     @FXML
     private Button ASK;
@@ -42,23 +39,21 @@ public class PatientFaqController {
 
     @FXML
     private Button cancelFAQ;
+
     @FXML
     private Faq faq;
 
     private Patient currentPatient;
-    private Faq_Handler faqHandler;
-
 
     // Initialize method
     public void initialize(String username) {
         currentPatient = new Patient(username); // Initialize patient with username
         faq = new Faq(); // Initialize FAQ class
-        faqHandler = new Faq_Handler(); // Initialize the FAQ handler
 
+        // Initialize the FAQ handler
         populateDoctorComboBox(); // Populate doctor ComboBox
         setupTableView(); // Setup FAQ TableView
     }
-
 
     // Populate ComboBox with doctors from Faq
     private void populateDoctorComboBox() {
@@ -99,11 +94,7 @@ public class PatientFaqController {
         }
     }
 
-
-
-
-
-
+    // Setup the TableView with FAQ data
     private void setupTableView() {
         Question.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getQuestion()));
@@ -114,14 +105,12 @@ public class PatientFaqController {
         refreshTableView();
     }
 
+    // Refresh TableView with the updated FAQ list
     private void refreshTableView() {
-        // Assuming you have a method in Faq_Handler to retrieve all FAQs
-        Faq_Handler faqHandler = new Faq_Handler();
-        List<Faq> faqs = faqHandler.getAllFaqs();
+        List<Faq> faqs = Faq.getAllFaqs();
         ObservableList<Faq> faqList = FXCollections.observableArrayList(faqs);
         faqview.setItems(faqList);
     }
-
 
     // Handle the ASK button click
     public void HandleASK(ActionEvent actionEvent) {
@@ -143,7 +132,7 @@ public class PatientFaqController {
             newFaq.setQuestion(questionText);
             newFaq.setAnswer(""); // Default to no answer initially
 
-            if (faqHandler.insertFaq(newFaq)) {
+            if (faq.insertFaq(newFaq)) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION,
                         "Question submitted successfully!", ButtonType.OK);
                 alert.showAndWait();
@@ -171,9 +160,7 @@ public class PatientFaqController {
             Parent newPage = loader.load();
 
             PatientHomeController controller = loader.getController();
-
             controller.initialize(currentPatient.getUsername());
-
 
             Stage currentStage = (Stage) cancelFAQ.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));

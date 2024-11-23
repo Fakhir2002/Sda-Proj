@@ -1,6 +1,7 @@
 package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Doctor_Handler;
+import com.example.temp.DB_HANDLER.Faq_Handler;
 import com.example.temp.DB_HANDLER.Patient_Handler;
 
 import java.util.List;
@@ -13,11 +14,13 @@ public class Faq {
     private String answer;
     private List<Patient> patients;
     private List<Doctor> doctors;
+    private static Faq_Handler faqHandler;
 
     public Faq(){
 
         Doctor_Handler doctorHandler = new Doctor_Handler();
         Patient_Handler patientHandler = new Patient_Handler();
+        faqHandler = new Faq_Handler();
 
         this.doctors = doctorHandler.getAllDoctorsDetails();
         this.patients = patientHandler.getAllPatientDetails();
@@ -38,6 +41,11 @@ public class Faq {
                 .collect(Collectors.toList());
     }
 
+    public static List<Faq> getAllFaqs(){
+        return faqHandler.getAllFaqs();
+    }
+
+
 
 
     public int getPatientID() { return patientID; }
@@ -53,4 +61,7 @@ public class Faq {
     public void setAnswer(String answer) { this.answer = answer; }
 
 
+    public boolean insertFaq(Faq newFaq) {
+        return faqHandler.insertFaq(newFaq);
+    }
 }

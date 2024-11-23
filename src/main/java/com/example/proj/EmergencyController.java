@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class EmergencyController {
+public class EmergencyController implements InitializeUsername{
     @FXML
     private Label welcomeText;
 
@@ -23,6 +23,14 @@ public class EmergencyController {
     @FXML
     private Button BackButton;
 
+    @FXML
+    private Patient currentPatient;
+
+    public void initialize(String username) {
+        // Initialize Patient and Appointment objects
+        currentPatient = new Patient(username);
+    }
+
     public void Handleback(ActionEvent actionEvent) {
 
 
@@ -32,6 +40,9 @@ public class EmergencyController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) BackButton.getScene().getWindow();
+            PatientHomeController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
+
 
             // Create a new stage
 
@@ -46,7 +57,5 @@ public class EmergencyController {
 
     }
 
-    public void initialize(String username) {
 
-    }
 }
