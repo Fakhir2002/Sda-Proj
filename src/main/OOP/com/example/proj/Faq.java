@@ -64,4 +64,23 @@ public class Faq {
     public boolean insertFaq(Faq newFaq) {
         return faqHandler.insertFaq(newFaq);
     }
+
+    /**
+     * Calls the FaqHandler to update the answer for this FAQ entry.
+     *
+     * @param patientID The patient's ID
+     * @param doctorID The doctor's ID
+     * @param newAnswer The new answer to the FAQ
+     * @return true if the answer was successfully updated, false otherwise
+     */
+    public boolean updateFaqAnswer(int patientID, int doctorID, String newAnswer) {
+        // Corrected the case here
+        return faqHandler.updateFaqAnswer(patientID, doctorID, newAnswer);
+    }
+
+    public static List<Faq> getFaqsByDoctorId(int doctorId) {
+        return faqHandler.getFaqsByDoctorId(doctorId);
+    }
+
+
 }

@@ -76,7 +76,7 @@ public class DoctorFaqController implements InitializeUsername{
 
     private void loadDoctorFAQs() {
         // Fetch FAQs assigned to the current doctor
-        List<Faq> doctorFaqs = faqHandler.getFaqsByDoctorId(currentDoctor.getId());
+        List<Faq> doctorFaqs = faq.getFaqsByDoctorId(currentDoctor.getId());
 
         // Update the observable list to reflect database data
         faqObservableList.setAll(doctorFaqs);
@@ -105,7 +105,7 @@ public class DoctorFaqController implements InitializeUsername{
         selectedFaq.setAnswer(answer);
 
         // Update the FAQ in the database
-        boolean updateSuccess = faqHandler.updateFaqAnswer(
+        boolean updateSuccess = faq.updateFaqAnswer(
                 selectedFaq.getPatientID(),
                 selectedFaq.getDoctorID(),
                 selectedFaq.getAnswer()
