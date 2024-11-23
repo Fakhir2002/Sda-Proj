@@ -16,7 +16,7 @@ import javafx.concurrent.Task;
 import java.io.IOException;
 import java.util.List;
 
-public class SubmitFeedbackController {
+public class SubmitFeedbackController implements InitializeUsername{
 
     public Button submitted;
     @FXML

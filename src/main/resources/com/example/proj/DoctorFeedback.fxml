@@ -1,57 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
-<?import javafx.scene.effect.Light.Distant?>
-<?import javafx.scene.effect.Lighting?>
-<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="636.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.DoctorFeedbackController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="646.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.DoctorFeedbackController">
     <children>
         <ImageView fitHeight="40.0" fitWidth="55.0" layoutX="-57.0" layoutY="-11.0">
             <image>
                 <Image url="@images/logo.png" />
             </image>
         </ImageView>
-        <AnchorPane layoutX="-2.0" prefHeight="400.0" prefWidth="166.0" style="-fx-background-color: #d7e1e5;">
-            <children>
-                <ImageView fitHeight="48.0" fitWidth="70.0" layoutX="60.0" layoutY="7.0">
-                    <image>
-                        <Image url="@images/logo.png" />
-                    </image>
-                </ImageView>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#014d4e" height="48.0" layoutX="38.0" layoutY="62.0" stroke="#047b66" strokeType="INSIDE" width="114.0">
-                    <effect>
-                        <Bloom>
-                            <input>
-                                <Lighting>
-                                    <bumpInput>
-                                        <Shadow />
-                                    </bumpInput>
-                                    <light>
-                                        <Light.Distant />
-                                    </light>
-                                </Lighting>
-                            </input>
-                        </Bloom>
-                    </effect>
-                </Rectangle>
-                <Text fill="#0b0202" layoutX="50.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CureTrack">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Text>
-            </children>
-        </AnchorPane>
-        <Text fill="WHITE" layoutX="361.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK" wrappingWidth="289.60000000000014">
+        <AnchorPane layoutX="-2.0" prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: #d7e1e5;" />
+        <Text fill="WHITE" layoutX="33.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK" wrappingWidth="289.60000000000014">
             <font>
                 <Font name="System Bold" size="17.0" />
             </font>
@@ -59,32 +27,21 @@
                 <Glow>
                     <input>
                         <Bloom />
-                    </input></Glow>
+                    </input>
+                </Glow>
             </effect>
         </Text>
-        <Text fill="WHITE" layoutX="211.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fill="WHITE" layoutX="207.0" layoutY="347.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fill="WHITE" layoutX="207.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <Text fill="WHITE" layoutX="387.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright (c).">
-            <font>
-                <Font name="System Bold" size="8.0" />
-            </font>
-        </Text>
-        <Text fill="WHITE" layoutX="372.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Rights Reserved">
-            <font>
-                <Font name="System Bold" size="9.0" />
-            </font>
-        </Text>
-      <Button fx:id="Backbutton" layoutX="298.0" layoutY="313.0" mnemonicParsing="false" onAction="#GoBack" text="Back" />
-      <Text layoutX="210.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient 1" />
-      <Text layoutX="211.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient 4" />
-      <Text layoutX="211.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient 3" />
-      <Text layoutX="211.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient 2" />
-      <Text layoutX="-174.0" layoutY="-24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <TextField layoutX="287.0" layoutY="88.0" />
-      <TextField layoutX="286.0" layoutY="137.0" />
-      <TextField layoutX="287.0" layoutY="187.0" />
-      <TextField layoutX="287.0" layoutY="234.0" />
-
+        <TableView fx:id="feedbackTable" layoutX="16.0" layoutY="55.0" prefHeight="318.0" prefWidth="611.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="44.800048828125" text="ID" />
+                <TableColumn fx:id="patientNameColumn" prefWidth="84.79998779296875" text="PName" />
+                <TableColumn fx:id="doctorNameColumn" prefWidth="83.20001220703125" text="Dname" />
+                <TableColumn fx:id="hospitalNameColumn" prefWidth="89.5999755859375" text="HName" />
+                <TableColumn fx:id="experienceRatingColumn" prefWidth="97.5999755859375" text="Experience" />
+                <TableColumn fx:id="recommendationsColumn" prefWidth="98.4000244140625" text="Recommend" />
+                <TableColumn fx:id="feedbackCommentsColumn" prefWidth="119.199951171875" text="Feedback" />
+            </columns>
+        </TableView>
+          <Button fx:id="Backbutton" layoutX="502.0" layoutY="16.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="26.0" prefWidth="70.0" text="Back" />
     </children>
 </AnchorPane>

@@ -2,36 +2,91 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Feedback_Handler;
 
+import java.util.List;
+
 public class Feedback {
 
-    private static Feedback_Handler feedbackHandler=new Feedback_Handler();
+    private int id;
+    private String patientName;
+    private String doctorName;
+    private String hospitalName;
+    private boolean experienceRating;
+    private String recommendations;
+    private String feedbackComments;
 
-    public Feedback() {
-        // Initialize the feedback handler that interacts with the database
-        this.feedbackHandler = new Feedback_Handler();
+    // Feedback_Handler instance to interact with database
+    private static Feedback_Handler feedbackHandler = new Feedback_Handler();
+
+    // Default constructor
+    public Feedback() {}
+
+    // Constructor to initialize all fields
+    public Feedback(int id, String patientName, String doctorName, String hospitalName, boolean experienceRating, String recommendations, String feedbackComments) {
+        this.id = id;
+        this.patientName = patientName;
+        this.doctorName = doctorName;
+        this.hospitalName = hospitalName;
+        this.experienceRating = experienceRating;
+        this.recommendations = recommendations;
+        this.feedbackComments = feedbackComments;
     }
 
-    /**
-     * Collects feedback from the user and saves it to the database.
-     *
-     * @param patientId          The ID of the patient providing the feedback.
-     * @param patientName        The name of the patient providing the feedback.
-     * @param doctorName         The name of the doctor being reviewed.
-     * @param hospitalName       The name of the hospital where the feedback is provided.
-     * @param experienceRating   True for positive feedback ("Yes"), false for negative feedback ("No").
-     * @param recommendations    Any suggestions or recommendations from the patient.
-     * @param feedbackComments   Additional feedback/comments from the patient.
-     * @return true if the feedback is successfully saved, false otherwise.
-     */
+    // Getters for each field
+    public int getId() {
+        return id;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public boolean getExperienceRating() {
+        return experienceRating;
+    }
+
+    public String getRecommendations() {
+        return recommendations;
+    }
+
+    public String getFeedbackComments() {
+        return feedbackComments;
+    }
+
+    // Method to insert feedback into the database (non-static)
     public static boolean insertFeedback(int patientId, String patientName, String doctorName, String hospitalName,
                                          boolean experienceRating, String recommendations, String feedbackComments) {
-
         // Validate the data (you can add more validation logic here)
         if (patientName.isEmpty() || doctorName.isEmpty() || hospitalName.isEmpty()) {
             return false;  // Invalid input, return false
         }
 
         // Pass the data to the Feedback_Handler to save to the database
-        return feedbackHandler.insertFeedback(patientId, patientName, doctorName, hospitalName, experienceRating, recommendations, feedbackComments);
+        return feedbackHandler.insertFeedback(patientName, doctorName, hospitalName, experienceRating, recommendations, feedbackComments);
     }
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "id=" + id +
+                ", patientName='" + patientName + '\'' +
+                ", doctorName='" + doctorName + '\'' +
+                ", hospitalName='" + hospitalName + '\'' +
+                ", experienceRating=" + experienceRating +
+                ", recommendations='" + recommendations + '\'' +
+                ", feedbackComments='" + feedbackComments + '\'' +
+                '}';
+    }
+
+    public static List<Feedback> getAllFeedback() {
+        // Call the Feedback_Handler to retrieve all feedback
+        return feedbackHandler.getAllFeedback();  // This returns the list of feedback from DB
+    }
+
 }

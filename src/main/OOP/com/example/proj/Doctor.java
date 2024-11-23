@@ -33,6 +33,7 @@ public class Doctor {
         this.address = address;
         this.username = username;
         this.passwordHash = passwordHash;
+        Doctor_Handler doctorHandler = new Doctor_Handler();
     }
 
     // Method to fetch and update doctor details from the database
