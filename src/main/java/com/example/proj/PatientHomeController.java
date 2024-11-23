@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PatientHomeController {
+public class PatientHomeController implements InitializeUsername{
 
     @FXML
     private Button faqsButton;
@@ -41,138 +41,66 @@ public class PatientHomeController {
     private Patient currentPatient;
     private String username;
 
-
     // Setter to pass the username from the login screen to this controller
     public void initialize(String username) {
-        this.username=username;
-        // Variable to store the username
-        PatientName.setText("Welcome, " + username); // Set the label text to display the username
-        currentPatient= new Patient(username);
-        System.out.println("Patient logged in with username: " + currentPatient.getUsername() +" and name: "+ currentPatient.getFirstName());
-
+        this.username = username;
+        currentPatient = new Patient(username);
+        PatientName.setText("Welcome, " + username);
+        System.out.println("Patient logged in with username: " + currentPatient.getUsername() + " and name: " + currentPatient.getFirstName());
     }
 
-    public void HandleBookAppointment(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
+    // Load the corresponding page based on the button clicked
+    private void loadPage(String fxmlFile, String title, Button currentButton) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent newPage = loader.load();
 
-            BookAppointmentController controller = loader.getController();
+            // Pass the username to the controllers where necessary
+            Object controller = loader.getController();
+            if (controller instanceof InitializeUsername) {
+                ((InitializeUsername) controller).initialize(currentPatient.getUsername());
+            }
 
-            // Pass the username to the BookController
-
-            controller.initialize(currentPatient.getUsername());
-
-            Stage currentStage = (Stage) BookAppointment.getScene().getWindow();
+            Stage currentStage = (Stage) currentButton.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("BookAppointment");
+            currentStage.setTitle(title);
             currentStage.sizeToScene();
             currentStage.show();
 
         } catch (IOException e) {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
+    }
+
+    // Event handlers for different buttons
+    public void HandleBookAppointment(ActionEvent actionEvent) {
+        loadPage("BookAppointment.fxml", "Book Appointment", BookAppointment);
     }
 
     public void HandleCompare(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Comparison.fxml"));
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) Compare.getScene().getWindow();
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Comparison");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("Comparison.fxml", "Comparison", Compare);
     }
 
     public void HandleFeedback(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Submit-Feedback.fxml"));
-            Parent newPage = loader.load();
-
-            SubmitFeedbackController controller = loader.getController();
-            controller.initialize(currentPatient.getUsername());
-
-            Stage currentStage = (Stage) Feedback.getScene().getWindow();
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Feedback");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("Submit-Feedback.fxml", "Feedback", Feedback);
     }
 
     public void HandleEmergency(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Emergency.fxml"));
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) emergency.getScene().getWindow();
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Emergency");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("Emergency.fxml", "Emergency", emergency);
     }
 
     public void HandleFaqs(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientFaq.fxml"));
-            Parent newPage = loader.load();
-
-
-            PatientFaqController controller = loader.getController();
-            controller.initialize(currentPatient.getUsername());
-
-            Stage currentStage = (Stage) faqsButton.getScene().getWindow();
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("FAQs");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("PatientFaq.fxml", "FAQs", faqsButton);
     }
 
     public void HandlePayments(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Pay-Bills.fxml"));
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) payment.getScene().getWindow();
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Bills");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Debugging in case of issues loading the FXML
-        }
+        loadPage("Pay-Bills.fxml", "Bills", payment);
     }
 
     public void handlepatlogout(ActionEvent actionEvent) {
-        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();
-
 
             System.out.println("Patient logged out");
 

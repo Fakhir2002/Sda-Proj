@@ -43,4 +43,8 @@ public class PayBillsController {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
+
+    public void initialize(String username) {
+
+    }
 }

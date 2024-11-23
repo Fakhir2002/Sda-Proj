@@ -1,6 +1,5 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Appointment_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BookAppointmentController {
+public class BookAppointmentController implements InitializeUsername {
 
     @FXML
     private Button Confirm;
@@ -37,21 +36,19 @@ public class BookAppointmentController {
     private Patient currentPatient;
     private Appointment appointment;
 
+    @Override
     public void initialize(String username) {
-        // Create Patient object
+        // Initialize Patient and Appointment objects
         currentPatient = new Patient(username);
-        System.out.println("Patient Object in Book Appointments with username: " + currentPatient.getId() + " " + currentPatient.getFirstName());
+        System.out.println("Patient logged in: " + currentPatient.getId() + " " + currentPatient.getFirstName());
 
-        // Initialize the Appointment object
         appointment = new Appointment();
 
-        // Populate Hospital ComboBox
+        // Populate ComboBoxes
         populateHospitalComboBox();
-
-        // Add listeners to refresh dependent ComboBoxes
         setupComboBoxListeners();
 
-        // Attach listener to DatePicker
+        // Set listener for DatePicker
         datebox.setOnAction(event -> handleDateSelection());
     }
 
@@ -78,7 +75,6 @@ public class BookAppointmentController {
 
     private void populateDoctorComboBox() {
         DoctorBox.getItems().clear();
-
         String selectedSpeciality = SpecialityBox.getValue();
         String selectedHospital = HospitalBox.getValue();
 
@@ -98,13 +94,13 @@ public class BookAppointmentController {
     }
 
     private void setupComboBoxListeners() {
-        // HospitalBox Listener
+        // HospitalComboBox Listener
         HospitalBox.setOnAction(event -> {
             populateSpecialityComboBox();
             populateDoctorComboBox(); // Refresh doctor list based on hospital selection
         });
 
-        // SpecialityBox Listener
+        // SpecialityComboBox Listener
         SpecialityBox.setOnAction(event -> populateDoctorComboBox());
     }
 
@@ -124,12 +120,10 @@ public class BookAppointmentController {
 
     private void populateTimeBox() {
         timeBox.getItems().clear();
-
         List<String> timeSlots = List.of(
                 "09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM",
                 "03:00 PM - 04:00 PM", "04:00 PM - 05:00 PM", "05:00 PM - 06:00 PM"
         );
-
         timeBox.getItems().addAll(timeSlots);
 
         if (!timeSlots.isEmpty()) {
@@ -163,10 +157,7 @@ public class BookAppointmentController {
 
         int patientId = currentPatient.getId();
 
-        Appointment_Handler appointmentHandler = new Appointment_Handler();
-        boolean isSaved = appointmentHandler.saveAppointment("Pending", selectedDate, selectedTime, doctorId, patientId);
-
-        if (isSaved) {
+        if (Appointment.saveAppointment("Pending", selectedDate, selectedTime, doctorId, patientId)) {
             showAlert("Success", "Appointment confirmed successfully.");
         } else {
             showAlert("Error", "Failed to save the appointment. Please try again.");
@@ -187,6 +178,7 @@ public class BookAppointmentController {
             Parent newPage = loader.load();
             PatientHomeController controller = loader.getController();
             controller.initialize(currentPatient.getUsername());
+
             Stage currentStage = (Stage) PatientHome.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("PatientHome");

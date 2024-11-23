@@ -45,4 +45,8 @@ public class EmergencyController {
         }
 
     }
+
+    public void initialize(String username) {
+
+    }
 }

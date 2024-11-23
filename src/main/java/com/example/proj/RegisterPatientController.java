@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Patient_Handler;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +34,6 @@ public class RegisterPatientController {
     @FXML
     private PasswordField passwordField;
 
-    private Patient_Handler patientRegisterHandler = new Patient_Handler();
 
     public void handlePatientRegCancel(ActionEvent actionEvent) {
         try {

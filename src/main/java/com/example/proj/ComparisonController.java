@@ -33,7 +33,7 @@ public class ComparisonController {
         // Populate the ComboBox with options
         comparisonBox.getItems().addAll("Doctor Comparison", "Hospital Comparison");
 
-        // Optional: Set a default value
+        // Set a default value
         comparisonBox.setValue("Doctor Comparison");
     }
 

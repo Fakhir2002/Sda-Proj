@@ -57,4 +57,9 @@ public class Appointment {
         return handler.deleteAppointment(appointmentId);
     }
 
+    public static boolean saveAppointment(String status, String date, String time, int doctorId, int patientId){
+    Appointment_Handler appointmentHandler = new Appointment_Handler();
+        return appointmentHandler.saveAppointment(status, date, time, doctorId, patientId);
+    }
+
 }

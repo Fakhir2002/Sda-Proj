@@ -1,7 +1,5 @@
 package com.example.proj;
 
-
-import com.example.temp.DB_HANDLER.Patient_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class PatientLoginController {
+
     @FXML
     private Button hello2; // Back button
 
@@ -30,22 +29,7 @@ public class PatientLoginController {
 
     // Handles the "Back" button action
     public void patientgoback(ActionEvent actionEvent) {
-        try {
-            // Load the FXML for the Home Page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
-            Parent newPage = loader.load();
-
-            Stage currentStage = (Stage) hello2.getScene().getWindow();
-
-            // Update the current stage with the new scene
-            currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Home Page");
-            currentStage.sizeToScene();
-            currentStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace(); // Log the error for debugging
-        }
+        loadPage("HomePage.fxml", "Home Page", hello2);
     }
 
     // Handles the "Login" button action
@@ -59,35 +43,48 @@ public class PatientLoginController {
             return;
         }
 
-        // Use PatientLogin_Handler to validate credentials
-        Patient_Handler loginHandler = new Patient_Handler();
         if (Patient.validateLogin(username, password)) {
-            try {
-                // Load the FXML for the Patient Home Page
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
-                Parent newPage = loader.load();
-
-                // Get the controller for the PatientHome screen
-                PatientHomeController controller = loader.getController();
-
-                // Pass the username to the PatientHomeController
-                controller.initialize(username);
-
-
-                Stage currentStage = (Stage) patientlog.getScene().getWindow();
-
-                // Update the current stage with the new scene
-                currentStage.setScene(new Scene(newPage));
-                currentStage.setTitle("Patient Home Page");
-                currentStage.sizeToScene();
-                currentStage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace(); // Log the error for debugging
-            }
+            loadPatientHomePage(username);
         } else {
             // Show an error alert if credentials are invalid
             showAlert("Login Failed", "Invalid username or password. Please try again.");
+        }
+    }
+
+    // Utility method to load pages
+    private void loadPage(String fxmlFile, String title, Button currentButton) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent newPage = loader.load();
+
+            Stage currentStage = (Stage) currentButton.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle(title);
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the error for debugging
+        }
+    }
+
+    // Navigate to the Patient Home Page and pass the username
+    private void loadPatientHomePage(String username) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
+            Parent newPage = loader.load();
+
+            // Pass the username to the PatientHomeController
+            PatientHomeController controller = loader.getController();
+            controller.initialize(username);
+
+            Stage currentStage = (Stage) patientlog.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Patient Home Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Log the error for debugging
         }
     }
 
