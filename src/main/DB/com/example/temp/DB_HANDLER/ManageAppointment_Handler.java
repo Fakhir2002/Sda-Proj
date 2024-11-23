@@ -9,7 +9,7 @@ import java.sql.*;
 public class ManageAppointment_Handler {
 
     // Method to fetch all appointments from the database
-    public ObservableList<Object[]> getAppointments() {
+    public ObservableList<Object[]> getAppointments(int doctorId) {
         ObservableList<Object[]> appointments = FXCollections.observableArrayList();
 
         // Database connection details
@@ -17,24 +17,28 @@ public class ManageAppointment_Handler {
         String user = "root";  // Update with your DB user
         String password = "12345678"; // Update with your DB password
 
-        // SQL query to fetch data from appointments table
-        String sql = "SELECT * FROM appointment"; // Modify this as needed to match your database schema
+        // SQL query to fetch data from the appointments table where doctor_id matches
+        String sql = "SELECT appointmentID, patient_id, date, time, status FROM appointment WHERE doctor_id = ?";
 
         // Fetch data from the database and populate the appointments list
         try (Connection conn = DriverManager.getConnection(url, user, password);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            while (rs.next()) {
-                // Retrieve data from the result set
-                int id = rs.getInt("appointmentID");
-                String name = String.valueOf(rs.getInt("patient_id"));
-                String date = rs.getString("date");
-                String time = rs.getString("time");
-                String status = rs.getString("status");
+            // Set the doctor_id parameter in the query
+            pstmt.setInt(1, doctorId);
 
-                // Add to ObservableList as an Object array
-                appointments.add(new Object[]{id, name, date, time, status});
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    // Retrieve data from the result set
+                    int id = rs.getInt("appointmentID");
+                    String patientId = String.valueOf(rs.getInt("patient_id"));
+                    String date = rs.getString("date");
+                    String time = rs.getString("time");
+                    String status = rs.getString("status");
+
+                    // Add to ObservableList as an Object array
+                    appointments.add(new Object[]{id, patientId, date, time, status});
+                }
             }
 
         } catch (SQLException e) {
@@ -43,6 +47,7 @@ public class ManageAppointment_Handler {
 
         return appointments; // Return the list of appointments
     }
+
 
 
 

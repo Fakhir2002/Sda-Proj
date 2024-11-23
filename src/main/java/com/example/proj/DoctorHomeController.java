@@ -43,6 +43,10 @@ private Doctor currentDoctor;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageAppointment.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
+            ManageAppointmentController controller = loader.getController();
+
+            controller.initialize(currentDoctor.getUsername());
+
             Stage currentStage = (Stage) appoint.getScene().getWindow();
 
             // Create a new stage

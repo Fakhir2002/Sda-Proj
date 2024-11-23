@@ -34,11 +34,14 @@ public class ManageAppointmentController {
     @FXML
     private Label welcomeText;
     public Button backfromapp;
+    @FXML
+    private Doctor currentDoctor;
 
 
     // This method is called when the FXML page is loaded
     @FXML
-    public void initialize() {
+    public void initialize(String username) {
+        currentDoctor = new Doctor(username);
         // Call the method to fetch and display appointments as soon as the page is loaded
         display();
     }
@@ -74,8 +77,11 @@ public class ManageAppointmentController {
         // Create the handler instance
         ManageAppointment_Handler handler = new ManageAppointment_Handler();
 
-        // Retrieve the appointments from the database
-        ObservableList<Object[]> appointments = handler.getAppointments();
+        // Retrieve the doctor ID from the currentDoctor object
+        int doctorId = currentDoctor.getId(); // Ensure this method exists in the Doctor class
+
+        // Retrieve the appointments for the logged-in doctor
+        ObservableList<Object[]> appointments = handler.getAppointments(doctorId);
 
         // Set the items in the table
         appointmentTable.setItems(appointments);
@@ -87,6 +93,7 @@ public class ManageAppointmentController {
         time.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty((String) cellData.getValue()[3]));
         status.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty((String) cellData.getValue()[4]));
     }
+
 
     @FXML
     public void HandleConfirm(ActionEvent actionEvent) {
