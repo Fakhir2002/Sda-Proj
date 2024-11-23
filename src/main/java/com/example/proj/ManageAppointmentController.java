@@ -55,6 +55,10 @@ public class ManageAppointmentController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
             Parent newPage = loader.load();
+
+            DoctorHomeController controller = loader.getController();
+            controller.initialize(currentDoctor.getUsername());
+
             Stage currentStage = (Stage) backfromapp.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Doctor's Home Page");
