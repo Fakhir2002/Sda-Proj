@@ -31,7 +31,7 @@ private Doctor currentDoctor;
     public void initialize(String username) {
         DoctorName.setText("Welcome, " + username); // Set the label text to display the username
         currentDoctor= new Doctor(username);
-        System.out.println("Patient logged in with username: " + currentDoctor.getUsername() +" "+ currentDoctor.getName());
+        System.out.println("Doctor logged in with username: " + currentDoctor.getUsername() +" and name: "+ currentDoctor.getName());
 
     }
 

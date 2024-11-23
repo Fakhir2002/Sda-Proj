@@ -45,7 +45,7 @@ public class PatientHomeController {
         // Variable to store the username
         PatientName.setText("Welcome, " + username); // Set the label text to display the username
         currentPatient= new Patient(username);
-        System.out.println("Patient logged in with username: " + currentPatient.getUsername() +" "+ currentPatient.getFirstName());
+        System.out.println("Patient logged in with username: " + currentPatient.getUsername() +" and name: "+ currentPatient.getFirstName());
 
     }
 
