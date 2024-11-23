@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -59,9 +60,10 @@ public class DoctorComparisonController {
             String doctor1Name = doctorComboBox1.getValue();
             String doctor2Name = doctorComboBox2.getValue();
 
+            // Check if either of the doctors is not selected
             if (doctor1Name == null || doctor2Name == null) {
-                System.out.println("Please select two doctors for comparison.");
-                return;
+                showAlert("Error", "Please select two doctors for comparison.");
+                return; // Exit the method if doctors are not selected
             }
 
             // Fetch doctor details
@@ -85,6 +87,16 @@ public class DoctorComparisonController {
             e.printStackTrace();
         }
     }
+
+    // Method to show an alert
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
 
     @FXML

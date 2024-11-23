@@ -94,6 +94,8 @@ public class StaffRegisterController {
             return;
         }
 
+
+
         // Validate contact number (must be 10 digits)
         if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) {
             showAlert("Error", "Contact number must be a 11-digit number.", Alert.AlertType.ERROR);

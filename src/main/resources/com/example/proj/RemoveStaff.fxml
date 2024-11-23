@@ -18,12 +18,12 @@
                 <Bloom />
             </effect>
         </Label>
-        <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Staff ID to remove">
+        <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Staff to remove">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Button fx:id="remm" onAction="#handleRemoveStaff" layoutX="244.0" layoutY="187.0" mnemonicParsing="false" text="Remove" />
+        <Button fx:id="remm" layoutX="244.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleRemoveStaff" text="Remove" />
         <Button fx:id="staffback" layoutX="370.0" layoutY="187.0" mnemonicParsing="false" onAction="#handlestaffback" text="Back" />
       <ComboBox fx:id="removestaffcombobox" layoutX="261.0" layoutY="115.0" prefWidth="150.0" />
     </children>

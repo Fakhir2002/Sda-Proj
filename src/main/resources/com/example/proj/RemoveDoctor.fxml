@@ -18,12 +18,12 @@
                 <Bloom />
             </effect>
         </Label>
-        <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Doctor ID to remove">
+        <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Doctor to Remove">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Button fx:id="removeDoctorButton" onAction="#handleRemoveDoctor" layoutX="269.0" layoutY="187.0" mnemonicParsing="false" text="Remove" />
+        <Button fx:id="removeDoctorButton" layoutX="269.0" layoutY="187.0" mnemonicParsing="false" onAction="#handleRemoveDoctor" text="Remove" />
       <Button fx:id="docback" layoutX="382.0" layoutY="187.0" mnemonicParsing="false" onAction="#handledocback" text="Back" />
       <ComboBox fx:id="doctorComboBox" layoutX="273.0" layoutY="115.0" prefWidth="150.0" />
     </children>

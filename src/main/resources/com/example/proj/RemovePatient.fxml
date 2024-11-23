@@ -18,7 +18,7 @@
             <Bloom />
          </effect>
       </Label>
-      <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter patient ID to remove">
+      <Text fill="WHITE" layoutX="82.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Patient to Remove">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

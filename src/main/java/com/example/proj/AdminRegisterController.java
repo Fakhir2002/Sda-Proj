@@ -97,20 +97,7 @@ public class AdminRegisterController {
             showAlert(Alert.AlertType.ERROR, "Error", "Contact number must be a 11-digit number.");
             return;
         }
-        if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "First name should only contain alphabetic characters.");
-            return;
-        }
-        if (lastName.isEmpty() || !lastName.matches("[a-zA-Z]+")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Last name should only contain alphabetic characters.");
-            return;
-        }
 
-        // Validate contact number (must be 10 digits)
-        if (contactNo.isEmpty() || !contactNo.matches("[0-9]{11}")) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Contact number must be a 11-digit number.");
-            return;
-        }
 
         // Validate date of birth (must be in the past and a valid date)
         if (dob == null) {
@@ -122,9 +109,6 @@ public class AdminRegisterController {
             showAlert(Alert.AlertType.ERROR, "Error", "Date of Birth cannot be in the future!");
             return;
         }
-
-        // Validate address (not empty)
-        // Validate date of birth (must be in the past and a valid date)
 
         // Validate address (not empty)
         if (address.isEmpty()) {

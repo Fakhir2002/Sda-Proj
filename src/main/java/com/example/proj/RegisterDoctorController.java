@@ -124,6 +124,11 @@ public class RegisterDoctorController {
             showAlert(Alert.AlertType.ERROR, "Error", "Please fill in all fields.");
             return;
         }
+        if (!name.matches("[a-zA-Z ]+")) { // Allows only letters and spaces
+            showAlert(Alert.AlertType.ERROR, "Error", "Name must only contain letters and spaces.");
+            return;
+        }
+
 
         // Validate specialty (ensure it's not empty)
         if (!specialty.matches("[a-zA-Z ]+")) { // Allows only letters and spaces
