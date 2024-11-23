@@ -11,24 +11,27 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class PayBillsController {
+public class PayBillsController implements InitializeUsername {
     @FXML
     private Label welcomeText;
 
     @FXML
     private Button BackButton;
-
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private Patient currentPatient;
 
+    public void initialize(String username) {
+        // Populate the ComboBox with options
+        currentPatient = new Patient(username);
+    }
     public void HandleBack(ActionEvent actionEvent) {
 
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
+            PatientHomeController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
 
             Stage currentStage = (Stage) BackButton.getScene().getWindow();
 
@@ -44,7 +47,5 @@ public class PayBillsController {
         }
     }
 
-    public void initialize(String username) {
 
-    }
 }

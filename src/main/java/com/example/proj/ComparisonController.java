@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ComparisonController {
+public class ComparisonController implements InitializeUsername{
 
     @FXML
     private Label welcomeText;
@@ -25,12 +25,14 @@ public class ComparisonController {
 
     @FXML
     private ComboBox<String> comparisonBox; // ComboBox for selecting comparison type
-
+@FXML
+    private Patient currentPatient;
     /**
      * Initialize the ComboBox and set up default options.
      */
-    public void initialize() {
+    public void initialize(String username) {
         // Populate the ComboBox with options
+        currentPatient = new Patient(username);
         comparisonBox.getItems().addAll("Doctor Comparison", "Hospital Comparison");
 
         // Set a default value
@@ -45,6 +47,8 @@ public class ComparisonController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
             Parent newPage = loader.load();
+            PatientHomeController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
 
             Stage currentStage = (Stage) PatientHome.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
@@ -86,6 +90,7 @@ public class ComparisonController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent newPage = loader.load();
+
 
             Stage currentStage = (Stage) proceedButton.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
