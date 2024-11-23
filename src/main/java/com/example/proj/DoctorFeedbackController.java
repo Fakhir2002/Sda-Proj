@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class DoctorFeedbackController extends Application {
+public class DoctorFeedbackController extends Application  implements InitializeUsername{
 
     @FXML
     private Button Backbutton;
@@ -48,6 +48,10 @@ public class DoctorFeedbackController extends Application {
     private TableColumn<Feedback, String> feedbackCommentsColumn;
 
     private Feedback_Handler feedbackHandler = new Feedback_Handler();
+    @FXML
+    private Doctor currentDoctor;
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -60,7 +64,9 @@ public class DoctorFeedbackController extends Application {
     }
 
     @FXML
-    public void initialize() {
+    public void initialize(String username) {
+        currentDoctor = new Doctor(username);
+
         // Initialize the TableView columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
@@ -89,6 +95,9 @@ public class DoctorFeedbackController extends Application {
             // Load the FXML for the Doctor Home Page
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
             Parent newPage = loader.load();
+
+            DoctorHomeController controller = loader.getController();
+            controller.initialize(currentDoctor.getUsername());
 
             Stage currentStage = (Stage) Backbutton.getScene().getWindow();
 

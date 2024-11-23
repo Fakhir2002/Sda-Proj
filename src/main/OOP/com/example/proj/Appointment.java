@@ -3,6 +3,8 @@ package com.example.proj;
 import com.example.temp.DB_HANDLER.Appointment_Handler;
 import com.example.temp.DB_HANDLER.Hospital_Handler;
 import com.example.temp.DB_HANDLER.Doctor_Handler;
+import com.example.temp.DB_HANDLER.ManageAppointment_Handler;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -11,7 +13,8 @@ public class Appointment {
     private List<Hospital> hospitals;
     private List<Doctor> doctors;
     private List<String> specialities;
-    Appointment_Handler handler = new Appointment_Handler();// If specialities are just strings, keep it as is
+    Appointment_Handler handler = new Appointment_Handler();
+    ManageAppointment_Handler manageAppointmentHandler = new ManageAppointment_Handler();
 
     public Appointment() {
         // Initialize the handlers
@@ -62,4 +65,11 @@ public class Appointment {
         return appointmentHandler.saveAppointment(status, date, time, doctorId, patientId);
     }
 
+    public ObservableList<Object[]> getAppointments(int doctorId) {
+        return manageAppointmentHandler.getAppointments(doctorId);
+    }
+
+    public void updateAppointmentStatus(int appointmentId) {
+        manageAppointmentHandler.updateAppointmentStatus(appointmentId);
+    }
 }

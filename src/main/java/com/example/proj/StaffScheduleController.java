@@ -11,14 +11,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StaffScheduleController {
+public class StaffScheduleController implements InitializeUsername{
     @FXML
     private Label welcomeText;
     public Button backfromss;
+    @FXML
+    private Doctor currentDoctor;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void initialize(String username) {
+        currentDoctor = new Doctor(username);
     }
 
     public void handlebackfromss(ActionEvent actionEvent)
@@ -27,6 +29,9 @@ public class StaffScheduleController {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
+
+            DoctorHomeController controller = loader.getController();
+            controller.initialize(currentDoctor.getUsername());
 
             Stage currentStage = (Stage) backfromss.getScene().getWindow();
 

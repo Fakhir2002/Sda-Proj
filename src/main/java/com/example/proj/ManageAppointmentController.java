@@ -1,7 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Appointment_Handler;
-import com.example.temp.DB_HANDLER.ManageAppointment_Handler;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,12 +35,15 @@ public class ManageAppointmentController implements InitializeUsername{
     public Button backfromapp;
     @FXML
     private Doctor currentDoctor;
+    @FXML
+    private Appointment appointment;
 
 
     // This method is called when the FXML page is loaded
     @FXML
     public void initialize(String username) {
         currentDoctor = new Doctor(username);
+        appointment = new Appointment();
         // Call the method to fetch and display appointments as soon as the page is loaded
         display();
     }
@@ -78,14 +80,13 @@ public class ManageAppointmentController implements InitializeUsername{
 
 
     public void display() {
-        // Create the handler instance
-        ManageAppointment_Handler handler = new ManageAppointment_Handler();
+
 
         // Retrieve the doctor ID from the currentDoctor object
         int doctorId = currentDoctor.getId(); // Ensure this method exists in the Doctor class
 
         // Retrieve the appointments for the logged-in doctor
-        ObservableList<Object[]> appointments = handler.getAppointments(doctorId);
+        ObservableList<Object[]> appointments = appointment.getAppointments(doctorId);
 
         // Set the items in the table
         appointmentTable.setItems(appointments);
@@ -108,11 +109,9 @@ public class ManageAppointmentController implements InitializeUsername{
             // Get the appointment ID from the selected row
             int appointmentId = (Integer) selectedAppointment[0];
 
-            // Create the handler instance to update the status
-            ManageAppointment_Handler handler = new ManageAppointment_Handler();
 
             // Update the appointment status to "confirmed"
-            handler.updateAppointmentStatus(appointmentId);
+            appointment.updateAppointmentStatus(appointmentId);
 
             // Refresh the table to show the updated status
             display();
@@ -149,8 +148,6 @@ public class ManageAppointmentController implements InitializeUsername{
         try {
             int appointmentId = Integer.parseInt(appointmentIdText);
 
-            // Create the handler instance to delete the appointment
-            Appointment_Handler handler = new Appointment_Handler();
 
             // Call the delete method
             boolean isDeleted = Appointment.deleteAppointment(appointmentId);

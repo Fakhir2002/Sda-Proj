@@ -12,21 +12,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class VideoController {
+public class VideoController implements InitializeUsername{
     @FXML
     private Label welcomeText;
     public Button backfromvid;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private Doctor currentDoctor;
+
+    @FXML
+    public void initialize(String username) {
+        currentDoctor = new Doctor(username);
     }
+
+
 
     public void handlebackvid(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
+
+            DoctorHomeController controller = loader.getController();
+            controller.initialize(currentDoctor.getUsername());
 
             Stage currentStage = (Stage) backfromvid.getScene().getWindow();
 
