@@ -41,6 +41,11 @@ public class AdminHealthcarePackageController {
     private ComboBox<Hospital> hospitalComboBox; // Update to use Hospital objects
     @FXML
     private Button PackageBackButton;
+    @FXML
+    private DatePicker start;
+    @FXML
+    private DatePicker end;
+
 
     private final HealthCarePackage_Handler packageHandler = new HealthCarePackage_Handler();
     private final Hospital_Handler hospitalHandler = new Hospital_Handler(); // New handler for hospitals
@@ -96,9 +101,37 @@ public class AdminHealthcarePackageController {
             Hospital selectedHospital = hospitalComboBox.getValue(); // Get selected hospital
             double price = Double.parseDouble(priceField.getText());
             String description = descriptionField.getText();
-            LocalDate startDate = LocalDate.now(); // Example start date
-            LocalDate endDate = startDate.plusMonths(1); // Example end date
+            LocalDate startDate = start.getValue(); // Example start date
+            LocalDate endDate = end.getValue(); // Example end date
+            String priceText = priceField.getText().trim();
 
+            if (startDate != null && startDate.isBefore(LocalDate.now())) {
+                showAlert("Validation Error", "Start date cannot be in the past.", Alert.AlertType.WARNING);
+                return;
+            }
+            if (name.isEmpty()) {
+                showAlert("Validation Error", "Name cannot be empty.", Alert.AlertType.WARNING);
+                return;
+            }
+            if (description.isEmpty()) {
+                showAlert("Validation Error", "Name cannot be empty.", Alert.AlertType.WARNING);
+                return;
+            }
+            if (priceField==null) {
+                showAlert("Validation Error", "Price cannot be empty.", Alert.AlertType.WARNING);
+                return;
+            }
+
+            if (!priceText.matches("\\d+")) { // Matches only digits (whole numbers)
+                showAlert("Validation Error", "Price must be a valid number. No letters or symbols allowed.", Alert.AlertType.WARNING);
+                return;
+            }           // Try to parse the price, if it fails show an erro
+
+            // Validate that the end date is not before the start date
+            if (endDate != null && endDate.isBefore(startDate)) {
+                showAlert("Validation Error", "End date cannot be before the start date.", Alert.AlertType.WARNING);
+                return;
+            }
             if (selectedHospital == null) {
                 showAlert("Validation Error", "Please select a hospital.", Alert.AlertType.WARNING);
                 return;
