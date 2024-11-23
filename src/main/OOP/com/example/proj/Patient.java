@@ -2,6 +2,7 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Patient_Handler;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Patient {
     private int id;
@@ -12,6 +13,7 @@ public class Patient {
     private String address;
     private String username;
     private String password;
+    private static Patient_Handler patientHandler = new Patient_Handler();
 
     // Constructor to initialize patient data by username
     public Patient(String username) {
@@ -69,4 +71,24 @@ public class Patient {
     public void setAddress(String address) { this.address = address; }
     public void setUsername(String username) { this.username = username; }
     public void setPassword(String password) { this.password = password; }
+
+    public static boolean registerPatient(String firstName, String lastName, String contactNo,
+                                          String dob, String address, String username, String password) {
+        return patientHandler.registerPatient(firstName, lastName, contactNo, dob, address, username, password);
+    }
+
+    // Method to validate a patient's login (calls the DB Handler's login validation method)
+    public static boolean validateLogin(String username, String password) {
+        return patientHandler.validateLogin(username, password);
+    }
+
+    // Method to retrieve patient details by username (calls the DB Handler's query method)
+    public static Patient getPatientDetails(String username) {
+        return patientHandler.getPatientDetails(username);
+    }
+
+    // Method to retrieve all patients (calls the DB Handler's get all patients method)
+    public static List<Patient> getAllPatients() {
+        return patientHandler.getAllPatientDetails();
+    }
 }

@@ -65,7 +65,7 @@ public class DoctorLoginController {
         }
 
         // Verify credentials with the database
-        boolean isValid = loginHandler.validateLogin(username, password);
+        boolean isValid = Doctor.validateLogin(username, password);
 
         if (isValid) {
             // If credentials are valid, navigate to DoctorHome.fxml

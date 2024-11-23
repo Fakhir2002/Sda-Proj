@@ -216,6 +216,35 @@ public class Doctor_Handler {
 
         return doctors;
     }
+    public Doctor getDoctorByName(String name) {
+        String query = "SELECT * FROM doctors WHERE name = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, name);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return new Doctor(
+                            resultSet.getInt("DoctorID"),
+                            resultSet.getString("Name"),
+                            resultSet.getString("DOB"),
+                            resultSet.getString("Hospital"),
+                            resultSet.getString("Specialty"),
+                            resultSet.getString("Contact"),
+                            resultSet.getString("Address"),
+                            resultSet.getString("username"),
+                            resultSet.getString("password")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
 

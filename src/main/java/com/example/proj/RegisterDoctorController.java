@@ -156,7 +156,7 @@ public class RegisterDoctorController {
 
         // Attempt to insert data into the database
         String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        boolean success = doctorRegisterHandler.registerDoctor(name, dobString, hospital, specialty, contact, address, username, password);
+        boolean success = Doctor.registerDoctor(name, dobString, hospital, specialty, contact, address, username, password);
 
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Doctor registered successfully.");

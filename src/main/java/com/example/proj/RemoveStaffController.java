@@ -76,7 +76,7 @@ public class RemoveStaffController {
         }
 
         // Call the Admin_Handler to remove the staff
-        boolean success = adminHandler.removeStaff(selectedStaffName);
+        boolean success = Admin.removeStaff(selectedStaffName);
 
         // Show alert based on success or failure
         if (success) {

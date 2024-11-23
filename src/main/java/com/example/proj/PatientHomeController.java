@@ -39,9 +39,12 @@ public class PatientHomeController {
 
     @FXML
     private Patient currentPatient;
+    private String username;
+
 
     // Setter to pass the username from the login screen to this controller
     public void initialize(String username) {
+        this.username=username;
         // Variable to store the username
         PatientName.setText("Welcome, " + username); // Set the label text to display the username
         currentPatient= new Patient(username);
@@ -50,6 +53,7 @@ public class PatientHomeController {
     }
 
     public void HandleBookAppointment(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BookAppointment.fxml"));
             Parent newPage = loader.load();
@@ -72,6 +76,7 @@ public class PatientHomeController {
     }
 
     public void HandleCompare(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Comparison.fxml"));
             Parent newPage = loader.load();
@@ -88,6 +93,7 @@ public class PatientHomeController {
     }
 
     public void HandleFeedback(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Submit-Feedback.fxml"));
             Parent newPage = loader.load();
@@ -107,6 +113,7 @@ public class PatientHomeController {
     }
 
     public void HandleEmergency(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Emergency.fxml"));
             Parent newPage = loader.load();
@@ -123,6 +130,7 @@ public class PatientHomeController {
     }
 
     public void HandleFaqs(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientFaq.fxml"));
             Parent newPage = loader.load();
@@ -143,6 +151,7 @@ public class PatientHomeController {
     }
 
     public void HandlePayments(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Pay-Bills.fxml"));
             Parent newPage = loader.load();
@@ -159,6 +168,7 @@ public class PatientHomeController {
     }
 
     public void handlepatlogout(ActionEvent actionEvent) {
+        currentPatient= new Patient(username);
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
             Parent newPage = loader.load();

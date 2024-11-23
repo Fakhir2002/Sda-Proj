@@ -55,7 +55,7 @@ public class Patient_Handler {
     /**
      * Validates the patient's login credentials.
      */
-    public boolean validateLogin(String username, String password) {
+    public static boolean validateLogin(String username, String password) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_QUERY)) {
 

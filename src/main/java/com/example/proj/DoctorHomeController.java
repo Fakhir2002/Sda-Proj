@@ -22,13 +22,14 @@ public class DoctorHomeController
     public Button Feedback;
     @FXML
     private Label DoctorName;
-
+    private String username;
 
 @FXML
 private Doctor currentDoctor;
 
 
     public void initialize(String username) {
+        this.username=username;
         DoctorName.setText("Welcome, " + username); // Set the label text to display the username
         currentDoctor= new Doctor(username);
         System.out.println("Doctor logged in with username: " + currentDoctor.getUsername() +" and name: "+ currentDoctor.getName());
@@ -36,6 +37,7 @@ private Doctor currentDoctor;
     }
 
     public void handleAppointment(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageAppointment.fxml")); // Ensure AboutUs.fxml exists in the same directory
@@ -56,6 +58,7 @@ private Doctor currentDoctor;
     }
 
     public void handlevid(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("video-view.fxml")); // Ensure AboutUs.fxml exists in the same directory
@@ -77,6 +80,7 @@ private Doctor currentDoctor;
     }
 
     public void handledocfaq(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFaq.fxml")); // Ensure AboutUs.fxml exists in the same directory
@@ -102,6 +106,7 @@ private Doctor currentDoctor;
     }
 
     public void handlefeedback(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
 
 
 
@@ -109,6 +114,7 @@ private Doctor currentDoctor;
     }
 
     public void handlestaff(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Staff-Schedule.fxml")); // Ensure AboutUs.fxml exists in the same directory
@@ -130,6 +136,7 @@ private Doctor currentDoctor;
     }
 
     public void HandleLogout(ActionEvent actionEvent) {
+        currentDoctor= new Doctor(username);
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml")); // Ensure AboutUs.fxml exists in the same directory
@@ -151,6 +158,7 @@ private Doctor currentDoctor;
     }
 
     public void Gofeedback(ActionEvent actionEvent) { try {
+        currentDoctor= new Doctor(username);
         // Load the FXML for the About Us application
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorFeedback.fxml")); // Ensure AboutUs.fxml exists in the same directory
         Parent newPage = loader.load();

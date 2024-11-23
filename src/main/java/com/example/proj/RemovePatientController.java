@@ -59,7 +59,7 @@ public class RemovePatientController {
 
         if (selectedPatientName != null && !selectedPatientName.isEmpty()) { // Ensure a patient is selected
             // Call Admin_Handler to remove the patient by their first name
-            boolean isRemoved = adminHandler.removePatient(selectedPatientName);
+            boolean isRemoved = Admin.removePatient(selectedPatientName);
 
             if (isRemoved) {
                 showAlert("Success", "Patient removed successfully!", Alert.AlertType.INFORMATION);

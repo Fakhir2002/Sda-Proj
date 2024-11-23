@@ -77,7 +77,7 @@ public class RemoveDoctorController {
             int doctorID = doctorIDList.get(selectedIndex);
 
             // Call Admin_Handler to remove the doctor
-            boolean isRemoved = adminHandler.removeDoctor(doctorID);
+            boolean isRemoved = Admin.removeDoctor(doctorID);
 
             if (isRemoved) {
                 showAlert("Success", "Doctor removed successfully!", Alert.AlertType.INFORMATION);

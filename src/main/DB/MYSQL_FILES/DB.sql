@@ -63,7 +63,7 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`appointmentID`),
   KEY `doctor_id` (`doctor_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (8,'confirmed','2024-11-23','10:00 AM - 11:00 AM',3,9),(9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'Pending','2024-11-27','11:00 AM - 12:00 PM',3,9);
+INSERT INTO `appointment` VALUES (8,'confirmed','2024-11-23','10:00 AM - 11:00 AM',3,9),(9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `doctors` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`DoctorID`),
   UNIQUE KEY `Username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `doctors` (
 
 LOCK TABLES `doctors` WRITE;
 /*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
-INSERT INTO `doctors` VALUES (3,'munhim','2002-02-20','CMH','surgeon','03349556848','RaceCourse','doctor','password');
+INSERT INTO `doctors` VALUES (7,'Moeez','1998-07-09','CMH','Medical Specialist','03099717098','RaceCourse Apartments','moeez','password'),(8,'Shabbir ','1967-03-15','CMH','Paeds','03009113908','RaceCourse Apartments','baba','password');
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `faq` (
 
 LOCK TABLES `faq` WRITE;
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
-INSERT INTO `faq` VALUES (9,3,'geyy','true');
+INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool',''),(15,8,'hello','hi');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +149,7 @@ CREATE TABLE `feedback` (
   `recommendations` text,
   `feedback_comments` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool');
+INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool'),(15,'Afrah','Shabbir ','CMH','0','everything good','perfect');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +178,7 @@ CREATE TABLE `healthcare_packages` (
   `price` double NOT NULL,
   `description` text,
   PRIMARY KEY (`package_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -187,7 +187,7 @@ CREATE TABLE `healthcare_packages` (
 
 LOCK TABLES `healthcare_packages` WRITE;
 /*!40000 ALTER TABLE `healthcare_packages` DISABLE KEYS */;
-INSERT INTO `healthcare_packages` VALUES (1,'kuch bhi','CMH','2024-11-23','2024-12-23',2000,'wow');
+INSERT INTO `healthcare_packages` VALUES (1,'kuch bhi','CMH','2024-11-23','2024-12-23',2000,'wow'),(2,'jango','CMH','2024-11-23','2024-12-23',25000,'very good package');
 /*!40000 ALTER TABLE `healthcare_packages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -234,7 +234,7 @@ CREATE TABLE `patients` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,7 +243,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (9,'Fakhir','Ali','03335080003','2002-10-05','Bahria Town','username','password');
+INSERT INTO `patients` VALUES (9,'Fakhir','Ali','03335080003','2002-10-05','Bahria Town','username','password'),(13,'hamza','Aslam','99999999999','2024-10-27','fdsfsd','dwcscs','abcdefgh'),(15,'Afrah','Syed','33333344444','2021-11-02','F-10 Islamabad','afrah','password');
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +265,7 @@ CREATE TABLE `staff` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -287,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-23 15:40:38
+-- Dump completed on 2024-11-23 20:41:49

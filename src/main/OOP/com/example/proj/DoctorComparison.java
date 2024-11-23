@@ -1,27 +1,38 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
-import java.util.List;
-
 public class DoctorComparison {
 
-    private List<Doctor> doctors;
+    private String attribute;
+    private String doctor1Value;
+    private String doctor2Value;
 
-    public DoctorComparison() {
-        // Initialize the handler and fetch the doctor data
-        Doctor_Handler doctorHandler = new Doctor_Handler();
-        this.doctors = doctorHandler.getAllDoctorsDetails();  // Assuming this returns a list of Doctor objects
+    public DoctorComparison(String attribute, String doctor1Value, String doctor2Value) {
+        this.attribute = attribute;
+        this.doctor1Value = doctor1Value;
+        this.doctor2Value = doctor2Value;
     }
 
-    public String compareDoctors(String doctorName1, String doctorName2) {
-        // Simply compare the names of the doctors
-        if (doctorName1 != null && doctorName2 != null) {
-            if (doctorName1.equals(doctorName2)) {
-                return "Both doctors have the same name.";
-            } else {
-                return "The doctors have different names.";
-            }
-        }
-        return "Comparison failed. One or both doctor names are invalid.";
+    public String getAttribute() {
+        return attribute;
+    }
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
+    public String getDoctor1Value() {
+        return doctor1Value;
+    }
+
+    public void setDoctor1Value(String doctor1Value) {
+        this.doctor1Value = doctor1Value;
+    }
+
+    public String getDoctor2Value() {
+        return doctor2Value;
+    }
+
+    public void setDoctor2Value(String doctor2Value) {
+        this.doctor2Value = doctor2Value;
     }
 }

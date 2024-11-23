@@ -108,7 +108,7 @@ public class RegisterPatientController {
 
         String Sdob = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         // Attempt to insert data into the database
-        boolean success = patientRegisterHandler.registerPatient(firstName, lastName, contactNo, Sdob, address, username, password);
+        boolean success = Patient.registerPatient(firstName, lastName, contactNo, Sdob, address, username, password);
 
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Patient registered successfully.");

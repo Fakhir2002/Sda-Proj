@@ -61,7 +61,7 @@ public class PatientLoginController {
 
         // Use PatientLogin_Handler to validate credentials
         Patient_Handler loginHandler = new Patient_Handler();
-        if (loginHandler.validateLogin(username, password)) {
+        if (Patient.validateLogin(username, password)) {
             try {
                 // Load the FXML for the Patient Home Page
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));

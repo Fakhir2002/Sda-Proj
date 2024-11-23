@@ -90,7 +90,7 @@ public class SubmitFeedbackController {
             Task<List<Doctor>> task = new Task<List<Doctor>>() {
                 @Override
                 protected List<Doctor> call() throws Exception {
-                    return doctorHandler.getDoctorsByHospital(hospitalName);
+                    return Doctor.getDoctorsByHospital(hospitalName);
                 }
             };
 
@@ -129,7 +129,7 @@ public class SubmitFeedbackController {
         String comments = commentsField.getText();
 
         // Validate if all required fields are filled
-        if (patientName.isEmpty() || doctorName == null || hospitalName == null || experience == null || recommendations.isEmpty()) {
+        if ( doctorName == null || hospitalName == null || experience == null || recommendations.isEmpty()) {
             showError("All fields are required.");
             return;
         }

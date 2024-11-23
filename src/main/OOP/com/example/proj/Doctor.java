@@ -2,6 +2,8 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Doctor_Handler;
 
+import java.util.List;
+
 public class Doctor {
     private int id; // Unique identifier for the doctor
     private String name;
@@ -69,6 +71,29 @@ public class Doctor {
     public String toString() {
         return "Doctor{id=" + id + ", name='" + name + "', specialty='" + specialty + "', hospital='" + hospital + "'}";
     }
+    public static boolean registerDoctor(String name, String dob, String hospital, String specialty,
+                                         String contact, String address, String username, String passwordHash) {
+        Doctor_Handler handler = new Doctor_Handler();
+        return handler.registerDoctor(name, dob, hospital, specialty, contact, address, username, passwordHash);
+    }
+    public static boolean validateLogin(String username, String password) {
+        Doctor_Handler handler = new Doctor_Handler();
+        return handler.validateLogin(username, password);
+    }
+    public static List<String> getAllDoctors() {
+        Doctor_Handler doctorHandler = new Doctor_Handler(); // Creating an instance of Doctor_Handler
+        return doctorHandler.getAllDoctors(); // Calling the method from Doctor_Handler
+    }
+    public static List<Doctor> getDoctorsByHospital(String hospitalName) {
+        Doctor_Handler doctorHandler = new Doctor_Handler(); // Creating an instance of Doctor_Handler
+        return doctorHandler.getDoctorsByHospital(hospitalName); // Calling the method from Doctor_Handler
+    }
+
+    public static Doctor getDoctorbyName(String name) {
+        Doctor_Handler doctorHandler = new Doctor_Handler(); // Assumes DoctorHandler is accessible
+        return doctorHandler.getDoctorByName(name);
+    }
+
 
 
 }

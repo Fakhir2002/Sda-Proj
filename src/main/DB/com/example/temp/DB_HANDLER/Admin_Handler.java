@@ -24,7 +24,7 @@ public class Admin_Handler {
      * @param doctorID The ID of the doctor to remove.
      * @return true if the doctor was removed successfully, false otherwise.
      */
-    public boolean removeDoctor(int doctorID) {
+    public static boolean removeDoctor(int doctorID) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_DOCTOR_QUERY)) {
 
