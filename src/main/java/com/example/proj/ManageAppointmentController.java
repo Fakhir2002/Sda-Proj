@@ -1,5 +1,6 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.Appointment_Handler;
 import com.example.temp.DB_HANDLER.ManageAppointment_Handler;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -34,6 +35,7 @@ public class ManageAppointmentController {
     private Label welcomeText;
     public Button backfromapp;
 
+
     // This method is called when the FXML page is loaded
     @FXML
     public void initialize() {
@@ -59,6 +61,14 @@ public class ManageAppointmentController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private Button deleteButton;
+    @FXML
+    private TextField del;// FXML delete button
+
+    @FXML
+
 
     public void display() {
         // Create the handler instance
@@ -108,6 +118,57 @@ public class ManageAppointmentController {
             alert.setTitle("No Appointment Selected");
             alert.setHeaderText(null);
             alert.setContentText("Please select an appointment to confirm.");
+            alert.showAndWait();
+        }
+    }
+    public void handleDeleteAppointment(ActionEvent actionEvent) {
+        // Get the appointment ID from the TextField
+        String appointmentIdText = del.getText();
+
+        if (appointmentIdText.isEmpty()) {
+            // If the input field is empty, show an error message
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Input Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter an appointment ID to delete.");
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            int appointmentId = Integer.parseInt(appointmentIdText);
+
+            // Create the handler instance to delete the appointment
+            Appointment_Handler handler = new Appointment_Handler();
+
+            // Call the delete method
+            boolean isDeleted = Appointment.deleteAppointment(appointmentId);
+
+            if (isDeleted) {
+                // Refresh the table to reflect the deletion
+                display();
+
+                // Show a success message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Appointment Deleted");
+                alert.setHeaderText(null);
+                alert.setContentText("The appointment has been deleted.");
+                alert.showAndWait();
+            } else {
+                // If the appointment was not found or not deleted
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Delete Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Failed to delete the appointment. Please check the ID and try again.");
+                alert.showAndWait();
+            }
+
+        } catch (NumberFormatException e) {
+            // Handle invalid number format for the appointment ID
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid numeric appointment ID.");
             alert.showAndWait();
         }
     }

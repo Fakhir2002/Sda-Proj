@@ -1,5 +1,6 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.Appointment_Handler;
 import com.example.temp.DB_HANDLER.Hospital_Handler;
 import com.example.temp.DB_HANDLER.Doctor_Handler;
 
@@ -9,7 +10,8 @@ public class Appointment {
 
     private List<Hospital> hospitals;
     private List<Doctor> doctors;
-    private List<String> specialities;  // If specialities are just strings, keep it as is
+    private List<String> specialities;
+    Appointment_Handler handler = new Appointment_Handler();// If specialities are just strings, keep it as is
 
     public Appointment() {
         // Initialize the handlers
@@ -46,4 +48,13 @@ public class Appointment {
     public void setSpecialities(List<String> specialities) {
         this.specialities = specialities;
     }
+
+    public static boolean deleteAppointment(int appointmentId) {
+        // Create an instance of the Appointment_Handler
+        Appointment_Handler handler = new Appointment_Handler();
+
+        // Call the deleteAppointment method from the handler and return its result
+        return handler.deleteAppointment(appointmentId);
+    }
+
 }

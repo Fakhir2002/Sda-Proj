@@ -67,6 +67,7 @@ public class BookAppointmentController {
         }
     }
 
+
     private void populateSpecialityComboBox() {
         List<String> specialities = appointment.getSpecialities();
         SpecialityBox.getItems().addAll(specialities);
@@ -80,9 +81,12 @@ public class BookAppointmentController {
 
     private void populateDoctorComboBox() {
         String selectedSpeciality = SpecialityBox.getValue();
-        if (selectedSpeciality != null) {
+        String selectedHospital = HospitalBox.getValue(); // Get the selected hospital
+
+        if (selectedSpeciality != null && selectedHospital != null) {
             List<String> filteredDoctors = appointment.getDoctors().stream()
-                    .filter(doctor -> selectedSpeciality.equals(doctor.getSpecialty()))
+                    .filter(doctor -> selectedSpeciality.equals(doctor.getSpecialty())
+                            && selectedHospital.equals(doctor.getHospital())) // Check hospital match
                     .map(Doctor::getName)
                     .collect(Collectors.toList());
 
@@ -96,6 +100,7 @@ public class BookAppointmentController {
             }
         }
     }
+
 
     public void HandleBack(ActionEvent actionEvent) {
         try {
@@ -208,6 +213,7 @@ public class BookAppointmentController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }
 
 

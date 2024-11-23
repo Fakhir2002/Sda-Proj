@@ -31,4 +31,24 @@ public class Appointment_Handler {
             return false; // Return false in case of an error
         }
     }
+    public boolean deleteAppointment(int appointmentId) {
+        String deleteQuery = "DELETE FROM appointment WHERE appointmentID = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+
+            // Set the appointmentId parameter for the query
+            preparedStatement.setInt(1, appointmentId);
+
+            // Execute the delete query
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Return true if the deletion was successful
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // Return false in case of an error
+        }
+    }
+
+
+
 }

@@ -141,7 +141,7 @@ public class SubmitFeedbackController {
         Feedback_Handler feedbackHandler = new Feedback_Handler();
 
         // Call the insertFeedback method and check if the operation was successful
-        boolean success = feedbackHandler.insertFeedback(patientid,patientName, doctorName, hospitalName, experienceRating, recommendations, comments);
+        boolean success = Feedback.insertFeedback(patientid,patientName, doctorName, hospitalName, experienceRating, recommendations, comments);
 
         // Show success or failure message
         if (success) {

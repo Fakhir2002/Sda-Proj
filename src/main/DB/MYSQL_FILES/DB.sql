@@ -63,7 +63,7 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`appointmentID`),
   KEY `doctor_id` (`doctor_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (8,'confirmed','2024-11-23','10:00 AM - 11:00 AM',3,9),(9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15);
+INSERT INTO `appointment` VALUES (9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `doctors` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`DoctorID`),
   UNIQUE KEY `Username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `doctors` (
 
 LOCK TABLES `doctors` WRITE;
 /*!40000 ALTER TABLE `doctors` DISABLE KEYS */;
-INSERT INTO `doctors` VALUES (7,'Moeez','1998-07-09','CMH','Medical Specialist','03099717098','RaceCourse Apartments','moeez','password'),(8,'Shabbir ','1967-03-15','CMH','Paeds','03009113908','RaceCourse Apartments','baba','password');
+INSERT INTO `doctors` VALUES (7,'Moeez','1998-07-09','CMH','Medical Specialist','03099717098','RaceCourse Apartments','moeez','password'),(8,'Shabbir ','1967-03-15','CMH','Paeds','03009113908','RaceCourse Apartments','baba','password'),(9,'John Cena','1990-10-30','Reliance','ENT','03332222222','I-8 Islamabad','john','password'),(10,'Mama','1974-09-05','Shifa','Dentist','03335555555','RaceCourse Apartments','mama','password');
 /*!40000 ALTER TABLE `doctors` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,7 +129,7 @@ CREATE TABLE `faq` (
 
 LOCK TABLES `faq` WRITE;
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
-INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool',''),(15,8,'hello','hi');
+INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool',''),(15,8,'hello','hi'),(0,10,'yo mama whats up','im good'),(9,10,'hi mama','hi beta jee');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +158,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool'),(15,'Afrah','Shabbir ','CMH','0','everything good','perfect');
+INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool'),(9,'Fakhir','Mama','Shifa','0','very cool mama','whatsup maa'),(15,'Afrah','Shabbir ','CMH','0','everything good','perfect');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +287,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-23 20:41:49
+-- Dump completed on 2024-11-23 22:56:53

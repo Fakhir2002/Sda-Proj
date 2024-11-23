@@ -71,14 +71,12 @@ public class DoctorComparisonController {
             // Clear TableView and populate it with comparison data
             doctorTableView.getItems().clear();
             doctorTableView.getItems().addAll(
-                    new DoctorComparison("ID", String.valueOf(doctor1.getId()), String.valueOf(doctor2.getId())),
                     new DoctorComparison("Name", doctor1.getName(), doctor2.getName()),
                     new DoctorComparison("Specialty", doctor1.getSpecialty(), doctor2.getSpecialty()),
                     new DoctorComparison("Hospital", doctor1.getHospital(), doctor2.getHospital()),
                     new DoctorComparison("DOB", doctor1.getDob(), doctor2.getDob()),
                     new DoctorComparison("Contact", doctor1.getContact(), doctor2.getContact()),
-                    new DoctorComparison("Address", doctor1.getAddress(), doctor2.getAddress()),
-                    new DoctorComparison("Username", doctor1.getUsername(), doctor2.getUsername())
+                    new DoctorComparison("Address", doctor1.getAddress(), doctor2.getAddress())
             );
 
             // Optionally exclude sensitive data like passwordHash

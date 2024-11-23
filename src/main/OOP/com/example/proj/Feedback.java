@@ -4,7 +4,7 @@ import com.example.temp.DB_HANDLER.Feedback_Handler;
 
 public class Feedback {
 
-    private Feedback_Handler feedbackHandler;
+    private static Feedback_Handler feedbackHandler=new Feedback_Handler();
 
     public Feedback() {
         // Initialize the feedback handler that interacts with the database
@@ -23,8 +23,8 @@ public class Feedback {
      * @param feedbackComments   Additional feedback/comments from the patient.
      * @return true if the feedback is successfully saved, false otherwise.
      */
-    public boolean submitFeedback(int patientId, String patientName, String doctorName, String hospitalName,
-                                  boolean experienceRating, String recommendations, String feedbackComments) {
+    public static boolean insertFeedback(int patientId, String patientName, String doctorName, String hospitalName,
+                                         boolean experienceRating, String recommendations, String feedbackComments) {
 
         // Validate the data (you can add more validation logic here)
         if (patientName.isEmpty() || doctorName.isEmpty() || hospitalName.isEmpty()) {
