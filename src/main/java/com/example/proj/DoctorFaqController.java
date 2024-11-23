@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Faq_Handler;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,13 +39,14 @@ public class DoctorFaqController implements InitializeUsername{
     private Faq faq;
 
     private Doctor currentDoctor;
-    private Faq_Handler faqHandler;
+
     private ObservableList<Faq> faqObservableList;
 
     public void initialize(String username) {
         // Initialize the current doctor and handler
         currentDoctor = new Doctor(username);
-        faqHandler = new Faq_Handler();
+        faq = new Faq();
+
 
         // Set up the table view
         setupTableView();
