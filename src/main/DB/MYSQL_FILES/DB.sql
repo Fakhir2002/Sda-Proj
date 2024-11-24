@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: user
+-- Host: 127.0.0.1    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -330,6 +330,32 @@ INSERT INTO `patients` VALUES (9,'Fakhir','Ali','03335080003','2002-10-05','Bahr
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `payment` (
+  `paymentID` int NOT NULL AUTO_INCREMENT,
+  `Description` varchar(500) NOT NULL,
+  `Amount` int NOT NULL,
+  `Status` varchar(255) NOT NULL,
+  PRIMARY KEY (`paymentID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid');
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `staff`
 --
 
@@ -396,4 +422,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  3:32:42
+-- Dump completed on 2024-11-25  3:34:18
