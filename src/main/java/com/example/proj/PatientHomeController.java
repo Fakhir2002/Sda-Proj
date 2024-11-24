@@ -114,4 +114,14 @@ public class PatientHomeController implements InitializeUsername{
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
+
+    public void handleNotification1(ActionEvent actionEvent) {
+    }
+
+    public void handleNotification2(ActionEvent actionEvent) {
+    }
+
+    public void handleNotification3(ActionEvent actionEvent) {
+
+    }
 }

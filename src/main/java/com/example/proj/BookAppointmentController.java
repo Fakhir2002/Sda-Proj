@@ -120,18 +120,56 @@ public class BookAppointmentController implements InitializeUsername {
 
     private void populateTimeBox() {
         timeBox.getItems().clear();
-        List<String> timeSlots = List.of(
+        if (DoctorBox.getValue() == null || datebox.getValue() == null) {
+            System.out.println("Doctor or Date not selected."); // Debug
+            return; // Return early if either the doctor or date is not selected
+        }
+
+        String selectedDoctorName = DoctorBox.getValue();
+        String selectedDate = datebox.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        // Get the ID of the selected doctor
+        int doctorId = appointment.getDoctors().stream()
+                .filter(doctor -> doctor.getName().equals(selectedDoctorName))
+                .map(Doctor::getId)
+                .findFirst()
+                .orElse(-1);
+
+        if (doctorId == -1) {
+            System.out.println("Invalid doctor selected."); // Debug
+            showAlert("Error", "Selected doctor is invalid. Please try again.");
+            return;
+        }
+
+        // Query the database to find booked time slots for the selected doctor and date
+        List<String> bookedTimeSlots = Appointment.getBookedTimeSlots(doctorId, selectedDate);
+
+        System.out.println("Booked Time Slots: " + bookedTimeSlots); // Debug
+
+        // Define all available time slots
+        List<String> allTimeSlots = List.of(
                 "09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM",
                 "03:00 PM - 04:00 PM", "04:00 PM - 05:00 PM", "05:00 PM - 06:00 PM"
         );
-        timeBox.getItems().addAll(timeSlots);
 
-        if (!timeSlots.isEmpty()) {
-            timeBox.setValue(timeSlots.get(0));
+        // Filter out the booked time slots
+        List<String> availableTimeSlots = allTimeSlots.stream()
+                .filter(slot -> !bookedTimeSlots.contains(slot))
+                .collect(Collectors.toList());
+
+        System.out.println("Available Time Slots: " + availableTimeSlots); // Debug
+
+        // Populate the timeBox with the available time slots
+        timeBox.getItems().addAll(availableTimeSlots);
+
+        if (!availableTimeSlots.isEmpty()) {
+            timeBox.setValue(availableTimeSlots.get(0)); // Set default selection
+        } else {
+            showAlert("No Slots Available", "There are no available time slots for the selected date and doctor.");
         }
-
-        System.out.println("TimeBox populated with: " + timeSlots);
     }
+
+
 
     @FXML
     public void handleConfirm(ActionEvent event) {

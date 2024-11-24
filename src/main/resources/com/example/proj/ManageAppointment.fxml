@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -56,7 +55,6 @@
                 </Label>
                 <Button fx:id="Confirm" layoutX="242.0" layoutY="318.0" mnemonicParsing="false" onAction="#HandleConfirm" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
                 <Button fx:id="backfromapp" layoutX="341.0" layoutY="318.0" mnemonicParsing="false" onAction="#handlebackfromApp" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
-                <Button fx:id="bhaag" onAction="#handleDeleteAppointment" layoutX="90.0" layoutY="335.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="56.0" style="-fx-background-color: #d7e1e5;" text="Delete" />
                 <TableView fx:id="appointmentTable" layoutX="11.0" layoutY="85.0" prefHeight="197.0" prefWidth="418.0">
                     <columns>
                         <TableColumn fx:id="ID" prefWidth="110.4000244140625" text="Appointment ID" />
@@ -66,7 +64,6 @@
                         <TableColumn fx:id="status" prefWidth="75.33331298828125" text="status" />
                     </columns>
                 </TableView>
-            <TextField fx:id="del" layoutX="43.0" layoutY="292.0" promptText="Enter ID to Delete" />
             </children>
         </AnchorPane>
     </center>

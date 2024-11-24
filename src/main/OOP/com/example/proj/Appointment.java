@@ -13,8 +13,10 @@ public class Appointment {
     private List<Hospital> hospitals;
     private List<Doctor> doctors;
     private List<String> specialities;
-    Appointment_Handler handler = new Appointment_Handler();
+    static Appointment_Handler handler = new Appointment_Handler();
     ManageAppointment_Handler manageAppointmentHandler = new ManageAppointment_Handler();
+
+
 
     public Appointment() {
         // Initialize the handlers
@@ -25,6 +27,10 @@ public class Appointment {
         this.hospitals = hospitalHandler.getAllHospitals();  // Returns a list of Hospital objects
         this.doctors = doctorHandler.getAllDoctorsDetails();  // Returns a list of Doctor objects
         this.specialities = doctorHandler.getAllSpecialities();  // Assuming specialities are just strings
+    }
+
+    public static List<String> getBookedTimeSlots(int doctorId, String selectedDate) {
+        return handler.getBookedTimeSlots(doctorId,selectedDate);
     }
 
     // Getters and setters
@@ -61,8 +67,8 @@ public class Appointment {
     }
 
     public static boolean saveAppointment(String status, String date, String time, int doctorId, int patientId){
-    Appointment_Handler appointmentHandler = new Appointment_Handler();
-        return appointmentHandler.saveAppointment(status, date, time, doctorId, patientId);
+
+        return handler.saveAppointment(status, date, time, doctorId, patientId);
     }
 
     public ObservableList<Object[]> getAppointments(int doctorId) {
@@ -72,4 +78,10 @@ public class Appointment {
     public void updateAppointmentStatus(int appointmentId) {
         manageAppointmentHandler.updateAppointmentStatus(appointmentId);
     }
+
+    public ObservableList<Object[]> getPendingAppointments(int doctorId) {
+        return handler.getPendingAppointments(doctorId);  // Call the method in Appointment_Handler to fetch pending appointments
+    }
+
+
 }
