@@ -33,6 +33,10 @@ public class Patient {
         this.password = password;
     }
 
+    public Patient() {
+
+    }
+
     // Method to fetch and update patient details from the database
     public void updatePatientDetails() {
         Patient_Handler handler = new Patient_Handler();
@@ -91,4 +95,5 @@ public class Patient {
     public static List<Patient> getAllPatients() {
         return patientHandler.getAllPatientDetails();
     }
+    public String getPatientNameById(int patientId){return patientHandler.getPatientNameById(patientId);}
 }

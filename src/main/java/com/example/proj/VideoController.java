@@ -7,38 +7,67 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
-public class VideoController implements InitializeUsername{
+public class VideoController implements InitializeUsername {
+
     @FXML
-    private Label welcomeText;
-    public Button backfromvid;
+    private Button ConsultButton;
+    @FXML
+    private ComboBox<String> PatientComboBox; // Change type to String for patient names
+    @FXML
+    private Button backfromvid;
 
     @FXML
     private Doctor currentDoctor;
+    @FXML
+    private VideoConsultation videoConsultation;
+    @FXML
+    private Patient patient;  // Assuming you have a Patient_Handler instance
 
     @FXML
     public void initialize(String username) {
         currentDoctor = new Doctor(username);
+        videoConsultation = new VideoConsultation();
+        patient = new Patient();  // Initialize Patient_Handler
+
+        // Populate the ComboBox with patient names for the current doctor
+        populatePatientComboBox(currentDoctor.getId());
     }
 
+    private void populatePatientComboBox(int doctorId) {
+        // Fetch the list of patient IDs for the current doctor
+        List<Integer> patientIds = videoConsultation.getConsultationsForDoctor(doctorId);
 
+        // Clear any existing items in the ComboBox
+        PatientComboBox.getItems().clear();
+
+        // Add all patient names to the ComboBox
+        for (int patientId : patientIds) {
+            // Get the patient name by ID
+            String patientName = patient.getPatientNameById(patientId);
+
+            // Add the patient name to the ComboBox
+            if (patientName != null) {
+                PatientComboBox.getItems().add(patientName);
+            }
+        }
+    }
 
     public void handlebackvid(ActionEvent actionEvent) {
         try {
-            // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            // Load the FXML for the Doctor's home page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
             Parent newPage = loader.load();
 
             DoctorHomeController controller = loader.getController();
             controller.initialize(currentDoctor.getUsername());
 
             Stage currentStage = (Stage) backfromvid.getScene().getWindow();
-
-            // Create a new stage
 
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Doctor's Home Page");
@@ -48,5 +77,9 @@ public class VideoController implements InitializeUsername{
         } catch (IOException e) {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
+    }
+
+    public void handlerequests(ActionEvent actionEvent) {
+        // Handle the video consultation request logic here if needed
     }
 }

@@ -157,4 +157,29 @@ public class Patient_Handler {
         }
         return patients;
     }
+
+    public String getPatientNameById(int patientId) {
+        String query = "SELECT first_name, last_name FROM patients WHERE id = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the patient ID for the prepared statement
+            preparedStatement.setInt(1, patientId);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Construct the full name from the first and last name
+                    String firstName = resultSet.getString("first_name");
+                    String lastName = resultSet.getString("last_name");
+                    return firstName + " " + lastName; // Return the full name
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no matching patient is found
+    }
+
 }

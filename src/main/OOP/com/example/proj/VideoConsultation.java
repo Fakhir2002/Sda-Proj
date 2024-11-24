@@ -2,6 +2,8 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.VideoConsultationDBHandler;
 
+import java.util.List;
+
 public class VideoConsultation {
 
     // Instance variables
@@ -9,6 +11,7 @@ public class VideoConsultation {
     private String status;
     private int patientId;
     private int doctorId;
+    private VideoConsultationDBHandler videoConsultationDBHandler;
 
     // Constructor to initialize the video consultation
     public VideoConsultation(int consultationId, String status, int patientId, int doctorId) {
@@ -16,6 +19,10 @@ public class VideoConsultation {
         this.status = status;
         this.patientId = patientId;
         this.doctorId = doctorId;
+    }
+
+    public VideoConsultation() {
+        videoConsultationDBHandler = new VideoConsultationDBHandler();
     }
 
     // Getter and Setter methods for each field
@@ -67,5 +74,9 @@ public class VideoConsultation {
     public static boolean saveConsultationToDB(String status, int patientId, int doctorId) {
         // Call the static method in VideoConsultationDBHandler to save this consultation
         return VideoConsultationDBHandler.saveVideoConsultation(status, patientId, doctorId);
+    }
+
+    public List<Integer> getConsultationsForDoctor(int doctorId) {
+        return videoConsultationDBHandler.getConsultationsForDoctor(doctorId);
     }
 }

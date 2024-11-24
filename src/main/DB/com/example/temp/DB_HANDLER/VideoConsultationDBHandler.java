@@ -1,13 +1,11 @@
 package com.example.temp.DB_HANDLER;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VideoConsultationDBHandler {
 
-    // Database connection details (update with your database info)
     private static final String DB_URL = "jdbc:mysql://localhost:3306/user";
     private static final String DB_USERNAME = "root";
     private static final String DB_PASSWORD = "12345678";
@@ -34,4 +32,28 @@ public class VideoConsultationDBHandler {
         }
     }
 
+    // Method to fetch all consultations for a given doctor
+    public static List<Integer> getConsultationsForDoctor(int doctorId) {
+        List<Integer> patientIds = new ArrayList<>();
+        String query = "SELECT patient_id FROM VideoConsultation WHERE doctor_id = ?";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the doctor_id for the prepared statement
+            preparedStatement.setInt(1, doctorId);
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Extract patient IDs from the result set
+            while (resultSet.next()) {
+                patientIds.add(resultSet.getInt("patient_id"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exception (e.g., log or rethrow)
+        }
+        return patientIds;
+    }
 }
