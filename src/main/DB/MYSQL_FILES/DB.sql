@@ -272,6 +272,31 @@ INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `medicalhistory`
+--
+
+DROP TABLE IF EXISTS `medicalhistory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `medicalhistory` (
+  `historyID` int NOT NULL AUTO_INCREMENT,
+  `Diagnosis` varchar(500) NOT NULL,
+  `Treatment` varchar(500) NOT NULL,
+  `Date` date NOT NULL,
+  PRIMARY KEY (`historyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `medicalhistory`
+--
+
+LOCK TABLES `medicalhistory` WRITE;
+/*!40000 ALTER TABLE `medicalhistory` DISABLE KEYS */;
+/*!40000 ALTER TABLE `medicalhistory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `notification`
 --
 
@@ -400,7 +425,7 @@ CREATE TABLE `videoconsultation` (
   `patient_id` int NOT NULL,
   `doctor_id` int NOT NULL,
   PRIMARY KEY (`consultation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +434,7 @@ CREATE TABLE `videoconsultation` (
 
 LOCK TABLES `videoconsultation` WRITE;
 /*!40000 ALTER TABLE `videoconsultation` DISABLE KEYS */;
-INSERT INTO `videoconsultation` VALUES (1,'Pending',9,7);
+INSERT INTO `videoconsultation` VALUES (1,'Pending',9,7),(2,'Pending',9,8);
 /*!40000 ALTER TABLE `videoconsultation` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -422,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  3:34:18
+-- Dump completed on 2024-11-25  4:45:20
