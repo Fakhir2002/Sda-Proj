@@ -109,6 +109,33 @@ INSERT INTO `doctors` VALUES (7,'Moeez','1998-07-09','CMH','Medical Specialist',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `emergency`
+--
+
+DROP TABLE IF EXISTS `emergency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `emergency` (
+  `emergency_id` int NOT NULL AUTO_INCREMENT,
+  `patient_id` int NOT NULL,
+  `doctor_id` int NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  PRIMARY KEY (`emergency_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emergency`
+--
+
+LOCK TABLES `emergency` WRITE;
+/*!40000 ALTER TABLE `emergency` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emergency` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `faq`
 --
 
@@ -129,7 +156,7 @@ CREATE TABLE `faq` (
 
 LOCK TABLES `faq` WRITE;
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
-INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool',''),(15,8,'hello','hi'),(0,10,'yo mama whats up','im good'),(9,10,'hi mama','hi beta jee'),(0,9,'is ur chaddi paseena full','yes');
+INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool','yoyo'),(15,8,'hello','hi'),(0,10,'yo mama whats up','im good'),(9,10,'hi mama','hi beta jee'),(0,9,'is ur chaddi paseena full','yes');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,4 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-24  3:08:20
+-- Dump completed on 2024-11-24  5:16:56
