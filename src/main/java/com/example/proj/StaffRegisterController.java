@@ -1,20 +1,21 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.Hospital_Handler;
 import com.example.temp.DB_HANDLER.StaffRegister_Handler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class StaffRegisterController {
     @FXML
@@ -38,6 +39,31 @@ public class StaffRegisterController {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
+    @FXML
+    private ComboBox<String> hoscomb;
+    public void initialize()
+    {
+        populateHospitals(); // Populate hospitals on initialization
+    }
+    private void populateHospitals() {
+        Hospital_Handler hospitalHandler = new Hospital_Handler(); // Assuming this is your handler class
+        List<Hospital> hospitalList = hospitalHandler.getAllHospitals(); // Fetch all hospitals
+
+        if (hospitalList != null && !hospitalList.isEmpty()) {
+            ObservableList<String> hospitals = FXCollections.observableArrayList();
+
+            // Add hospital names to the ObservableList
+            for (Hospital hospital : hospitalList) {
+                hospitals.add(hospital.getName()); // Assuming `Hospital` has a `getName()` method
+            }
+
+            hoscomb.setItems(hospitals);
+        } else {
+            showAlert("Info", "No hospitals found in the database.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    // Utility method to show alerts
 
     // Handle cancel button
     public void handleStaffRegCancel(ActionEvent actionEvent) {
@@ -83,6 +109,7 @@ public class StaffRegisterController {
         String address = addressField.getText();
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String selectedHospital = hoscomb.getValue();
 
         // Validate inputs
         if (firstName.isEmpty() || !firstName.matches("[a-zA-Z]+")) {
@@ -107,6 +134,12 @@ public class StaffRegisterController {
             showAlert("Error", "Date of Birth is required!", Alert.AlertType.ERROR);
             return;
         }
+
+        if (selectedHospital == null || selectedHospital.isEmpty()) {
+            showAlert("Error", "Please select a hospital from the dropdown.", Alert.AlertType.ERROR);
+            return;
+        }
+
         LocalDate currentDate = LocalDate.now();
         if (dob.isAfter(currentDate)) {
             showAlert("Error", "Date of Birth cannot be in the future!",Alert.AlertType.ERROR);
@@ -134,7 +167,7 @@ public class StaffRegisterController {
         StaffRegister_Handler handler = new StaffRegister_Handler();
         // Convert LocalDate to String in the "yyyy-MM-dd" format
         String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        boolean isRegistered = handler.registerStaff(firstName, lastName, contactNo, dobString, address, username, password);
+        boolean isRegistered = Staff.registerStaff(firstName, lastName, contactNo, dobString, address, username, password,selectedHospital);
 
 
         if (isRegistered) {

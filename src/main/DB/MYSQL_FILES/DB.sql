@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `user`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: user
+-- Host: localhost    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -293,9 +291,10 @@ CREATE TABLE `staff` (
   `address` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `Hospital` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,7 +303,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES (3,'InamUllah','Shaikh','03339999999','2000-06-16','I-8 Islamabad','inam','password'),(7,'Abdullah','Aslam','03001234567','2000-12-09','E-11 Islamabad','abdullah','password');
+INSERT INTO `staff` VALUES (12,'habibi','dubai','03002222222','2000-11-23','dubai','habibi','password','Shifa'),(13,'zayyam','wallahi','03002323232','2000-08-23','Media Town Rawalpindi','zayyam','password','Safari Hospital'),(14,'Rayyan','Sheikh','03001010101','2003-07-02','I-10 Islamabad','rayyan','password','Shifa'),(15,'Umer','Farooq','03340000000','2001-06-26','your home','umer','password','CMH'),(16,'ayna','sulaiman','03210000000','1990-01-15','DHA 2 Islamabad','ayna','password','CMH');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -317,4 +316,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-24  6:12:25
+-- Dump completed on 2024-11-24 19:08:41

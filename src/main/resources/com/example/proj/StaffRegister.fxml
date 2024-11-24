@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.StaffRegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.StaffRegisterController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -43,9 +44,9 @@
         </AnchorPane>
     </left>
     <center>
-        <AnchorPane prefHeight="400.0" prefWidth="533.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="434.0" prefWidth="440.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="94.0" layoutY="22.0" prefHeight="33.0" prefWidth="264.0" text="Staff Registration Form" textFill="#080303">
+                <Label layoutX="105.0" layoutY="14.0" prefHeight="32.0" prefWidth="230.0" text="Staff Registration Form" textFill="#080303">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
@@ -53,75 +54,81 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Label layoutX="34.0" layoutY="77.0" text="First Name" textFill="WHITE">
+                <Label layoutX="25.0" layoutY="62.0" text="First Name" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Label>
-                <Label layoutX="33.0" layoutY="109.0" text="Last Name" textFill="WHITE">
+                <Label layoutX="23.0" layoutY="92.0" text="Last Name" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="30.0" layoutY="150.0" text="Contact No" textFill="#fffdfd">
+                <Label layoutX="20.0" layoutY="135.0" text="Contact No" textFill="#fffdfd">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="37.0" layoutY="189.0" text="DOB" textFill="WHITE">
+                <Label layoutX="33.0" layoutY="174.0" text="DOB" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="33.0" layoutY="222.0" text="Address" textFill="WHITE">
+                <Label layoutX="32.0" layoutY="247.0" text="Address" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="33.0" layoutY="262.0" text="Username" textFill="WHITE">
+                <Label layoutX="25.0" layoutY="282.0" text="Username" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="35.0" layoutY="301.0" text="Password" textFill="WHITE">
+                <Label layoutX="27.0" layoutY="321.0" text="Password" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="firstNameField" layoutX="157.0" layoutY="73.0" promptText="First Name">
+                <TextField fx:id="firstNameField" layoutX="138.0" layoutY="62.0" promptText="First Name">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="lastNameField" layoutX="157.0" layoutY="107.0" promptText="Last Name">
+                <TextField fx:id="lastNameField" layoutX="138.0" layoutY="94.0" promptText="Last Name">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="contactNoField" layoutX="157.0" layoutY="148.0" promptText="Contact No">
+                <TextField fx:id="contactNoField" layoutX="138.0" layoutY="137.0" promptText="Contact No">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="addressField" layoutX="157.0" layoutY="224.0" promptText="Address">
+                <TextField fx:id="addressField" layoutX="138.0" layoutY="249.0" promptText="Address">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField fx:id="usernameField" layoutX="157.0" layoutY="260.0" promptText="Username">
+                <TextField fx:id="usernameField" layoutX="138.0" layoutY="284.0" promptText="Username">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <PasswordField fx:id="passwordField" layoutX="157.0" layoutY="299.0" promptText="Password">
+                <PasswordField fx:id="passwordField" layoutX="138.0" layoutY="323.0" promptText="Password">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </PasswordField>
                 <Button fx:id="StaffRegButton" layoutX="332.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleStaffReg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Button fx:id="staffRegCancel" layoutX="333.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleStaffRegCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
-                <Button fx:id="staffalready" layoutX="138.0" layoutY="344.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="23.0" prefWidth="162.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
-            <DatePicker fx:id="dobField" layoutX="156.0" layoutY="187.0" prefHeight="26.0" prefWidth="126.0" />
+                <Button fx:id="staffalready" layoutX="138.0" layoutY="375.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="14.0" prefWidth="151.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
+            <DatePicker fx:id="dobField" layoutX="138.0" layoutY="174.0" prefHeight="26.0" prefWidth="123.0" />
+            <Label layoutX="32.0" layoutY="208.0" text="Hospital" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="hoscomb" layoutX="139.0" layoutY="206.0" prefHeight="26.0" prefWidth="126.0" />
             </children>
         </AnchorPane>
     </center>

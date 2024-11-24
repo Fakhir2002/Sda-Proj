@@ -14,23 +14,24 @@ public class StaffRegister_Handler {
 
     // SQL query for inserting staff data
     private static final String INSERT_STAFF_QUERY =
-            "INSERT INTO staff (first_name, last_name, contact_no, dob, address, username, password) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+            "INSERT INTO staff (first_name, last_name, contact_no, dob, address, username, password,hospital) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
     /**
      * Saves staff data to the database.
      *
-     * @param firstName  Staff's first name
-     * @param lastName   Staff's last name
-     * @param contactNo  Staff's contact number
-     * @param dob        Staff's date of birth
-     * @param address    Staff's address
-     * @param username   Staff's username
-     * @param password   Staff's password
+     * @param firstName        Staff's first name
+     * @param lastName         Staff's last name
+     * @param contactNo        Staff's contact number
+     * @param dob              Staff's date of birth
+     * @param address          Staff's address
+     * @param username         Staff's username
+     * @param password         Staff's password
+     * @param selectedHospital
      * @return true if the data was successfully inserted, false otherwise
      */
     public boolean registerStaff(String firstName, String lastName, String contactNo,
-                                 String dob, String address, String username, String password) {
+                                 String dob, String address, String username, String password, String selectedHospital) {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(INSERT_STAFF_QUERY)) {
 
@@ -41,7 +42,8 @@ public class StaffRegister_Handler {
             preparedStatement.setString(4, dob);
             preparedStatement.setString(5, address);
             preparedStatement.setString(6, username);
-            preparedStatement.setString(7, password); // Consider hashing the password
+            preparedStatement.setString(7, password);
+            preparedStatement.setString(8, selectedHospital); // Consider hashing the password
 
             // Execute the query
             int rowsInserted = preparedStatement.executeUpdate();
