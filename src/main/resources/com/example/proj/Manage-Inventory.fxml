@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,9 +12,9 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.ManageInventoryController">
     <left>
-        <AnchorPane prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: #d7e1e5; -fx-background-color: ;" BorderPane.alignment="CENTER" />
+        <AnchorPane prefHeight="400.0" prefWidth="0.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER" />
     </left>
-   <center>
+    <bottom>
         <AnchorPane prefHeight="400.0" prefWidth="533.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="202.0" layoutY="24.0" prefHeight="33.0" prefWidth="264.0" text="Manage Inventory" textFill="WHITE">
@@ -23,7 +22,7 @@
                         <Font name="Bell MT Bold" size="23.0" />
                     </font>
                     <effect>
-                  <Bloom />
+                        <Bloom />
                     </effect>
                 </Label>
                 <Label layoutX="35.0" layoutY="88.0" text="Medicines" textFill="WHITE">
@@ -41,105 +40,37 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <TextField layoutX="220.0" layoutY="178.0" promptText="Stock 2">
+                <Slider fx:id="medSlider" layoutX="26.0" layoutY="176.0" prefHeight="29.0" prefWidth="104.0" min="100" max="1000" value="100"/>
+                <Slider fx:id="stockSlider" layoutX="225.0" layoutY="184.0" prefHeight="14.0" prefWidth="104.0" min="100" max="1000" value="100"/>
+                <Slider fx:id="miscSlider" layoutX="424.0" layoutY="184.0" prefHeight="14.0" prefWidth="104.0" min="100" max="1000" value="100"/>
+                <Separator layoutX="185.0" layoutY="139.0" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: #014D4E;" />
+                <Separator layoutX="404.0" layoutY="139.0" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: #014D4E;" />
+                <Button fx:id="saveee" onAction="#handleSaveButton" layoutX="308.0" layoutY="343.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="51.0" style="-fx-background-color: #d7e1e5;" text="Save" textFill="#0d0101">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="medTextField" layoutX="16.0" layoutY="124.0" prefHeight="33.0" prefWidth="130.0" promptText="Med " text="100">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="16.0" layoutY="178.0" promptText="Med 2">
+                <TextField fx:id="stockTextField" layoutX="222.0" layoutY="124.0" prefHeight="31.0" prefWidth="122.0" promptText="Stock " text="100">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="16.0" layoutY="235.0" promptText="Med 3">
+                <TextField fx:id="miscTextField" layoutX="424.0" layoutY="124.0" prefHeight="30.0" prefWidth="119.0" promptText="Mis " text="100">
                     <font>
                         <Font size="10.0" />
                     </font>
                 </TextField>
-                <TextField layoutX="16.0" layoutY="299.0" promptText="Med 4">
+                <Button fx:id="InventoryButton" layoutX="223.0" layoutY="343.0" mnemonicParsing="false" onAction="#Handleback" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Back">
                     <font>
-                        <Font size="10.0" />
+                        <Font size="14.0" />
                     </font>
-                </TextField>
-            <TextField layoutX="220.0" layoutY="235.0" promptText="Stock 3">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="220.0" layoutY="299.0" promptText="Stock 4">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <Slider layoutX="28.0" layoutY="154.0" prefHeight="29.0" prefWidth="104.0" />
-            <Slider layoutX="28.0" layoutY="329.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="28.0" layoutY="265.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="28.0" layoutY="208.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="223.0" layoutY="329.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="223.0" layoutY="265.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="223.0" layoutY="208.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider accessibleRole="BUTTON" layoutX="223.0" layoutY="154.0" prefHeight="14.0" prefWidth="104.0">
-               <effect>
-                  <Blend />
-               </effect>
-            </Slider>
-            <Slider layoutX="426.0" layoutY="329.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="426.0" layoutY="265.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="426.0" layoutY="208.0" prefHeight="14.0" prefWidth="104.0" />
-            <Slider layoutX="426.0" layoutY="154.0" prefHeight="14.0" prefWidth="104.0" />
-            <Separator layoutX="185.0" layoutY="139.0" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: #014D4E;" />
-            <Separator layoutX="404.0" layoutY="139.0" orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: #014D4E;" />
-            <Button layoutX="54.0" layoutY="353.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Save">
-               <font>
-                  <Font size="8.0" />
-               </font>
-            </Button>
-            <Button layoutX="248.0" layoutY="356.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Save" textFill="#0d0101">
-               <font>
-                  <Font size="8.0" />
-               </font>
-            </Button>
-            <Button cancelButton="true" layoutX="451.0" layoutY="356.0" minHeight="21.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Save" textFill="#130101" wrapText="true">
-               <font>
-                  <Font size="8.0" />
-               </font>
-            </Button>
-            <TextField layoutX="16.0" layoutY="124.0" promptText="Med 1">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="222.0" layoutY="124.0" promptText="Stock 1">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="424.0" layoutY="124.0" promptText="Mis 1">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="424.0" layoutY="178.0" promptText="Mis 2">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="424.0" layoutY="235.0" promptText="Mis 3">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="424.0" layoutY="299.0" promptText="Mis 4">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <Button fx:id="InventoryButton" layoutX="27.0" layoutY="29.0" mnemonicParsing="false" onAction="#Handleback" prefHeight="22.0" prefWidth="54.0" style="-fx-background-color: #d7e1e5;" text="Back">
-               <font>
-                  <Font size="8.0" />
-               </font>
-            </Button>
+                </Button>
             </children>
         </AnchorPane>
-   </center>
+    </bottom>
 </BorderPane>
