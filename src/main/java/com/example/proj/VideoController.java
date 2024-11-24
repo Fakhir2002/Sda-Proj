@@ -80,6 +80,23 @@ public class VideoController implements InitializeUsername {
     }
 
     public void handlerequests(ActionEvent actionEvent) {
-        // Handle the video consultation request logic here if needed
+        try {
+            // Load the FXML for the Doctor's home page
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MedicalHistory.fxml"));
+            Parent newPage = loader.load();
+
+            //DoctorHomeController controller = loader.getController();
+            //controller.initialize(currentDoctor.getUsername());
+
+            Stage currentStage = (Stage) ConsultButton.getScene().getWindow();
+
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Doctor's Home Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Debugging in case of issues loading the FXML
+        }
     }
 }
