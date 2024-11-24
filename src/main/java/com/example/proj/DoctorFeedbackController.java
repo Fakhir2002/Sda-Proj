@@ -84,10 +84,19 @@ public class DoctorFeedbackController extends Application  implements Initialize
      * Loads feedback data from the database and populates the TableView.
      */
     private void loadFeedbackData() {
-        List<Feedback> feedbackList = Feedback.getAllFeedback();
+        // Get the name of the current doctor
+        String doctorName = currentDoctor.getName();
+
+        // Fetch feedbacks filtered by the doctor's name
+        List<Feedback> feedbackList = Feedback.getFeedbackByDoctorName(doctorName);
+
+        // Convert the list to an ObservableList for the TableView
         ObservableList<Feedback> observableFeedbackList = FXCollections.observableArrayList(feedbackList);
+
+        // Set the items in the TableView
         feedbackTable.setItems(observableFeedbackList);
     }
+
 
     @FXML
     public void GoBack(ActionEvent actionEvent) {

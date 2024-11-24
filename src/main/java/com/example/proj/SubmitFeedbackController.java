@@ -134,14 +134,12 @@ public class SubmitFeedbackController implements InitializeUsername{
             return;
         }
 
-        // Convert experience string (Yes/No) to boolean for database
-        boolean experienceRating = experience.equalsIgnoreCase("Yes");
 
         // Create an instance of Feedback_Handler to save the data
         Feedback_Handler feedbackHandler = new Feedback_Handler();
 
         // Call the insertFeedback method and check if the operation was successful
-        boolean success = Feedback.insertFeedback(patientid,patientName, doctorName, hospitalName, experienceRating, recommendations, comments);
+        boolean success = Feedback.insertFeedback(patientid,patientName, doctorName, hospitalName, experience, recommendations, comments);
 
         // Show success or failure message
         if (success) {

@@ -78,7 +78,7 @@ public class PatientHomeController implements InitializeUsername{
     }
 
     public void HandleCompare(ActionEvent actionEvent) {
-        loadPage("Comparison.fxml", "Comparison", Compare);
+        loadPage("DoctorComparison.fxml", "Comparison", Compare);
     }
 
     public void HandleFeedback(ActionEvent actionEvent) {

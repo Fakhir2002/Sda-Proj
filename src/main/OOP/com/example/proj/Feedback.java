@@ -10,7 +10,7 @@ public class Feedback {
     private String patientName;
     private String doctorName;
     private String hospitalName;
-    private boolean experienceRating;
+    private String experienceRating;
     private String recommendations;
     private String feedbackComments;
 
@@ -21,7 +21,7 @@ public class Feedback {
     public Feedback() {}
 
     // Constructor to initialize all fields
-    public Feedback(int id, String patientName, String doctorName, String hospitalName, boolean experienceRating, String recommendations, String feedbackComments) {
+    public Feedback(int id, String patientName, String doctorName, String hospitalName, String experienceRating, String recommendations, String feedbackComments) {
         this.id = id;
         this.patientName = patientName;
         this.doctorName = doctorName;
@@ -29,6 +29,10 @@ public class Feedback {
         this.experienceRating = experienceRating;
         this.recommendations = recommendations;
         this.feedbackComments = feedbackComments;
+    }
+
+    public static List<Feedback> getFeedbackByDoctorName(String doctorName) {
+        return feedbackHandler.getAllFeedback(doctorName);
     }
 
     // Getters for each field
@@ -48,7 +52,7 @@ public class Feedback {
         return hospitalName;
     }
 
-    public boolean getExperienceRating() {
+    public String getExperienceRating() {
         return experienceRating;
     }
 
@@ -62,7 +66,7 @@ public class Feedback {
 
     // Method to insert feedback into the database (non-static)
     public static boolean insertFeedback(int patientId, String patientName, String doctorName, String hospitalName,
-                                         boolean experienceRating, String recommendations, String feedbackComments) {
+                                         String experienceRating, String recommendations, String feedbackComments) {
         // Validate the data (you can add more validation logic here)
         if (patientName.isEmpty() || doctorName.isEmpty() || hospitalName.isEmpty()) {
             return false;  // Invalid input, return false
@@ -84,9 +88,6 @@ public class Feedback {
                 '}';
     }
 
-    public static List<Feedback> getAllFeedback() {
-        // Call the Feedback_Handler to retrieve all feedback
-        return feedbackHandler.getAllFeedback();  // This returns the list of feedback from DB
-    }
+
 
 }

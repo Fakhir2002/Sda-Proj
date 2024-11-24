@@ -1,23 +1,18 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
-public class DoctorComparisonController {
+public class DoctorComparisonController implements  InitializeUsername{
 
     @FXML
     private ComboBox<String> doctorComboBox1; // ComboBox for Doctor 1
@@ -33,9 +28,20 @@ public class DoctorComparisonController {
     @FXML
     private TableColumn<DoctorComparison, String> doctor2Column; // Doctor 2 column
 
-    private final Doctor_Handler doctorHandler = new Doctor_Handler(); // Assuming Doctor_Handler handles DB access
+    @FXML
+    private DoctorComparison doctorComparison;
+    @FXML
+    private Feedback feedback;
+    @FXML
+    private Patient currentPatient;
+    @FXML
+    private Button backyy;
 
-    public void initialize() {
+
+    public void initialize(String username) {
+        currentPatient = new Patient(username);
+        doctorComparison = new DoctorComparison();
+        feedback=new Feedback();
         // Populate ComboBoxes
         loadDoctorNames();
 
@@ -46,7 +52,7 @@ public class DoctorComparisonController {
     }
 
     private void loadDoctorNames() {
-        List<String> doctorNames = doctorHandler.getAllDoctors(); // Fetch doctor names from the database
+        List<String> doctorNames = doctorComparison.getAllDoctors(); // Fetch doctor names from the database
         if (doctorNames != null) {
             doctorComboBox1.getItems().addAll(doctorNames);
             doctorComboBox2.getItems().addAll(doctorNames);
@@ -66,27 +72,89 @@ public class DoctorComparisonController {
                 return; // Exit the method if doctors are not selected
             }
 
+            // Check if the same doctor is selected
+            if (doctor1Name.equals(doctor2Name)) {
+                showAlert("Error", "You cannot compare the same doctor.");
+                return; // Exit the method if the same doctor is selected
+            }
+
             // Fetch doctor details
             Doctor doctor1 = Doctor.getDoctorbyName(doctor1Name);
             Doctor doctor2 = Doctor.getDoctorbyName(doctor2Name);
 
-            // Clear TableView and populate it with comparison data
+            // Fetch feedbacks for both doctors
+            List<Feedback> feedbacksForDoctor1 = Feedback.getFeedbackByDoctorName(doctor1Name);
+            List<Feedback> feedbacksForDoctor2 = Feedback.getFeedbackByDoctorName(doctor2Name);
+
+            // Calculate average feedback ratings
+            double avgFeedbackDoctor1 = calculateAverageFeedback(feedbacksForDoctor1);
+            double avgFeedbackDoctor2 = calculateAverageFeedback(feedbacksForDoctor2);
+
+            // Clear TableView and populate it with comparison data (including formatted feedback rating)
             doctorTableView.getItems().clear();
             doctorTableView.getItems().addAll(
                     new DoctorComparison("Name", doctor1.getName(), doctor2.getName()),
                     new DoctorComparison("Specialty", doctor1.getSpecialty(), doctor2.getSpecialty()),
                     new DoctorComparison("Hospital", doctor1.getHospital(), doctor2.getHospital()),
-                    new DoctorComparison("DOB", doctor1.getDob(), doctor2.getDob()),
-                    new DoctorComparison("Contact", doctor1.getContact(), doctor2.getContact()),
-                    new DoctorComparison("Address", doctor1.getAddress(), doctor2.getAddress())
+                    new DoctorComparison("Average Feedback Rating",
+                            formatFeedbackRating(avgFeedbackDoctor1),
+                            formatFeedbackRating(avgFeedbackDoctor2))
             );
-
-            // Optionally exclude sensitive data like passwordHash
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    // Method to calculate average feedback rating
+    private double calculateAverageFeedback(List<Feedback> feedbacks) {
+        if (feedbacks == null || feedbacks.isEmpty()) {
+            return 0.0; // No feedback available
+        }
+
+        double totalScore = 0;
+        int count = 0;
+
+        for (Feedback feedback : feedbacks) {
+            String experienceRating = feedback.getExperienceRating();
+            switch (experienceRating) {
+                case "Excellent":
+                    totalScore += 4;
+                    break;
+                case "Good":
+                    totalScore += 3;
+                    break;
+                case "Average":
+                    totalScore += 2;
+                    break;
+                case "Poor":
+                    totalScore += 1;
+                    break;
+            }
+            count++;
+        }
+
+        return totalScore / count; // Return average score
+    }
+
+    // Method to format feedback rating into descriptive labels
+    private String formatFeedbackRating(double rating) {
+        if (rating == 0.0) {
+            return "No Feedback"; // No feedback available
+        } else if (rating > 1 && rating <= 2) {
+            return "Average";
+        } else if (rating > 2 && rating <= 3) {
+            return "Good";
+        } else if (rating > 3 && rating < 4) {
+            return "Excellent";
+        } else if (rating == 4) {
+            return "THE BEST";
+        }
+        return "Undefined"; // Fallback case, should not normally occur
+    }
+
+
+
 
     // Method to show an alert
     private void showAlert(String title, String message) {
@@ -97,19 +165,20 @@ public class DoctorComparisonController {
         alert.showAndWait();
     }
 
-
-
     @FXML
     public void backfromdoccomp(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Comparison.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientHome.fxml"));
             Parent newPage = loader.load();
+            PatientHomeController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
 
-            Stage currentStage = (Stage) doctorTableView.getScene().getWindow();
+            Stage currentStage = (Stage) backyy.getScene().getWindow();
             currentStage.setScene(new Scene(newPage));
-            currentStage.setTitle("Comparison");
+            currentStage.setTitle("PatientHome");
             currentStage.sizeToScene();
             currentStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
