@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -63,7 +62,7 @@
                 <Button fx:id="emergency" layoutX="-2.0" layoutY="264.0" mnemonicParsing="false" onAction="#HandleEmergency" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Emergency" textFill="#ececec" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Button fx:id="faqsButton" layoutY="213.0" mnemonicParsing="false" onAction="#HandleFaqs" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Faqs" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Button fx:id="payment" layoutX="2.0" layoutY="360.0" mnemonicParsing="false" onAction="#HandlePayments" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Payments" textFill="WHITE" AnchorPane.leftAnchor="0.0" />
-                <Button fx:id="patlogout" layoutX="64.0" layoutY="405.0" mnemonicParsing="false" onAction="#handlepatlogout" text="Logout" />
+            <Button fx:id="hello" layoutY="405.0" mnemonicParsing="false" onAction="#chalochalo" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Explore Healthcare Packages" textFill="#fffdfd" />
             </children>
         </AnchorPane>
         <Text fill="WHITE" layoutX="224.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
@@ -99,5 +98,6 @@
                 </Menu>
             </menus>
         </MenuBar>
+          <Button fx:id="patlogout" layoutX="237.0" layoutY="404.0" mnemonicParsing="false" onAction="#handlepatlogout" text="Logout" />
     </children>
 </AnchorPane>

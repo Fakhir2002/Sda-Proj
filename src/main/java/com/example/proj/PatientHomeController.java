@@ -32,6 +32,9 @@ public class PatientHomeController implements InitializeUsername{
     private Button payment;
 
     @FXML
+    private Button hello;
+
+    @FXML
     private Button patlogout;
 
     @FXML
@@ -87,6 +90,10 @@ public class PatientHomeController implements InitializeUsername{
     public void HandleCompare(ActionEvent actionEvent) {
         loadPage("DoctorComparison.fxml", "Comparison", Compare);
     }
+    public void chalochalo(ActionEvent actionEvent) {
+        loadPage("SubscribePackage.fxml", "Subscribe Package", hello);
+    }
+
 
     public void HandleFeedback(ActionEvent actionEvent) {
         loadPage("Submit-Feedback.fxml", "Feedback", Feedback);
@@ -190,5 +197,4 @@ public class PatientHomeController implements InitializeUsername{
             System.out.println("Failed to delete the notification.");
         }
     }
-
 }
