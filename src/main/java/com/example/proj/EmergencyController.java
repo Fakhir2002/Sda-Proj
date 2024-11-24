@@ -1,14 +1,13 @@
 package com.example.proj;
 
+
 import com.example.temp.DB_HANDLER.Emergency_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +15,10 @@ import java.util.List;
 
 public class EmergencyController implements InitializeUsername {
 
+    @FXML
+    private Button Submit;
+    @FXML 
+    private TextField descriptionBox;
     @FXML
     private Label welcomeText;
 
@@ -30,16 +33,13 @@ public class EmergencyController implements InitializeUsername {
 
     private Patient currentPatient;
     private Emergency emergency;  // Instance of Emergency class
+    private Hospital hospital;
 
-    private Emergency_Handler emergencyHandler;  // Declare emergencyHandler here
-
-    public EmergencyController() {
-        this.emergencyHandler = new Emergency_Handler();  // Initialize emergencyHandler here
-    }
 
     public void initialize(String username) {
         // Initialize Patient object
         currentPatient = new Patient(username);
+        hospital = new Hospital();
 
         // Initialize Emergency object with the handler
         emergency = new Emergency();
@@ -91,4 +91,53 @@ public class EmergencyController implements InitializeUsername {
         // Debugging: Verify if the combo box is populated
         System.out.println("Emergency types populated: " + emergencyTypes);
     }
+
+    public void handleEmergency(ActionEvent actionEvent) {
+        // Get data from UI elements
+        String description = descriptionBox.getText();  // Get the description from the text field
+        String emergencyType = type.getSelectionModel().getSelectedItem();  // Get selected emergency type
+        String selectedHospital = hospitalComboBox.getSelectionModel().getSelectedItem();  // Get selected hospital
+
+        // Ensure all necessary data is entered
+        if (description.isEmpty() || emergencyType == null || selectedHospital == null) {
+            showAlert(Alert.AlertType.WARNING, "Incomplete Form", "Please fill in all fields!");
+            return; // Early exit if data is incomplete
+        }
+
+        // Get patient id from currentPatient object
+        int patientId = currentPatient.getId();
+
+        // Get hospital id based on selected hospital name
+        int hospitalId = hospital.getHospitalIdByName(selectedHospital); // Assuming this method exists in Hospital class
+
+        // Default status for new emergency record
+        String status = "Pending";
+
+        // Insert emergency record
+        boolean isInserted = emergency.insertEmergency(patientId, hospitalId, emergencyType, status, description);
+
+        if (isInserted) {
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Emergency record inserted successfully.");
+        } else {
+            showAlert(Alert.AlertType.ERROR, "Error", "Error inserting emergency record.");
+        }
+    }
+
+    /**
+     * Show an alert with a specific type, title, and message.
+     *
+     * @param alertType The type of alert (e.g., WARNING, ERROR, INFORMATION)
+     * @param title     The title of the alert
+     * @param message   The message of the alert
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);  // No header
+        alert.setContentText(message);
+
+        // Show the alert and wait for the user to close it
+        alert.showAndWait();
+    }
+
 }

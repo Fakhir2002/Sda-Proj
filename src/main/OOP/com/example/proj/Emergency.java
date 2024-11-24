@@ -7,7 +7,7 @@ public class Emergency {
 
     private int emergency_id;
     private int patient_id;
-    private int doctor_id;
+    private int hospital_id;
     private String type;
     private String status;
     private String description;
@@ -20,13 +20,17 @@ public class Emergency {
     }
 
     // Parameterized constructor
-    public Emergency(int patient_id, int doctor_id, String type, String status, String description) {
+    public Emergency(int patient_id, int hospital_id, String type, String status, String description) {
         this.patient_id = patient_id;
-        this.doctor_id = doctor_id;
+        this.hospital_id = hospital_id;
         this.type = type;
         this.status = status;
         this.description = description;
         this.emergencyHandler = new Emergency_Handler();  // Initialize the emergencyHandler
+    }
+    public boolean insertEmergency(int patientId, int hospital_id, String type, String status, String description){
+      return  emergencyHandler.insertEmergency(patientId,hospital_id,type,status,description);
+
     }
 
     // Method to call the getHospitalNames method from Emergency_Handler
@@ -48,12 +52,12 @@ public class Emergency {
         this.patient_id = patient_id;
     }
 
-    public int getDoctor_id() {
-        return doctor_id;
+    public int gethospital_id() {
+        return hospital_id;
     }
 
-    public void setDoctor_id(int doctor_id) {
-        this.doctor_id = doctor_id;
+    public void sethospital_id(int doctor_id) {
+        this.hospital_id = doctor_id;
     }
 
     public String getType() {

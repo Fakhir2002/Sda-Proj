@@ -2,9 +2,13 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Hospital_Handler;
 
+import java.util.List;
+
 public class Hospital {
     private String id;  // Hospital ID
     private String name;  // Hospital Name
+    private Hospital_Handler hospitalHandler;
+
 
     // Constructor to initialize hospital data using ID
     public Hospital(String id) {
@@ -17,6 +21,17 @@ public class Hospital {
         this.id = id;
         this.name = name;
     }
+
+    public Hospital() {
+        hospitalHandler = new Hospital_Handler();
+
+    }
+
+    public List<Hospital> getAllHospitals(){
+        return hospitalHandler.getAllHospitals();
+    }
+
+
 
     // Method to fetch and update hospital details from the database
     public void updateHospitalDetails() {
@@ -39,5 +54,9 @@ public class Hospital {
     @Override
     public String toString() {
         return name; // This will be shown in the ComboBox
+    }
+
+    public int getHospitalIdByName(String selectedHospital) {
+        return hospitalHandler.getHospitalIdByName(selectedHospital);
     }
 }

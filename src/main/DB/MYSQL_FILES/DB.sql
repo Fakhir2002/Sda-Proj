@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `user`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: user
+-- Host: 127.0.0.1    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -118,12 +120,12 @@ DROP TABLE IF EXISTS `emergency`;
 CREATE TABLE `emergency` (
   `emergency_id` int NOT NULL AUTO_INCREMENT,
   `patient_id` int NOT NULL,
-  `doctor_id` int NOT NULL,
+  `hospital_id` int NOT NULL,
   `type` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`emergency_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,6 +134,7 @@ CREATE TABLE `emergency` (
 
 LOCK TABLES `emergency` WRITE;
 /*!40000 ALTER TABLE `emergency` DISABLE KEYS */;
+INSERT INTO `emergency` VALUES (1,9,2,'Heart Attack','Pending','i am dead'),(2,9,4,'Heart Attack','Pending','oi');
 /*!40000 ALTER TABLE `emergency` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -314,4 +317,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-24  5:16:56
+-- Dump completed on 2024-11-24  6:12:25

@@ -188,4 +188,40 @@ public class Hospital_Handler {
         return hospitalNames;
     }
 
+
+    // SQL query to retrieve hospital details by name
+    private static final String SELECT_HOSPITAL_ID_BY_NAME_QUERY =
+            "SELECT id FROM hospitals WHERE name = ?";  // Query to fetch hospital id by name
+
+    /**
+     * Retrieves the hospital ID based on the hospital name.
+     *
+     * @param hospitalName The name of the hospital
+     * @return The hospital ID if found, or -1 if not found
+     */
+    public int getHospitalIdByName(String hospitalName) {
+        int hospitalId = -1;  // Default value if hospital is not found
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_HOSPITAL_ID_BY_NAME_QUERY)) {
+
+            // Set the hospital name parameter for the prepared statement
+            preparedStatement.setString(1, hospitalName);
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // If a result is found, retrieve the hospital ID
+            if (resultSet.next()) {
+                hospitalId = resultSet.getInt("id");  // Get hospital ID
+            }
+
+        } catch (SQLException e) {
+            // Log the exception for debugging
+            e.printStackTrace();
+        }
+
+        return hospitalId;  // Return the hospital ID, or -1 if not found
+    }
+
 }
