@@ -22,13 +22,9 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" style="-fx-effect: #008080;">
+                <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" stroke="#008080" strokeWidth="1.0">
                     <effect>
-                        <Bloom>
-                            <input>
-                                <Bloom />
-                            </input>
-                        </Bloom>
+                        <Bloom />
                     </effect>
                 </Line>
                 <Label layoutX="45.0" layoutY="126.0" text="Doctor">
@@ -69,17 +65,17 @@
                     </font>
                 </Label>
                 <PasswordField fx:id="passwordField" layoutX="156.0" layoutY="164.0" />
-                <TextField  fx:id="usernameField" layoutX="157.0" layoutY="115.0" promptText="Username" />
+                <TextField fx:id="usernameField" layoutX="157.0" layoutY="115.0" promptText="Username" />
                 <Button fx:id="DocLog" layoutX="99.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleDocLogin" prefHeight="35.0" prefWidth="82.0" text="Login">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <Button fx:id="hello1" layoutX="253.0" layoutY="254.0" mnemonicParsing="false" onAction="#doctorgoback" prefHeight="35.0" prefWidth="82.0" text="Back">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+                <Button fx:id="hello1" layoutX="253.0" layoutY="254.0" mnemonicParsing="false" onAction="#doctorgoback" prefHeight="35.0" prefWidth="82.0" text="Back">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </children>
         </AnchorPane>
     </children>

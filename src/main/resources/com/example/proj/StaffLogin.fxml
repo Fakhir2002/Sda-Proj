@@ -22,13 +22,9 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" style="-fx-effect: #008080;">
+                <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" stroke="#008080" strokeWidth="1.0">
                     <effect>
-                        <Bloom>
-                            <input>
-                                <Bloom />
-                            </input>
-                        </Bloom>
+                        <Bloom />
                     </effect>
                 </Line>
                 <Label layoutX="54.0" layoutY="132.0" text="Staff">
@@ -75,11 +71,11 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-            <Button fx:id="hello3" layoutX="247.0" layoutY="254.0" mnemonicParsing="false" onAction="#staffgoback" prefHeight="35.0" prefWidth="82.0" text="Back">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+                <Button fx:id="hello3" layoutX="247.0" layoutY="254.0" mnemonicParsing="false" onAction="#staffgoback" prefHeight="35.0" prefWidth="82.0" text="Back">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
             </children>
         </AnchorPane>
     </children>

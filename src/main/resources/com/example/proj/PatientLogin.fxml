@@ -22,13 +22,9 @@
                   <Bloom />
                </effect>
             </Label>
-            <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" style="-fx-effect: #008080;">
+            <Line endX="100.0" layoutX="38.0" layoutY="83.0" startX="-21.299999237060547" startY="-1.52587890625E-5" stroke="#008080" strokeWidth="1.0">
                <effect>
-                  <Bloom>
-                     <input>
-                        <Bloom />
-                     </input>
-                  </Bloom>
+                  <Bloom />
                </effect>
             </Line>
             <Label layoutX="45.0" layoutY="126.0" text="Patient ">
