@@ -27,17 +27,11 @@ public class Emergency {
         this.type = type;
         this.status = status;
         this.description = description;
-        this.emergencyHandler = new Emergency_Handler();  // Initialize the emergencyHandler
+        this.emergencyHandler = new Emergency_Handler(); // Initialize here
     }
 
-    // Constructor for database retrieval (without description)
-    public Emergency(int emergency_id, int patient_id, int hospital_id, String type, String status) {
-        this.emergency_id = emergency_id;
-        this.patient_id = patient_id;
-        this.hospital_id = hospital_id;
-        this.type = type;
-        this.status = status;
-    }
+
+
 
     // Getters and Setters
     public int getEmergency_id() {
@@ -105,4 +99,9 @@ public class Emergency {
         Emergency_Handler emergency_handler = new Emergency_Handler();  // Create an instance of Emergency_Handler
         return emergency_handler.getEmergencyData();  // Call the function from the Emergency_Handler class
     }
+
+    public boolean updateStatus(int emergencyId, String newStatus) {
+        return emergencyHandler.updateEmergencyStatus(emergencyId, newStatus);
+    }
+
 }

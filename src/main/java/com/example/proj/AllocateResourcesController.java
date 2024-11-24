@@ -1,12 +1,11 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Emergency_Handler;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -16,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class AllocateResourcesController extends Application {
+public class AllocateResourcesController {
 
     @FXML
     private Button back;
@@ -35,20 +34,45 @@ public class AllocateResourcesController extends Application {
     @FXML
     private TableColumn<Emergency, String> columnStatus;
 
-    private Emergency_Handler emergencyHandler = new Emergency_Handler(); // Emergency_Handler instance
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        // Configure your stage if needed
-    }
 
     public void ConfirmThis(ActionEvent actionEvent) {
-        // Your confirmation action code here
+        // Get the selected emergency from the TableView
+        Emergency selectedEmergency = emergencyTable.getSelectionModel().getSelectedItem();
+
+        if (selectedEmergency == null) {
+            // No emergency selected, show an alert
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Emergency Selected");
+            alert.setContentText("Please select an emergency to confirm allocation.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Update the status to "ALLOCATED"
+        boolean isUpdated = selectedEmergency.updateStatus(selectedEmergency.getEmergency_id(), "ALLOCATED");
+
+        if (isUpdated) {
+            // Update the TableView to reflect the change
+            selectedEmergency.setStatus("ALLOCATED");
+            emergencyTable.refresh();
+
+            // Show a confirmation alert
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Status Updated");
+            alert.setContentText("The emergency status has been updated to 'ALLOCATED'.");
+            alert.showAndWait();
+        } else {
+            // Show an error alert
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Update Failed");
+            alert.setContentText("Failed to update the emergency status. Please try again.");
+            alert.showAndWait();
+        }
     }
+
 
     public void GoBack(ActionEvent actionEvent) {
         try {

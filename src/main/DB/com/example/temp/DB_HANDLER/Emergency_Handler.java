@@ -63,7 +63,8 @@ public class Emergency_Handler {
                         rs.getInt("patient_id"),     // Corrected to int
                         rs.getInt("hospital_id"),    // Corrected to int (no need for String.valueOf)
                         rs.getString("type"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getString("description")
                 ));
             }
 
@@ -75,6 +76,23 @@ public class Emergency_Handler {
         return emergencyList;
     }
 
+    public boolean updateEmergencyStatus(int emergencyId, String newStatus) {
+        String query = "UPDATE emergency SET status = ? WHERE emergency_id = ?";
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, newStatus);
+            pstmt.setInt(2, emergencyId);
+
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0; // Returns true if the update was successful
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Returns false in case of error
+        }
+    }
 
 
     // You can add additional methods for handling Emergency-related operations
