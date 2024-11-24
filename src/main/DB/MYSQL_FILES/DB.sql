@@ -253,12 +253,12 @@ DROP TABLE IF EXISTS `inventory`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventory` (
   `inventoryID` int NOT NULL AUTO_INCREMENT,
-  `hospitalID` int DEFAULT NULL,
+  `hospital` varchar(255) DEFAULT NULL,
   `medQuantity` int DEFAULT NULL,
   `stockQuantity` int DEFAULT NULL,
   `miscellaniousQuantity` int DEFAULT NULL,
   PRIMARY KEY (`inventoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL,462,397,590),(4,NULL,618,775,743);
+INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL,462,397,590),(4,NULL,618,775,743),(5,NULL,534,100,100),(6,'Safari Hospital',100,100,100);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,4 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  0:43:33
+-- Dump completed on 2024-11-25  1:49:25

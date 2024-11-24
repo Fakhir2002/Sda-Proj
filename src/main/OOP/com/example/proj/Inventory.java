@@ -4,15 +4,15 @@ import com.example.temp.DB_HANDLER.Inventory_Handler;
 
 public class Inventory {
     private int inventoryID;
-    private int hospitalID;
+    private String hospital;
     private int medQuantity;
     private int stockQuantity;
     private int miscellaniousQuantity;
 
     // Constructor
-    public Inventory(int inventoryID, int hospitalID, int medQuantity, int stockQuantity, int miscellaniousQuantity) {
+    public Inventory(int inventoryID, String hospital, int medQuantity, int stockQuantity, int miscellaniousQuantity) {
         this.inventoryID = inventoryID;
-        this.hospitalID = hospitalID;
+        this.hospital = hospital;
         this.medQuantity = medQuantity;
         this.stockQuantity = stockQuantity;
         this.miscellaniousQuantity = miscellaniousQuantity;
@@ -27,12 +27,12 @@ public class Inventory {
         this.inventoryID = inventoryID;
     }
 
-    public int getHospitalID() {
-        return hospitalID;
+    public String getHospitalID() {
+        return hospital;
     }
 
-    public void setHospitalID(int hospitalID) {
-        this.hospitalID = hospitalID;
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
     }
 
     public int getMedQuantity() {
@@ -64,14 +64,14 @@ public class Inventory {
     public String toString() {
         return "Inventory{" +
                 "inventoryID=" + inventoryID +
-                ", hospitalID=" + hospitalID +
+                ", hospitalID=" + hospital +
                 ", medQuantity=" + medQuantity +
                 ", stockQuantity=" + stockQuantity +
                 ", miscellaniousQuantity=" + miscellaniousQuantity +
                 '}';
     }
-    public static void addInventory(int medStock, int stockStock, int miscStock) {
+    public static void addInventory(String hospital,int medStock, int stockStock, int miscStock) {
         // Calling the static method insertInventory from Inventory_Handler
-        Inventory_Handler.insertInventory(medStock, stockStock, miscStock);
+        Inventory_Handler.insertInventory(hospital,medStock, stockStock, miscStock);
     }
 }

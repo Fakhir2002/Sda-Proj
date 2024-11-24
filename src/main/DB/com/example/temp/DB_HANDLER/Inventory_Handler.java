@@ -16,9 +16,9 @@ public class Inventory_Handler {
     }
 
     // This method inserts new inventory data into the database for a specific hospital
-    public static void insertInventory(int medStock, int stockStock, int miscStock) {
+    public static void insertInventory(String hospital,int medStock, int stockStock, int miscStock) {
         // SQL query to insert new inventory record
-        String sql = "INSERT INTO inventory (medQuantity, stockQuantity, miscellaniousQuantity) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO inventory (hospital,medQuantity, stockQuantity, miscellaniousQuantity) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -27,9 +27,10 @@ public class Inventory_Handler {
             System.out.println("Inserting new inventory: medStock=" + medStock + ", stockStock=" + stockStock + ", miscStock=" + miscStock );
 
             // Set the values to the PreparedStatement
-            pstmt.setInt(1, medStock);
-            pstmt.setInt(2, stockStock);
-            pstmt.setInt(3, miscStock);// Insert the logged-in hospital's ID
+            pstmt.setString(1, hospital);
+            pstmt.setInt(2, medStock);
+            pstmt.setInt(3, stockStock);
+            pstmt.setInt(4, miscStock);// Insert the logged-in hospital's ID
 
             // Execute the insert query
             int rowsAffected = pstmt.executeUpdate();

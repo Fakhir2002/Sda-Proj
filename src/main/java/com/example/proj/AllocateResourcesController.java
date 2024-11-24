@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class AllocateResourcesController {
+public class AllocateResourcesController implements InitializeUsername{
 
     @FXML
     private Button back;
@@ -33,6 +33,14 @@ public class AllocateResourcesController {
     private TableColumn<Emergency, String> columnType;
     @FXML
     private TableColumn<Emergency, String> columnStatus;
+    @FXML
+    private Staff currentStaff;
+
+    @Override
+    public void initialize(String username) {
+        currentStaff = new Staff(username);
+
+    }
 
 
     public void ConfirmThis(ActionEvent actionEvent) {
@@ -78,6 +86,8 @@ public class AllocateResourcesController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffHome.fxml")); // Ensure StaffHome.fxml exists
             Parent newPage = loader.load();
+            StaffHomeController controller = loader.getController();
+            controller.initialize(currentStaff.getUsername());
 
             Stage currentStage = (Stage) back.getScene().getWindow();
 
@@ -109,4 +119,6 @@ public class AllocateResourcesController {
         emergencyTable.getItems().clear();
         emergencyTable.getItems().addAll(emergencies); // Add data to TableView
     }
+
+
 }

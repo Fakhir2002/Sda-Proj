@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class RoomAllocationController {
+public class RoomAllocationController implements InitializeUsername{
     @FXML
     private Label welcomeText;
 
@@ -19,15 +19,22 @@ public class RoomAllocationController {
     private Button BackButton;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    private Staff currentStaff;
+
+    @Override
+    public void initialize(String username) {
+        currentStaff = new Staff(username);
     }
+
 
     public void HandleBack(ActionEvent actionEvent) {
         try {
             // Load the FXML for the About Us application
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffHome.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
+            StaffHomeController controller = loader.getController();
+            controller.initialize(currentStaff.getUsername());
+
 
             Stage currentStage = (Stage) BackButton.getScene().getWindow();
 
