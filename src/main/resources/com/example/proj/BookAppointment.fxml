@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.BookAppointmentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.BookAppointmentController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -43,7 +43,7 @@
         </AnchorPane>
     </left>
    <center>
-        <AnchorPane prefHeight="400.0" prefWidth="533.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="400.0" prefWidth="510.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
             <children>
                 <Label layoutX="87.0" layoutY="14.0" prefHeight="33.0" prefWidth="264.0" text="Book Appointment Form" textFill="#260909">
                     <font>
@@ -68,13 +68,13 @@
                         <Font name="System Bold" size="16.0" />
                     </font>
                 </Label>
-                <Button fx:id="Confirm"  onAction="#handleConfirm" layoutX="98.0" layoutY="333.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
+                <Button fx:id="Confirm" layoutX="143.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
             <Label layoutX="74.0" layoutY="58.0" prefHeight="18.0" prefWidth="315.0" text="Book your slot right now and save your time!" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="PatientHome" layoutX="196.0" layoutY="333.0" mnemonicParsing="false" onAction="#HandleBack" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Back" />
+            <Button fx:id="PatientHome" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" onAction="#HandleBack" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Back" />
             <ComboBox fx:id="HospitalBox" layoutX="143.0" layoutY="108.0" prefWidth="150.0" promptText="Hospital" />
             <ComboBox fx:id="SpecialityBox" layoutX="143.0" layoutY="149.0" prefWidth="150.0" promptText="Speciality" />
             <ComboBox fx:id="DoctorBox" layoutX="143.0" layoutY="188.0" prefWidth="150.0" promptText="Doctor" />
@@ -89,7 +89,23 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <DatePicker fx:id="datebox" layoutX="132.0" layoutY="226.0" />
+            <DatePicker fx:id="datebox" layoutX="142.0" layoutY="226.0" prefHeight="26.0" prefWidth="154.0" />
+            <Button fx:id="videobutton" layoutX="250.0" layoutY="341.0" mnemonicParsing="false" onAction="#handleVideoButton" prefHeight="30.0" prefWidth="168.0" text="Request Video Consultaion" />
+            <Label layoutX="345.0" layoutY="124.0" text="For Online Consultation" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="368.0" layoutY="163.0" prefHeight="22.0" prefWidth="114.0" text="No need to fill" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="369.0" layoutY="203.0" prefHeight="20.0" prefWidth="98.0" text="Date and Time" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
    </center>

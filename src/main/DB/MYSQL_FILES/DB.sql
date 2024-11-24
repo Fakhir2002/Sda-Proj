@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: user
+-- Host: localhost    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -253,12 +253,12 @@ DROP TABLE IF EXISTS `inventory`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inventory` (
   `inventoryID` int NOT NULL AUTO_INCREMENT,
-  `hospital` varchar(255) DEFAULT NULL,
+  `hospitalID` int DEFAULT NULL,
   `medQuantity` int DEFAULT NULL,
   `stockQuantity` int DEFAULT NULL,
   `miscellaniousQuantity` int DEFAULT NULL,
   PRIMARY KEY (`inventoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `inventory` (
 
 LOCK TABLES `inventory` WRITE;
 /*!40000 ALTER TABLE `inventory` DISABLE KEYS */;
-INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL,462,397,590),(4,NULL,618,775,743),(5,NULL,534,100,100),(6,'Safari Hospital',100,100,100);
+INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL,462,397,590),(4,NULL,618,775,743);
 /*!40000 ALTER TABLE `inventory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,6 +360,32 @@ LOCK TABLES `staff` WRITE;
 INSERT INTO `staff` VALUES (12,'habibi','dubai','03002222222','2000-11-23','dubai','habibi','password','Shifa'),(13,'zayyam','wallahi','03002323232','2000-08-23','Media Town Rawalpindi','zayyam','password','Safari Hospital'),(14,'Rayyan','Sheikh','03001010101','2003-07-02','I-10 Islamabad','rayyan','password','Shifa'),(15,'Umer','Farooq','03340000000','2001-06-26','your home','umer','password','CMH'),(16,'ayna','sulaiman','03210000000','1990-01-15','DHA 2 Islamabad','ayna','password','CMH');
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `videoconsultation`
+--
+
+DROP TABLE IF EXISTS `videoconsultation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `videoconsultation` (
+  `consultation_id` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(50) NOT NULL,
+  `patient_id` int NOT NULL,
+  `doctor_id` int NOT NULL,
+  PRIMARY KEY (`consultation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `videoconsultation`
+--
+
+LOCK TABLES `videoconsultation` WRITE;
+/*!40000 ALTER TABLE `videoconsultation` DISABLE KEYS */;
+INSERT INTO `videoconsultation` VALUES (1,'Pending',9,7);
+/*!40000 ALTER TABLE `videoconsultation` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -370,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  1:49:25
+-- Dump completed on 2024-11-25  3:32:42

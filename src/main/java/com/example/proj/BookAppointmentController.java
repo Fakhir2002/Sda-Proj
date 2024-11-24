@@ -1,5 +1,6 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.VideoConsultationDBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,8 @@ public class BookAppointmentController implements InitializeUsername {
     private ComboBox<String> timeBox;
     @FXML
     private DatePicker datebox;
+    @FXML
+    private Button videobutton;
 
     private Patient currentPatient;
     private Appointment appointment;
@@ -226,4 +229,58 @@ public class BookAppointmentController implements InitializeUsername {
             e.printStackTrace();
         }
     }
+    private void clearFields() {
+        datebox.setValue(null);  // Clear the DatePicker
+        HospitalBox.setValue(null);  // Clear the Hospital ComboBox
+        SpecialityBox.setValue(null);  // Clear the Speciality ComboBox
+        DoctorBox.setValue(null);  // Clear the Doctor ComboBox
+        timeBox.setValue(null);  // Clear the Time ComboBox
+    }
+    @FXML
+    public void handleVideoButton(ActionEvent event) {
+        // Check if date and time fields are filled
+        if (datebox.getValue() != null && timeBox.getValue() != null) {
+            // Show alert that fields must be empty
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Fields Must Be Empty");
+            alert.setHeaderText("Please clear the date and time fields");
+            alert.setContentText("You cannot proceed with a video consultation while the date and time are selected. Please clear these fields first.");
+            alert.showAndWait();
+
+            // Clear the fields after showing the alert
+            clearFields();
+        } else {
+            // If fields are empty, proceed with video consultation
+            int patientId = currentPatient.getId();
+            int doctorId = appointment.getDoctors().stream()
+                    .filter(doctor -> doctor.getName().equals(DoctorBox.getValue()))
+                    .map(Doctor::getId)
+                    .findFirst()
+                    .orElse(-1);
+
+            if (doctorId == -1) {
+                // Handle invalid doctor ID case (if doctor is not found)
+                showAlert("Error", "Selected doctor is invalid.");
+                return;
+            }
+
+            // Define status for the video consultation (e.g., "Pending")
+            String status = "Pending"; // You can change this based on your requirements
+
+            // Save the video consultation
+            boolean isSaved = VideoConsultation.saveConsultationToDB(status, patientId, doctorId);
+
+            if (isSaved) {
+                showAlert("Success", "Video consultation scheduled successfully.");
+            } else {
+                showAlert("Error", "Failed to schedule video consultation. Please try again.");
+            }
+
+            // Clear the fields after the consultation is saved
+            clearFields();
+        }
+    }
+
+
+
 }
