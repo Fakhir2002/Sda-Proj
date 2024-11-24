@@ -17,7 +17,7 @@ public class EmergencyController implements InitializeUsername {
 
     @FXML
     private Button Submit;
-    @FXML 
+    @FXML
     private TextField descriptionBox;
     @FXML
     private Label welcomeText;
@@ -139,5 +139,6 @@ public class EmergencyController implements InitializeUsername {
         // Show the alert and wait for the user to close it
         alert.showAndWait();
     }
+
 
 }

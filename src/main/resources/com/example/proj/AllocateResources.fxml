@@ -1,62 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.AllocateResourcesController">
-    <left>
-        <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="551.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.AllocateResourcesController">
+    <right>
+        <AnchorPane prefHeight="400.0" prefWidth="557.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
             <children>
-                <Label layoutX="37.0" layoutY="33.0" prefHeight="46.0" prefWidth="98.0" text="CureTrack">
-                    <font>
-                        <Font name="System Bold" size="18.0" />
-                    </font>
-                </Label>
-                <Line endX="87.29292297363281" endY="-1.52587890625E-5" layoutX="47.0" layoutY="93.0" startX="-20.70711326599121" startY="-1.52587890625E-5" stroke="#0c7961">
-                    <effect>
-                        <Bloom />
-                    </effect></Line>
-            <CheckBox layoutX="25.0" layoutY="113.0" mnemonicParsing="false" text="Emergency Case" />
-            <Button layoutX="60.0" layoutY="336.0" mnemonicParsing="false" text="Save" />
-            <CheckBox layoutX="12.0" layoutY="162.0" mnemonicParsing="false" text="Room" />
-            <CheckBox layoutX="10.0" layoutY="191.0" mnemonicParsing="false" text="Resources" />
-            <CheckBox layoutX="13.0" layoutY="222.0" mnemonicParsing="false" text="Staff" />
-            <Label layoutX="14.0" layoutY="138.0" text="Required:" textFill="#fffdfd">
-               <font>
-                  <Font name="System Bold" size="10.0" />
-               </font>
-            </Label>
-            <TextField layoutX="100.0" layoutY="159.0" prefHeight="22.0" prefWidth="46.0" promptText="Name" text="Qty">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="100.0" layoutY="189.0" prefHeight="22.0" prefWidth="46.0" promptText="Name" text="Qty">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            <TextField layoutX="100.0" layoutY="219.0" prefHeight="22.0" prefWidth="46.0" promptText="Name" text="Qty">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-            </children>
-        </AnchorPane>
-    </left>
-   <right>
-        <AnchorPane prefHeight="400.0" prefWidth="533.0" style="-fx-background-color: #014D4E;" BorderPane.alignment="CENTER">
-            <children>
-                <Label layoutX="123.0" layoutY="14.0" prefHeight="33.0" prefWidth="264.0" text="Allocate Resources" textFill="#260909">
+                <Label layoutX="192.0" layoutY="14.0" prefHeight="33.0" prefWidth="264.0" text="Allocate Resources" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
@@ -64,63 +21,26 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Label layoutX="34.0" layoutY="78.0" text="Hospital" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="15.0" />
-                    </font>
-                </Label>
-                <Label layoutX="32.0" layoutY="108.0" text="Case" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <Label layoutX="31.0" layoutY="142.0" text="Doctor" textFill="#fffdfd">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <TextField layoutX="157.0" layoutY="78.0" promptText=" Name">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <TextField layoutX="157.0" layoutY="110.0" promptText="Specialty">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <TextField layoutX="155.0" layoutY="144.0" promptText="Name">
-                    <font>
-                        <Font size="10.0" />
-                    </font>
-                </TextField>
-                <Button fx:id="back" layoutX="232.0" layoutY="322.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #d7e1e5;" text="Back" />
+                <Button fx:id="back" layoutX="192.0" layoutY="361.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #d7e1e5;" text="Back" />
                 <Label layoutX="74.0" layoutY="58.0" prefHeight="18.0" prefWidth="315.0" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <DatePicker layoutX="153.0" layoutY="174.0" prefHeight="10.0" prefWidth="127.0" />
-                <Label layoutX="39.0" layoutY="174.0" text="Date" textFill="#fffdfd">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <Label layoutX="38.0" layoutY="214.0" text="Time" textFill="#fffdfd">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                </Label>
-                <AnchorPane layoutX="113.0" layoutY="204.0" prefHeight="46.0" prefWidth="238.0">
-                    <children>
-                        <ComboBox layoutX="14.0" layoutY="10.0" prefHeight="25.0" prefWidth="54.0" />
-                        <ComboBox layoutX="83.0" layoutY="10.0" prefHeight="20.0" prefWidth="62.0" />
-                      <ComboBox layoutX="164.0" layoutY="9.0" prefHeight="27.0" prefWidth="59.0" />
-                    </children>
-                </AnchorPane>
-            <Button fx:id="Confirmation1" layoutX="50.0" layoutY="322.0" mnemonicParsing="false" onAction="#ConfirmThis" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
-                
+                <AnchorPane layoutX="113.0" layoutY="204.0" prefHeight="46.0" prefWidth="238.0" />
+                <Button fx:id="Confirmation1" layoutX="307.0" layoutY="361.0" mnemonicParsing="false" onAction="#ConfirmThis" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #d7e1e5;" text="Confirm" />
+
+                <!-- TableView with five columns -->
+                <TableView fx:id="emergencyTable" layoutX="17.0" layoutY="53.0" prefHeight="290.0" prefWidth="516.0">
+                    <columns>
+                        <TableColumn fx:id="columnId" prefWidth="100.0" text="Emergency ID" />
+                        <TableColumn fx:id="columnPatientid" prefWidth="100.0" text="Patient Name" />
+                        <TableColumn fx:id="columnHospitalid" prefWidth="100.0" text="Hospital Name" />
+                        <TableColumn fx:id="columnType" prefWidth="100.0" text="Type" />
+                        <TableColumn fx:id="columnStatus" prefWidth="100.0" text="Status" />
+                    </columns>
+                </TableView>
             </children>
         </AnchorPane>
-   </right>
+    </right>
 </BorderPane>

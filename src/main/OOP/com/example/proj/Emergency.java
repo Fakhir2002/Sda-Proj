@@ -20,7 +20,8 @@ public class Emergency {
     }
 
     // Parameterized constructor
-    public Emergency(int patient_id, int hospital_id, String type, String status, String description) {
+    public Emergency(int emergency_id, int patient_id, int hospital_id, String type, String status, String description) {
+        this.emergency_id = emergency_id;
         this.patient_id = patient_id;
         this.hospital_id = hospital_id;
         this.type = type;
@@ -28,12 +29,15 @@ public class Emergency {
         this.description = description;
         this.emergencyHandler = new Emergency_Handler();  // Initialize the emergencyHandler
     }
-    public boolean insertEmergency(int patientId, int hospital_id, String type, String status, String description){
-      return  emergencyHandler.insertEmergency(patientId,hospital_id,type,status,description);
 
+    // Constructor for database retrieval (without description)
+    public Emergency(int emergency_id, int patient_id, int hospital_id, String type, String status) {
+        this.emergency_id = emergency_id;
+        this.patient_id = patient_id;
+        this.hospital_id = hospital_id;
+        this.type = type;
+        this.status = status;
     }
-
-    // Method to call the getHospitalNames method from Emergency_Handler
 
     // Getters and Setters
     public int getEmergency_id() {
@@ -52,12 +56,12 @@ public class Emergency {
         this.patient_id = patient_id;
     }
 
-    public int gethospital_id() {
+    public int getHospital_id() {
         return hospital_id;
     }
 
-    public void sethospital_id(int doctor_id) {
-        this.hospital_id = doctor_id;
+    public void setHospital_id(int hospital_id) {
+        this.hospital_id = hospital_id;
     }
 
     public String getType() {
@@ -84,10 +88,21 @@ public class Emergency {
         this.description = description;
     }
 
+    // Insert emergency data
+    public boolean insertEmergency(int patientId, int hospital_id, String type, String status, String description) {
+        return emergencyHandler.insertEmergency(patientId, hospital_id, type, status, description);
+    }
+
+    // Fetch hospital names
     public List<String> fetchHospitalNames() {
         if (emergencyHandler == null) {
             emergencyHandler = new Emergency_Handler();  // Lazy initialization in case it's not already initialized
         }
         return emergencyHandler.getHospitalNames();  // This should no longer throw NullPointerException
+    }
+
+    public static List<Emergency> fetchEmergencyData() {
+        Emergency_Handler emergency_handler = new Emergency_Handler();  // Create an instance of Emergency_Handler
+        return emergency_handler.getEmergencyData();  // Call the function from the Emergency_Handler class
     }
 }

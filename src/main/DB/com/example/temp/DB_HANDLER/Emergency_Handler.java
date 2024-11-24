@@ -1,5 +1,7 @@
 package com.example.temp.DB_HANDLER;
 
+import com.example.proj.Emergency;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,34 @@ public class Emergency_Handler {
             return false;  // Returns false in case of error
         }
     }
+
+    public List<Emergency> getEmergencyData() {
+        List<Emergency> emergencyList = new ArrayList<>();
+        String query = "SELECT * from emergency";
+
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                emergencyList.add(new Emergency(
+                        rs.getInt("emergency_id"),  // This should match the data type of emergency_id
+                        rs.getInt("patient_id"),     // Corrected to int
+                        rs.getInt("hospital_id"),    // Corrected to int (no need for String.valueOf)
+                        rs.getString("type"),
+                        rs.getString("status")
+                ));
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return emergencyList;
+    }
+
+
 
     // You can add additional methods for handling Emergency-related operations
 }
