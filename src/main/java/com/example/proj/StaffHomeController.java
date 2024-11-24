@@ -66,11 +66,6 @@ public class StaffHomeController implements InitializeUsername {
     public void HandleManageInventory(ActionEvent actionEvent) {
         loadPage("Manage-Inventory.fxml", "Manage Inventory", InventoryButton);
     }
-
-    public void HandleRoomAllocation(ActionEvent actionEvent) {
-        loadPage("RoomAllocation.fxml", "Room Allocation", RoomAllocationButton);
-    }
-
     public void AllocateResourceButton(ActionEvent actionEvent) {
         loadPage("AllocateResources.fxml", "Allocate Resources", ResourcesButton);
     }
