@@ -1,6 +1,5 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.HealthCarePackage_Handler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +45,8 @@ public class SubscribePackageController implements InitializeUsername {
     @FXML
     private Patient currentPatient;
 
-    private final HealthCarePackage_Handler dbHandler = new HealthCarePackage_Handler();
+    private final HealthCarePackages handler = new HealthCarePackages();
+    private final Bill payment = new Bill(); // Instance of the PayBill_Handler
     private HealthCarePackages selectedPackage; // Holds the package selected for proceeding
 
     @FXML
@@ -81,7 +81,7 @@ public class SubscribePackageController implements InitializeUsername {
 
     private void loadData() {
         // Fetch data from the database using the handler
-        ObservableList<HealthCarePackages> packageList = FXCollections.observableArrayList(dbHandler.getAllPackages());
+        ObservableList<HealthCarePackages> packageList = FXCollections.observableArrayList(handler.getAllPackages());
 
         // Populate the TableView with the fetched data
         tableView.setItems(packageList);
@@ -93,14 +93,35 @@ public class SubscribePackageController implements InitializeUsername {
         selectedPackage = tableView.getSelectionModel().getSelectedItem();
 
         if (selectedPackage != null) {
+            // Create a payment for the selected package
+            String description = "HealthCare Package: " + selectedPackage.getName();
+            double amount = selectedPackage.getPrice();
+            String status = "Unpaid";
+
+            // Add payment to the database
+            boolean paymentAdded = payment.addPayment(description, amount, status);
+
+            if (paymentAdded) {
+                // Payment successfully added to the database
+                System.out.println("Payment created for the package: " + selectedPackage.getName());
+
+                // Optionally, you can display a success message to the user
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Payment created successfully!", ButtonType.OK);
+                alert.showAndWait();
+            } else {
+                // Handle failure in payment creation
+                System.out.println("Failed to create payment!");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to create payment.", ButtonType.OK);
+                alert.showAndWait();
+            }
+
             // Refresh the TableView to apply the new row style
             tableView.refresh();
-
-            // Optional: Additional actions like saving the selected package to the database
-            System.out.println("Proceeding with package: " + selectedPackage.getName());
         } else {
             // No package selected, display a message
             System.out.println("No package selected!");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a package to proceed.", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 

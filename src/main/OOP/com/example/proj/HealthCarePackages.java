@@ -1,15 +1,18 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.HealthCarePackage_Handler;
 import javafx.beans.property.*;
 import java.time.LocalDate;
+import java.util.List;
 
 public class HealthCarePackages {
-    private final StringProperty name;
-    private final StringProperty hospitalName;
-    private final ObjectProperty<LocalDate> startDate;
-    private final ObjectProperty<LocalDate> endDate;
-    private final DoubleProperty price;
-    private final StringProperty description;
+    private  StringProperty name;
+    private  StringProperty hospitalName;
+    private  ObjectProperty<LocalDate> startDate;
+    private  ObjectProperty<LocalDate> endDate;
+    private  DoubleProperty price;
+    private  StringProperty description;
+    HealthCarePackage_Handler packageHandler;
 
     public HealthCarePackages(String name, String hospitalName, LocalDate startDate, LocalDate endDate, double price, String description) {
         this.name = new SimpleStringProperty(name);
@@ -18,6 +21,11 @@ public class HealthCarePackages {
         this.endDate = new SimpleObjectProperty<>(endDate);
         this.price = new SimpleDoubleProperty(price);
         this.description = new SimpleStringProperty(description);
+    }
+
+    public HealthCarePackages() {
+        packageHandler=new HealthCarePackage_Handler();
+
     }
 
     // Properties
@@ -93,5 +101,9 @@ public class HealthCarePackages {
 
     public void setDescription(String description) {
         this.description.set(description);
+    }
+
+    public List<HealthCarePackages>  getAllPackages() {
+        return packageHandler.getAllPackages();
     }
 }
