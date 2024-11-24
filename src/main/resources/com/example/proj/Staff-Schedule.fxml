@@ -53,7 +53,7 @@
                         <Bloom />
                     </effect>
                 </Label>
-                <Button fx:id="Confirm" layoutX="255.0" layoutY="317.0" mnemonicParsing="false" onAction="#HandleConfirm" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #d7e1e5;" text="Reschedule" />
+                <Button fx:id="Confirm" layoutX="255.0" layoutY="317.0" mnemonicParsing="false" onAction="#HandleConfirm" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #d7e1e5;" text="Cancel Appointment" />
                 <Button fx:id="backfromss" layoutX="91.0" layoutY="319.0" mnemonicParsing="false" onAction="#handlebackfromss" prefHeight="25.0" prefWidth="66.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
                 <TableView fx:id="appointmentTable" layoutX="11.0" layoutY="85.0" prefHeight="197.0" prefWidth="418.0">
                     <columns>

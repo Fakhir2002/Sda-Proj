@@ -94,12 +94,8 @@
         </Label>
         <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #b2bdc1; -fx-text-fill: white;">
             <menus>
-                <Menu style="-fx-text-fill: black;" text="Notifications">
-                    <items>
-                        <MenuItem onAction="#handleNotification1" text="Notification 1" />
-                        <MenuItem onAction="#handleNotification2" text="Notification 2" />
-                        <MenuItem onAction="#handleNotification3" text="Notification 3" />
-                    </items>
+                <Menu fx:id="notificationMenu" style="-fx-text-fill: black;" text="Notifications">
+
                 </Menu>
             </menus>
         </MenuBar>

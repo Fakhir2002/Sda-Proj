@@ -83,6 +83,7 @@ public class StaffScheduleController implements InitializeUsername {
     }
 
     // Handle the "Reschedule" button click to delete an appointment and notify the patient
+
     @FXML
     public void HandleConfirm(ActionEvent actionEvent) {
         // Get the selected appointment from the table
@@ -90,20 +91,43 @@ public class StaffScheduleController implements InitializeUsername {
 
         if (selectedAppointment != null) {
             int appointmentId = (Integer) selectedAppointment[0]; // Get the appointment ID
+            int patientId = (Integer) selectedAppointment[4]; // Get the patient ID from the selected row
 
             // Call the method to delete the appointment from the database
             boolean isDeleted = Appointment.deleteAppointment(appointmentId);
 
             if (isDeleted) {
-                // Show confirmation alert that the appointment was deleted and the patient was notified
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment Rescheduled");
-                alert.setHeaderText(null);
-                alert.setContentText("The appointment has been deleted, and a notification has been sent to the patient.");
-                alert.showAndWait();
+                // Get the doctor's name
+                String doctorName = currentDoctor.getName(); // Ensure getName() exists in Doctor class
 
-                // Refresh the table to show the updated list of pending appointments
-                displayPendingAppointments();
+                // Create a new notification with the doctor's name included in the description
+                String description = "Your appointment with Dr. " + doctorName +
+                        " has been cancelled due to the unavailability of the doctor. Kindly reschedule.";
+
+                Notification notification = new Notification(patientId, currentDoctor.getId(), description);
+
+                // Save the notification to the database
+                boolean isNotificationSaved = notification.saveNotification();
+
+                if (isNotificationSaved) {
+                    // Show confirmation alert that the appointment was deleted and the patient was notified
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Appointment Rescheduled");
+                    alert.setHeaderText(null);
+                    alert.setContentText("The appointment has been deleted, and a notification has been sent to the patient.");
+                    alert.showAndWait();
+
+                    // Refresh the table to show the updated list of pending appointments
+                    displayPendingAppointments();
+                } else {
+                    // Show an error alert if the notification could not be saved
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Notification Failed");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Failed to send the notification. Please try again.");
+                    alert.showAndWait();
+                }
+
             } else {
                 // Show an error alert if the appointment could not be deleted
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -121,4 +145,6 @@ public class StaffScheduleController implements InitializeUsername {
             alert.showAndWait();
         }
     }
+
+
 }

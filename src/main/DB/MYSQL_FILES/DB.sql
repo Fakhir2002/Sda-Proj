@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: user
+-- Host: 127.0.0.1    Database: user
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -272,6 +272,33 @@ INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notification` (
+  `NotificationID` int NOT NULL AUTO_INCREMENT,
+  `patient_id` int DEFAULT NULL,
+  `doctor_id` int DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
+  `isRead` tinyint DEFAULT '0',
+  PRIMARY KEY (`NotificationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification`
+--
+
+LOCK TABLES `notification` WRITE;
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (4,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1);
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `patients`
 --
 
@@ -343,4 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-24 20:58:54
+-- Dump completed on 2024-11-25  0:43:33

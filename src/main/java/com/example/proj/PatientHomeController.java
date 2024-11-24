@@ -5,11 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class PatientHomeController implements InitializeUsername{
 
@@ -39,12 +39,19 @@ public class PatientHomeController implements InitializeUsername{
 
     @FXML
     private Patient currentPatient;
+    @FXML
+    private Menu notificationMenu;
+    @FXML
     private String username;
 
     // Setter to pass the username from the login screen to this controller
     public void initialize(String username) {
         this.username = username;
         currentPatient = new Patient(username);
+
+        // Load notifications
+        loadNotifications();
+
         PatientName.setText("Welcome, " + username);
         System.out.println("Patient logged in with username: " + currentPatient.getUsername() + " and name: " + currentPatient.getFirstName());
     }
@@ -115,13 +122,73 @@ public class PatientHomeController implements InitializeUsername{
         }
     }
 
-    public void handleNotification1(ActionEvent actionEvent) {
+
+    // Load notifications for the current patient
+    private void loadNotifications() {
+        try {
+            // Retrieve notifications from the database
+            List<Notification> notifications = Notification.getNotificationsByPatientId(currentPatient.getId());
+
+            notificationMenu.getItems().clear(); // Clear any previous items
+            boolean hasUnread = false;
+
+            for (Notification notification : notifications) {
+                MenuItem item = new MenuItem(notification.getDescription());
+
+                // Highlight if unread
+                if (!notification.isRead()) {
+                    hasUnread = true;
+                    item.setStyle("-fx-text-fill: red;");
+                }
+
+                // Add action to view notification
+                item.setOnAction(event -> viewNotification(notification));
+
+                notificationMenu.getItems().add(item);
+
+                // Add delete option
+                MenuItem deleteItem = new MenuItem("Delete");
+                deleteItem.setStyle("-fx-text-fill: black; -fx-font-size: 12;");
+                deleteItem.setOnAction(event -> deleteNotification(notification));
+                notificationMenu.getItems().add(deleteItem);
+            }
+
+            // Update Notification menu style
+            if (hasUnread) {
+                notificationMenu.setStyle("-fx-background-color: red;");
+            } else {
+                notificationMenu.setStyle("-fx-background-color: white;");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void handleNotification2(ActionEvent actionEvent) {
+    // Mark the notification as read and show its details
+    private void viewNotification(Notification notification) {
+        // Mark as read in the database
+        Notification.markAsRead(notification.getNotificationId());
+
+        // Display the notification details (You can use an Alert or a separate FXML page)
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notification");
+        alert.setHeaderText("Notification Details");
+        alert.setContentText(notification.getDescription());
+        alert.showAndWait();
+
+        // Reload notifications to update the UI
+        loadNotifications();
     }
 
-    public void handleNotification3(ActionEvent actionEvent) {
-
+    // Delete a notification
+    private void deleteNotification(Notification notification) {
+        // Delete from the database
+        if (Notification.deleteNotification(notification.getNotificationId())) {
+            System.out.println("Notification deleted successfully.");
+            loadNotifications(); // Refresh the menu
+        } else {
+            System.out.println("Failed to delete the notification.");
+        }
     }
+
 }
