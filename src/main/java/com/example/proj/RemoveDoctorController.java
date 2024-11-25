@@ -12,13 +12,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class RemoveDoctorController {
 
@@ -31,11 +27,6 @@ public class RemoveDoctorController {
     @FXML
     private ComboBox<String> doctorComboBox; // ComboBox to list doctors
 
-    private static final String URL = "jdbc:mysql://localhost:3306/user";
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
-
-    private static final String SELECT_DOCTORS_QUERY = "SELECT DoctorID, Name FROM doctors";
     private Admin_Handler adminHandler = new Admin_Handler(); // Admin_Handler instance
 
     private ObservableList<String> doctorList = FXCollections.observableArrayList();
@@ -46,26 +37,21 @@ public class RemoveDoctorController {
     }
 
     private void populateDoctorComboBox() {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOCTORS_QUERY);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+        // Fetch doctors list using Admin_Handler instead of database code here
+        doctorList.clear();
+        doctorIDList.clear();
 
-            doctorList.clear();
-            doctorIDList.clear();
+        // Fetch doctor names and IDs from the handler
+        var doctorData = adminHandler.getDoctorNamesAndIDs();
 
-            while (resultSet.next()) {
-                int doctorID = resultSet.getInt("DoctorID");
-                String doctorName = resultSet.getString("Name");
-
-                doctorList.add(doctorName);
-                doctorIDList.add(doctorID); // Add IDs in sync with names
-            }
-
-            doctorComboBox.setItems(doctorList);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        for (Pair<String, Integer> data : doctorData) {
+            doctorList.add(data.getKey());
+            doctorIDList.add(data.getValue());
         }
+
+
+
+        doctorComboBox.setItems(doctorList);
     }
 
     @FXML
@@ -77,7 +63,7 @@ public class RemoveDoctorController {
             int doctorID = doctorIDList.get(selectedIndex);
 
             // Call Admin_Handler to remove the doctor
-            boolean isRemoved = Admin.removeDoctor(doctorID);
+            boolean isRemoved = adminHandler.removeDoctor(doctorID);
 
             if (isRemoved) {
                 showAlert("Success", "Doctor removed successfully!", Alert.AlertType.INFORMATION);

@@ -1,6 +1,7 @@
 package Database;
 
 import com.example.proj.Admin;
+import javafx.util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 public class Admin_Handler implements DatabaseConfig{
 
 
+    private static final String GET_PATIENT_NAMES_QUERY = "SELECT first_name FROM patients";
+    private static final String SELECT_DOCTORS_QUERY = "SELECT DoctorID, Name FROM doctors";
     private static final String DELETE_DOCTOR_QUERY =
             "DELETE FROM doctors WHERE DoctorID = ?";
     private static final String DELETE_PATIENT_QUERY =
@@ -108,8 +111,28 @@ public class Admin_Handler implements DatabaseConfig{
         }
     }
 
-    private static final String GET_PATIENT_NAMES_QUERY = "SELECT first_name FROM patients";
 
+
+    public List<Pair<String, Integer>> getDoctorNamesAndIDs() {
+        List<Pair<String, Integer>> doctorData = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_DOCTORS_QUERY);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                String doctorName = resultSet.getString("Name");
+                int doctorID = resultSet.getInt("DoctorID");
+
+                doctorData.add(new Pair<>(doctorName, doctorID));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return doctorData;
+    }
     /**
      * Removes a patient from the database based on their name.
      *
