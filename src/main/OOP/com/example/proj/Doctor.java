@@ -36,6 +36,10 @@ public class Doctor {
         Doctor_Handler doctorHandler = new Doctor_Handler();
     }
 
+    public Doctor() {
+
+    }
+
     // Method to fetch and update doctor details from the database
     public void updateDoctorDetails() {
         Doctor_Handler handler = new Doctor_Handler();

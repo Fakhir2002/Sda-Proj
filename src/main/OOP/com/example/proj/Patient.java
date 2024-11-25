@@ -96,4 +96,8 @@ public class Patient {
         return patientHandler.getAllPatientDetails();
     }
     public String getPatientNameById(int patientId){return patientHandler.getPatientNameById(patientId);}
+
+    public String getPatientUsernameByName(String selectedPatientName) {
+        return patientHandler.getPatientUsernameByName(selectedPatientName);
+    }
 }

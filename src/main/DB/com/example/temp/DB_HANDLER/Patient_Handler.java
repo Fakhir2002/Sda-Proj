@@ -25,6 +25,9 @@ public class Patient_Handler {
             "SELECT username FROM patients WHERE username = ? AND password = ?";
     private static final String GET_ALL_PATIENTS_QUERY =
             "SELECT id, first_name, last_name, contact_no, dob, address, username, password FROM patients";
+    private static final String GET_USERNAME_BY_NAME_QUERY =
+            "SELECT username FROM patients WHERE CONCAT(first_name, ' ', last_name) = ?";
+
 
     /**
      * Saves patient data to the database.
@@ -182,4 +185,23 @@ public class Patient_Handler {
         return null; // Return null if no matching patient is found
     }
 
+    public String getPatientUsernameByName(String selectedPatientName) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(GET_USERNAME_BY_NAME_QUERY)) {
+
+            // Set parameters for the prepared statement
+            preparedStatement.setString(1, selectedPatientName);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("username");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null; // Return null if no matching username is found
+    }
 }

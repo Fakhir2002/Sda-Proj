@@ -16,26 +16,34 @@
             <!-- ScrollPane containing TableView -->
             <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="238.0" prefWidth="678.0">
                 <TableView fx:id="medicalHistoryTable" prefHeight="238.0" prefWidth="666.0">
-   
-                    <!-- TableColumn for a specific data field (e.g., date of condition) -->
                     <columns>
-                        <TableColumn prefWidth="247.999984562397" text="Diagnosis">
+                        <!-- Column for Diagnosis -->
+                        <TableColumn fx:id="diagnosisColumn" prefWidth="247.999984562397" text="Diagnosis">
                             <cellValueFactory>
-                                <PropertyValueFactory property="dateDiagnosed" />
+                                <PropertyValueFactory property="diagnosis" />
                             </cellValueFactory>
                         </TableColumn>
-                  <TableColumn prefWidth="300.00001525878906" text="Treatment" />
-                  <TableColumn prefWidth="116.800048828125" text="Date of Diagnosis" />
+                        <!-- Column for Treatment -->
+                        <TableColumn fx:id="treatmentColumn" prefWidth="300.00001525878906" text="Treatment">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="treatment" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!-- Column for Date -->
+                        <TableColumn fx:id="dateDiagnosedColumn" prefWidth="116.800048828125" text="Date of Diagnosis">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="date" />
+                            </cellValueFactory>
+                        </TableColumn>
                     </columns>
                 </TableView>
             </ScrollPane>
-         <Button layoutX="621.0" layoutY="279.0" mnemonicParsing="false" text="Update " />
-         <Label layoutX="14.0" layoutY="305.0" text="Diagnosis" textFill="WHITE" />
-         <TextArea layoutX="74.0" layoutY="261.0" prefHeight="106.0" prefWidth="206.0" />
-         <Label layoutX="305.0" layoutY="305.0" prefHeight="18.0" prefWidth="58.0" text="Treatment" textFill="WHITE" />
-         <TextArea layoutX="371.0" layoutY="260.0" prefHeight="106.0" prefWidth="235.0" />
-         <Button fx:id="nikal" layoutX="621.0" layoutY="323.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Back" />
-
+            <Button fx:id="updateButton" onAction="#handleSave" layoutX="621.0" layoutY="279.0" mnemonicParsing="false" text="Update" />
+            <Label layoutX="14.0" layoutY="305.0" text="Diagnosis" textFill="WHITE" />
+            <TextArea fx:id="diagnosisTextArea" layoutX="74.0" layoutY="261.0" prefHeight="106.0" prefWidth="206.0" />
+            <Label layoutX="305.0" layoutY="305.0" prefHeight="18.0" prefWidth="58.0" text="Treatment" textFill="WHITE" />
+            <TextArea fx:id="treatmentTextArea" layoutX="371.0" layoutY="260.0" prefHeight="106.0" prefWidth="235.0" />
+            <Button fx:id="nikal" onAction="#handleBack" layoutX="621.0" layoutY="323.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" text="Back" />
         </AnchorPane>
     </children>
 </AnchorPane>

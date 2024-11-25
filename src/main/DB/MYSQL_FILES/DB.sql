@@ -283,8 +283,9 @@ CREATE TABLE `medicalhistory` (
   `Diagnosis` varchar(500) NOT NULL,
   `Treatment` varchar(500) NOT NULL,
   `Date` date NOT NULL,
+  `patientID` int NOT NULL,
   PRIMARY KEY (`historyID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,6 +294,7 @@ CREATE TABLE `medicalhistory` (
 
 LOCK TABLES `medicalhistory` WRITE;
 /*!40000 ALTER TABLE `medicalhistory` DISABLE KEYS */;
+INSERT INTO `medicalhistory` VALUES (1,'lknk','okno','2024-11-25',0),(2,'dsaasad','sdav','2024-11-25',9),(3,'dfser','erdg','2024-11-25',9);
 /*!40000 ALTER TABLE `medicalhistory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +369,7 @@ CREATE TABLE `payment` (
   `Amount` int NOT NULL,
   `Status` varchar(255) NOT NULL,
   PRIMARY KEY (`paymentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +378,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid');
+INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid'),(2,'HealthCare Package: package1',2500,'Paid');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  4:45:20
+-- Dump completed on 2024-11-25  5:52:11
