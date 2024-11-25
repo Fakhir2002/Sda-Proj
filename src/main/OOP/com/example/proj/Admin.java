@@ -28,6 +28,15 @@ public class Admin extends User {
         this.dob = dob;
         this.address = address;
     }
+    public boolean login() {
+        // Create an instance of AdminLogin_Handler
+        Admin_Handler dbHandler = new Admin_Handler();
+
+        // Call the validateLogin method and return the result
+        return dbHandler.validateLogin(username, password);
+    }
+
+
 
     @Override
     public void updateDetails() {
@@ -46,6 +55,11 @@ public class Admin extends User {
 
     public  static boolean validateLogin(String username, String password) {
         return adminHandler.validateLogin(username, password);
+    }
+
+    public static boolean register(String firstName, String lastName, String contactNo, String dob,
+                                   String address, String username, String password) {
+        return adminHandler.registerAdmin(firstName, lastName, contactNo, dob, address, username, password);
     }
 
     // Static methods for admin operations

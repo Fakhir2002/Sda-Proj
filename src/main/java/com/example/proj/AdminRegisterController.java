@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.AdminRegister_Handler;
+import com.example.temp.DB_HANDLER.Admin_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +38,7 @@ public class AdminRegisterController {
     @FXML
     private TextField passwordField;   // Admin's password input
 
-    private final AdminRegister_Handler adminHandler = new AdminRegister_Handler();
+    private final Admin_Handler adminHandler = new Admin_Handler();
 
     public void handleAdminRegCancel(ActionEvent actionEvent) {
         try {
@@ -130,7 +130,7 @@ public class AdminRegisterController {
 
         // Call the database handler to register the admin
         String dobstring = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        boolean isRegistered = adminHandler.registerAdmin(firstName, lastName, contactNo, dobstring, address, username, password);
+        boolean isRegistered = Admin.register(firstName, lastName, contactNo, dobstring, address, username, password);
 
         if (isRegistered) {
             showAlert(Alert.AlertType.INFORMATION, "Success", "Admin registered successfully!");

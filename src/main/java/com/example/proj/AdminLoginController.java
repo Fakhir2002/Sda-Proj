@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.AdminLogin_Handler;
+import com.example.temp.DB_HANDLER.Admin_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +24,7 @@ public class AdminLoginController {
     @FXML
     private Button hello; // Back button
 
-    private final AdminLogin_Handler dbHandler = new AdminLogin_Handler();
+    private final Admin_Handler dbHandler = new Admin_Handler();
 
     /**
      * Handles the "Back" button action, navigates to the Home Page.
@@ -60,7 +60,7 @@ public class AdminLoginController {
         }
 
         // Check credentials against the database
-        boolean isValid = dbHandler.validateLogin(username, password);
+        boolean isValid = Admin.validateLogin(username, password);
         if (isValid) {
             try {
                 // Load Admin Home Page if login is successful
