@@ -108,6 +108,8 @@ public class Admin_Handler implements DatabaseConfig{
         }
     }
 
+    private static final String GET_PATIENT_NAMES_QUERY = "SELECT first_name FROM patients";
+
     /**
      * Removes a patient from the database based on their name.
      *
@@ -115,7 +117,7 @@ public class Admin_Handler implements DatabaseConfig{
      * @return true if the patient was removed successfully, false otherwise.
      */
     public boolean removePatient(String patientName) {
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try (Connection connection = DriverManager.getConnection(DatabaseConfig.URL, DatabaseConfig.USER, DatabaseConfig.PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_PATIENT_QUERY)) {
 
             preparedStatement.setString(1, patientName);
@@ -126,6 +128,29 @@ public class Admin_Handler implements DatabaseConfig{
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Retrieves the list of patient names from the database.
+     *
+     * @return A list of patient names.
+     */
+    public List<String> getPatientNames() {
+        List<String> patientNames = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DatabaseConfig.URL, DatabaseConfig.USER, DatabaseConfig.PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(GET_PATIENT_NAMES_QUERY)) {
+
+            while (resultSet.next()) {
+                patientNames.add(resultSet.getString("first_name")); // Add each name to the list
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return patientNames;
     }
 
     /**

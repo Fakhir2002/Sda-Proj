@@ -7,13 +7,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 
 import java.io.IOException;
-import java.sql.*;
+import java.util.List;
 
 public class RemovePatientController {
 
@@ -22,12 +22,8 @@ public class RemovePatientController {
 
     @FXML
     private ComboBox<String> removepatcombobox; // ComboBox for patient names
-    private ObservableList<String> patientList; // List for patient names
-    private Admin_Handler adminHandler = new Admin_Handler();
 
-    private static final String URL = "jdbc:mysql://localhost:3306/user";
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
+    private final Admin_Handler adminHandler = new Admin_Handler();
 
     @FXML
     public void initialize() {
@@ -36,36 +32,20 @@ public class RemovePatientController {
 
     public void populatePatientComboBox() {
         removepatcombobox.getItems().clear(); // Clear ComboBox to avoid duplicates
-
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT first_name FROM patients")) {
-
-            while (resultSet.next()) {
-                String patientName = resultSet.getString("first_name"); // Get patient first name
-                removepatcombobox.getItems().add(patientName); // Add patient name to ComboBox
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<String> patientNames = adminHandler.getPatientNames(); // Fetch patient names from the handler
+        removepatcombobox.getItems().addAll(patientNames); // Populate ComboBox with patient names
     }
 
     @FXML
     private void handleRemovePatient(ActionEvent event) {
-        // Get the selected patient's first name
-        String selectedPatientName = removepatcombobox.getSelectionModel().getSelectedItem();
+        String selectedPatientName = removepatcombobox.getSelectionModel().getSelectedItem(); // Get selected name
 
         if (selectedPatientName != null && !selectedPatientName.isEmpty()) { // Ensure a patient is selected
-            // Call Admin_Handler to remove the patient by their first name
-            boolean isRemoved = Admin.removePatient(selectedPatientName);
+            boolean isRemoved = adminHandler.removePatient(selectedPatientName); // Delegate removal to handler
 
             if (isRemoved) {
                 showAlert("Success", "Patient removed successfully!", Alert.AlertType.INFORMATION);
-
-                // Remove patient from ComboBox
-                removepatcombobox.getItems().remove(selectedPatientName);
-
+                removepatcombobox.getItems().remove(selectedPatientName); // Remove from ComboBox
             } else {
                 showAlert("Error", "Failed to remove the patient.", Alert.AlertType.ERROR);
             }
@@ -74,7 +54,6 @@ public class RemovePatientController {
         }
     }
 
-    // Utility method to show alerts
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -88,12 +67,10 @@ public class RemovePatientController {
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) patientback.getScene().getWindow();
-
             currentStage.setScene(new Scene(newPage));
             currentStage.setTitle("Admin's Home Page");
             currentStage.sizeToScene();
             currentStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
