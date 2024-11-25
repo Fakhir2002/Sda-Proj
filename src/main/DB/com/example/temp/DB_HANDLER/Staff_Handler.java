@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaffRegister_Handler {
+public class Staff_Handler {
 
     // Database credentials
     private static final String URL = "jdbc:mysql://localhost:3306/user";
@@ -25,6 +25,9 @@ public class StaffRegister_Handler {
             "SELECT * FROM staff WHERE hospital = ?";
     private static final String SELECT_STAFF_BY_NAME_QUERY =
             "SELECT * FROM staff WHERE first_name = ? AND last_name = ?";
+
+    private static final String VALIDATE_STAFF_QUERY =
+            "SELECT COUNT(*) FROM staff WHERE username = ? AND password = ?";
 
     /**
      * Registers a new staff member in the database.
@@ -141,6 +144,34 @@ public class StaffRegister_Handler {
         }
 
         return staffList;
+    }
+
+    /**
+     * Verifies staff credentials for login.
+     *
+     * @param username Staff's username
+     * @param password Staff's password
+     * @return true if the credentials are valid, false otherwise
+     */
+    public boolean loginStaff(String username, String password) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(VALIDATE_STAFF_QUERY)) {
+
+            // Set parameters for the prepared statement
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0; // Return true if the count is greater than 0
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false; // Return false if login fails
     }
 
     /**

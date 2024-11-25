@@ -1,7 +1,7 @@
 package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Hospital_Handler;
-import com.example.temp.DB_HANDLER.StaffRegister_Handler;
+import com.example.temp.DB_HANDLER.Staff_Handler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -164,7 +164,7 @@ public class StaffRegisterController {
         }
 
         // Register staff in the database
-        StaffRegister_Handler handler = new StaffRegister_Handler();
+        Staff_Handler handler = new Staff_Handler();
         // Convert LocalDate to String in the "yyyy-MM-dd" format
         String dobString = dob.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         boolean isRegistered = Staff.registerStaff(firstName, lastName, contactNo, dobString, address, username, password,selectedHospital);

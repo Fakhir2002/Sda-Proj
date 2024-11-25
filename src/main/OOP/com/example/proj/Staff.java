@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.StaffRegister_Handler;
+import com.example.temp.DB_HANDLER.Staff_Handler;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class Staff extends User {
     private String passwordHash;
     private String hospital;
 
-    private static final StaffRegister_Handler staffHandler = new StaffRegister_Handler();
+    private static final Staff_Handler staffHandler = new Staff_Handler();
 
     public Staff(String username, String password) {
         super(username, password);
