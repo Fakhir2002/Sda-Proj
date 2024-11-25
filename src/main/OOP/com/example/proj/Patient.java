@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Patient_Handler;
+import Database.Patient_Handler;
 
 import java.util.List;
 

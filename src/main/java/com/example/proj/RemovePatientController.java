@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Admin_Handler;
+import Database.Admin_Handler;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.List;
 
 public class RemovePatientController {
 

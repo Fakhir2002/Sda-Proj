@@ -1,6 +1,5 @@
-package com.example.temp.DB_HANDLER;
+package Database;
 
-import com.example.proj.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

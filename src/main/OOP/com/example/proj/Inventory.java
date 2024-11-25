@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Inventory_Handler;
+import Database.Inventory_Handler;
 
 public class Inventory {
     private int inventoryID;

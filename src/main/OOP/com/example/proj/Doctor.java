@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
+import Database.Doctor_Handler;
 
 import java.util.List;
 

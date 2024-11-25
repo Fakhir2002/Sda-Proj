@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Admin_Handler;
+import Database.Admin_Handler;
 
 public class Admin extends User {
     private String firstName;

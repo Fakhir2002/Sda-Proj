@@ -1,8 +1,8 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
-import com.example.temp.DB_HANDLER.Feedback_Handler;
-import com.example.temp.DB_HANDLER.Hospital_Handler;
+import Database.Doctor_Handler;
+import Database.Feedback_Handler;
+import Database.Hospital_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

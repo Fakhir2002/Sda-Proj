@@ -1,4 +1,4 @@
-package com.example.temp.DB_HANDLER;
+package Database;
 
 public interface DatabaseConfig {
     String URL = "jdbc:mysql://localhost:3306/user"; // Replace 'user' with your database name

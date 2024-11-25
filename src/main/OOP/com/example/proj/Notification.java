@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Notification_Handler;
+import Database.Notification_Handler;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.VideoConsultationDBHandler;
+import Database.VideoConsultationDBHandler;
 
 import java.util.List;
 

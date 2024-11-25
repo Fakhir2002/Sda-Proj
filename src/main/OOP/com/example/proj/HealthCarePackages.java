@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.HealthCarePackage_Handler;
+import Database.HealthCarePackage_Handler;
 import javafx.beans.property.*;
 import java.time.LocalDate;
 import java.util.List;

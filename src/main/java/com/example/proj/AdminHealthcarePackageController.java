@@ -1,7 +1,7 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.HealthCarePackage_Handler;
-import com.example.temp.DB_HANDLER.Hospital_Handler;
+import Database.HealthCarePackage_Handler;
+import Database.Hospital_Handler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

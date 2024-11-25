@@ -1,6 +1,6 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Emergency_Handler;
+import Database.Emergency_Handler;
 import java.util.List;
 
 public class Emergency {

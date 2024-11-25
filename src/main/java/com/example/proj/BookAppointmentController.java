@@ -1,6 +1,5 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.VideoConsultationDBHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,9 +1,9 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Appointment_Handler;
-import com.example.temp.DB_HANDLER.Hospital_Handler;
-import com.example.temp.DB_HANDLER.Doctor_Handler;
-import com.example.temp.DB_HANDLER.ManageAppointment_Handler;
+import Database.Appointment_Handler;
+import Database.Hospital_Handler;
+import Database.Doctor_Handler;
+import Database.ManageAppointment_Handler;
 import javafx.collections.ObservableList;
 
 import java.util.List;

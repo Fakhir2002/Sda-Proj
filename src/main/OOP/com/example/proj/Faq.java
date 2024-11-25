@@ -1,8 +1,8 @@
 package com.example.proj;
 
-import com.example.temp.DB_HANDLER.Doctor_Handler;
-import com.example.temp.DB_HANDLER.Faq_Handler;
-import com.example.temp.DB_HANDLER.Patient_Handler;
+import Database.Doctor_Handler;
+import Database.Faq_Handler;
+import Database.Patient_Handler;
 
 import java.util.List;
 import java.util.stream.Collectors;

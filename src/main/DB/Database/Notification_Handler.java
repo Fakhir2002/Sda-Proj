@@ -1,4 +1,4 @@
-package com.example.temp.DB_HANDLER;
+package Database;
 
 import com.example.proj.Notification;
 
