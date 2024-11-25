@@ -1,12 +1,17 @@
 package com.example.proj;
 
+import com.example.temp.DB_HANDLER.MedicalHistory_Handler;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+
+import java.util.List;
 
 public class MedicalRecord {
     private final SimpleStringProperty diagnosis;
     private final SimpleStringProperty treatment;
     private final SimpleStringProperty date;
+
+    private final MedicalHistory_Handler dbHandler = new MedicalHistory_Handler(); // Database handler instance
 
     // Constructor to initialize the fields
     public MedicalRecord(String diagnosis, String treatment, String date) {
@@ -52,5 +57,13 @@ public class MedicalRecord {
 
     public ObservableValue<String> dateProperty() {
         return date;
+    }
+
+    public List<MedicalRecord> getMedicalHistory(int id) {
+        return dbHandler.getMedicalHistory(id);
+    }
+
+    public boolean saveMedicalHistory(String diagnosis, String treatment, String currentDate, int id) {
+        return dbHandler.saveMedicalHistory(diagnosis, treatment, currentDate, id);
     }
 }
