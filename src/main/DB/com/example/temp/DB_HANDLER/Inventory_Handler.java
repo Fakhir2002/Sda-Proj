@@ -5,11 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Inventory_Handler {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/user";  // Replace with your database URL
-    private static final String USER = "root";  // If using MySQL, add your username here
-    private static final String PASSWORD = "12345678";  // If using MySQL, add your password here
+public class Inventory_Handler implements DatabaseConfig{
 
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);  // Correct connection setup

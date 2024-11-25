@@ -10,11 +10,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Appointment_Handler {
+public class Appointment_Handler implements DatabaseConfig{
 
-    private static final String URL = "jdbc:mysql://localhost:3306/user"; // Replace 'curetrack' with your database name
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     public boolean saveAppointment(String status, String date, String time, int doctorId, int patientId) {
         String insertQuery = "INSERT INTO appointment (status, date, time, doctor_id, patient_id) VALUES (?, ?, ?, ?, ?)";

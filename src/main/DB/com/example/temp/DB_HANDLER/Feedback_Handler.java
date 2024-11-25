@@ -5,12 +5,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Feedback_Handler {
+public class Feedback_Handler implements DatabaseConfig{
 
-    // Database credentials
-    private static final String URL = "jdbc:mysql://localhost:3306/user";
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     // SQL query for inserting feedback data with patient_id
     private static final String INSERT_FEEDBACK_QUERY =

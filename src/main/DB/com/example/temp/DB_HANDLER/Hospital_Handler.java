@@ -6,12 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hospital_Handler {
+public class Hospital_Handler implements DatabaseConfig{
 
-    // Database credentials
-    private static final String URL = "jdbc:mysql://localhost:3306/user"; // Ensure database name is correct
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     // SQL query to insert a new hospital
     private static final String INSERT_QUERY =

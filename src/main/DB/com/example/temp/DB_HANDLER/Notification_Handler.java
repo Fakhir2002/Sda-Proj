@@ -6,11 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notification_Handler {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/user";  // Your database URL
-    private static final String USER = "root";  // Your database username
-    private static final String PASSWORD = "12345678";  // Your database password
+public class Notification_Handler implements DatabaseConfig{
 
     // Save a new notification in the database
     public boolean saveNotification(int patientId, int doctorId, String description) {

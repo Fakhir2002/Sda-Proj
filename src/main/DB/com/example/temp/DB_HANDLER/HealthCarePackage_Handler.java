@@ -6,12 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HealthCarePackage_Handler {
+public class HealthCarePackage_Handler implements DatabaseConfig{
 
-    // Database credentials
-    private static final String URL = "jdbc:mysql://localhost:3306/user"; // Replace 'user' with your database name
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     // SQL queries
     private static final String INSERT_PACKAGE_QUERY =

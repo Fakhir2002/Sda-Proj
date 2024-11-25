@@ -4,17 +4,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoConsultationDBHandler {
-
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/user";
-    private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "12345678";
+public class VideoConsultationDBHandler implements DatabaseConfig{
 
     // Method to insert a new video consultation into the database
     public static boolean saveVideoConsultation(String status, int patientId, int doctorId) {
         String query = "INSERT INTO VideoConsultation (status, patient_id, doctor_id) VALUES (?, ?, ?)";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        try (Connection connection = DriverManager.getConnection(URL,USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             // Set the values for the prepared statement
@@ -37,7 +33,7 @@ public class VideoConsultationDBHandler {
         List<Integer> patientIds = new ArrayList<>();
         String query = "SELECT patient_id FROM VideoConsultation WHERE doctor_id = ?";
 
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+        try (Connection connection = DriverManager.getConnection(URL,USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             // Set the doctor_id for the prepared statement

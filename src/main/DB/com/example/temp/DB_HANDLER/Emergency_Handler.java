@@ -5,14 +5,14 @@ import com.example.proj.Emergency;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-public class Emergency_Handler {
+public class Emergency_Handler implements DatabaseConfig{
 
     // Method to fetch hospital names from the database
     public List<String> getHospitalNames() {
         List<String> hospitalNames = new ArrayList<>();
         String query = "SELECT Name FROM hospitals";  // Adjust based on your actual database schema
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -31,7 +31,7 @@ public class Emergency_Handler {
     public boolean insertEmergency(int patientId, int hospital_id, String type, String status, String description) {
         String query = "INSERT INTO emergency (patient_id, hospital_id, type, status, description) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, patientId);
@@ -53,7 +53,7 @@ public class Emergency_Handler {
         List<Emergency> emergencyList = new ArrayList<>();
         String query = "SELECT * from emergency";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -79,7 +79,7 @@ public class Emergency_Handler {
     public boolean updateEmergencyStatus(int emergencyId, String newStatus) {
         String query = "UPDATE emergency SET status = ? WHERE emergency_id = ?";
 
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "12345678");
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, newStatus);

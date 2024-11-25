@@ -6,15 +6,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Faq_Handler {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/user"; // Replace with your database URL
-    private static final String USER = "root"; // Replace with your DB username
-    private static final String PASSWORD = "12345678"; // Replace with your DB password
+public class Faq_Handler implements DatabaseConfig {
 
     // Method to insert an FAQ
     public boolean insertFaq(Faq faq) {
         String query = "INSERT INTO faq (patientID, doctorID, Question, Answer) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, faq.getPatientID());
@@ -34,7 +31,7 @@ public class Faq_Handler {
         List<Faq> faqs = new ArrayList<>();
         String query = "SELECT * FROM faq";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
@@ -57,7 +54,7 @@ public class Faq_Handler {
     // Method to update an FAQ's answer
     public boolean updateFaqAnswer(int patientID, int doctorID, String newAnswer) {
         String query = "UPDATE faq SET Answer = ? WHERE patientID = ? AND doctorID = ?";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, newAnswer);
@@ -76,7 +73,7 @@ public class Faq_Handler {
         List<Faq> faqs = new ArrayList<>();
         String query = "SELECT * FROM faq WHERE doctorID = ?";
 
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, doctorId);
@@ -101,7 +98,7 @@ public class Faq_Handler {
     // Method to delete an FAQ
     public boolean deleteFaq(int patientID, int doctorID) {
         String query = "DELETE FROM faq WHERE patientID = ? AND doctorID = ?";
-        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, patientID);

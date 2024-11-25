@@ -6,12 +6,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Doctor_Handler {
-
-    // Database credentials
-    private static final String URL = "jdbc:mysql://localhost:3306/user"; // Replace 'user' with your database name
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
+public class Doctor_Handler implements DatabaseConfig{
 
     // SQL query for inserting doctor data
     private static final String INSERT_DOCTOR_QUERY =

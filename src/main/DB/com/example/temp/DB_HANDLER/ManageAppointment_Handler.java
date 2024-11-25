@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 
-public class ManageAppointment_Handler {
+public class ManageAppointment_Handler implements DatabaseConfig{
 
     // Method to fetch all appointments from the database
     public ObservableList<Object[]> getAppointments(int doctorId) {
@@ -52,14 +52,12 @@ public class ManageAppointment_Handler {
 
 
     public void updateAppointmentStatus(int appointmentId) {
-        String url = "jdbc:mysql://localhost:3306/user"; // Update with your DB name
-        String user = "root";  // Update with your DB user
-        String password = "12345678"; // Update with your DB password
+
 
         // SQL query to update the status of an appointment
         String sql = "UPDATE appointment SET status = ? WHERE appointmentID = ?";
 
-        try (Connection conn = DriverManager.getConnection(url, user, password);
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, "confirmed"); // Set the status to "confirmed"

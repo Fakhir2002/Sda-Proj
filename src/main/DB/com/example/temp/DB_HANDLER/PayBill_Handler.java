@@ -10,11 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PayBill_Handler {
-
-    private static final String URL = "jdbc:mysql://localhost:3306/user"; // Database URL
-    private static final String USER = "root"; // Database username
-    private static final String PASSWORD = "12345678"; // Database password
+public class PayBill_Handler implements DatabaseConfig{
     private static Connection connection;
 
     // Constructor to initialize the database connection (you can use a connection pool in real applications)

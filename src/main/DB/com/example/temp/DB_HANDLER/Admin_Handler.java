@@ -4,11 +4,8 @@ import com.example.proj.Admin;
 
 import java.sql.*;
 
-public class Admin_Handler {
+public class Admin_Handler implements DatabaseConfig{
 
-    private static final String URL = "jdbc:mysql://localhost:3306/user";
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     private static final String DELETE_DOCTOR_QUERY =
             "DELETE FROM doctors WHERE DoctorID = ?";
