@@ -2,49 +2,104 @@ package com.example.proj;
 
 import com.example.temp.DB_HANDLER.Admin_Handler;
 
-public class Admin {
+public class Admin extends User {
     private String firstName;
     private String lastName;
     private String contactNo;
     private String dob;
     private String address;
-    private String username;
-    private String password;
-    private static Admin_Handler adminHandler=new Admin_Handler();
 
-    // Constructor to initialize admin details
+    private static final Admin_Handler adminHandler = new Admin_Handler();
+
+    public Admin(String username, String password) {
+        super(username, password);
+        updateDetails();
+    }
+    public Admin(){
+
+    }
+
     public Admin(String firstName, String lastName, String contactNo, String dob,
                  String address, String username, String password) {
+        super(username, password);
         this.firstName = firstName;
         this.lastName = lastName;
         this.contactNo = contactNo;
         this.dob = dob;
         this.address = address;
-        this.username = username;
-        this.password = password;
     }
 
-    // Getter methods for admin data
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
-    public String getContactNo() { return contactNo; }
-    public String getDob() { return dob; }
-    public String getAddress() { return address; }
-    public String getUsername() { return username; }
-    public String getPassword() { return password; }
+    @Override
+    public void updateDetails() {
+        Admin adminDetails = adminHandler.getAdminDetails(this.username);
+        if (adminDetails != null) {
+            this.firstName = adminDetails.getFirstName();
+            this.lastName = adminDetails.getLastName();
+            this.contactNo = adminDetails.getContactNo();
+            this.dob = adminDetails.getDob();
+            this.address = adminDetails.getAddress();
+            this.password = adminDetails.getPassword();
+        } else {
+            System.out.println("No admin found with the username: " + this.username);
+        }
+    }
 
+    public  static boolean validateLogin(String username, String password) {
+        return adminHandler.validateLogin(username, password);
+    }
+
+    // Static methods for admin operations
     public static boolean removeDoctor(int doctorID) {
         return adminHandler.removeDoctor(doctorID);
     }
+
     public static boolean removePatient(String patientName) {
-        // Delegate the call to the AdminHandler
         return adminHandler.removePatient(patientName);
     }
+
     public static boolean removeStaff(String staffName) {
-        // Delegate the call to AdminHandler
         return adminHandler.removeStaff(staffName);
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getContactNo() {
+        return contactNo;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 
 
+
+    public void setFirstName(String firstName) {
+        this.firstName= firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName=lastName;
+    }
+
+    public void setContactNo(String contactNo) {
+        this.contactNo=contactNo;
+    }
+
+    public void setDob(String dob) {
+        this.dob=dob;
+    }
+
+    public void setAddress(String address) {
+        this.address=address;
+    }
 }

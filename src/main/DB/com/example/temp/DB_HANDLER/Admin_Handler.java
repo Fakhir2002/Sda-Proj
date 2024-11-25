@@ -1,9 +1,8 @@
 package com.example.temp.DB_HANDLER;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import com.example.proj.Admin;
+
+import java.sql.*;
 
 public class Admin_Handler {
 
@@ -76,5 +75,46 @@ public class Admin_Handler {
             e.printStackTrace();
             return false;
         }
+    }
+
+
+    /**
+     * Retrieves the details of an admin from the database based on their username.
+     *
+     * @param username The username of the admin.
+     * @return An Admin object containing the admin's details, or null if not found.
+     */
+    public Admin getAdminDetails(String username) {
+        String query = "SELECT * FROM admins WHERE username = ?";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Admin admin = new Admin();
+                admin.setUsername(resultSet.getString("username"));
+                admin.setPassword(resultSet.getString("password"));
+                admin.setFirstName(resultSet.getString("firstName"));
+                admin.setLastName(resultSet.getString("lastName"));
+                admin.setContactNo(resultSet.getString("contactNo"));
+                admin.setDob(resultSet.getString("dob"));
+                admin.setAddress(resultSet.getString("address"));
+                return admin;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public boolean validateLogin(String username, String password) {
+        return true;
     }
 }
