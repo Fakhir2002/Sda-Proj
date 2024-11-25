@@ -38,13 +38,13 @@ public abstract class User {
     public static User createUser(String userType, String username, String password) {
         switch (userType.toLowerCase()) {
             case "doctor":
-                //return new Doctor(username, password);
+                return new Doctor(username, password);
             case "patient":
                 return new Patient(username, password);
             case "admin":
-               // return new Admin(username, password);
+                return new Admin(username, password);
             case "staff":
-              //  return new Staff(username, password);
+               return new Staff(username, password);
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }

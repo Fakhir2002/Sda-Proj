@@ -14,10 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class RemoveStaffController {
     @FXML
@@ -28,10 +24,6 @@ public class RemoveStaffController {
 
     @FXML
     private ComboBox<String> removestaffcombobox; // ComboBox for staff names
-
-    private static final String URL = "jdbc:mysql://localhost:3306/user";
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678";
 
     private ObservableList<String> staffList = FXCollections.observableArrayList();
 
@@ -45,22 +37,12 @@ public class RemoveStaffController {
 
     // Method to fetch staff names from the database and populate ComboBox
     public void populateStaffComboBox() {
-        removestaffcombobox.getItems().clear(); // Clear existing items from ComboBox
+        staffList.clear(); // Clear existing items from ComboBox
 
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT first_name FROM staff")) {
+        // Use Admin_Handler to fetch staff names
+        staffList.addAll(adminHandler.getStaffNames()); // Populate ComboBox with staff names
 
-            while (resultSet.next()) {
-                String staffName = resultSet.getString("first_name"); // Retrieve staff first name
-                staffList.add(staffName); // Add to the list
-            }
-
-            removestaffcombobox.setItems(staffList); // Set the ComboBox items
-
-        } catch (Exception e) {
-            e.printStackTrace(); // Handle any exceptions
-        }
+        removestaffcombobox.setItems(staffList); // Set the ComboBox items
     }
 
     // Method to handle the remove staff action
@@ -76,7 +58,7 @@ public class RemoveStaffController {
         }
 
         // Call the Admin_Handler to remove the staff
-        boolean success = Admin.removeStaff(selectedStaffName);
+        boolean success = adminHandler.removeStaff(selectedStaffName);
 
         // Show alert based on success or failure
         if (success) {

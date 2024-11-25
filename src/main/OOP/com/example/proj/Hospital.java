@@ -59,4 +59,6 @@ public class Hospital {
     public int getHospitalIdByName(String selectedHospital) {
         return hospitalHandler.getHospitalIdByName(selectedHospital);
     }
+
+
 }

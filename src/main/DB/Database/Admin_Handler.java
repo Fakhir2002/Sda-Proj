@@ -3,6 +3,8 @@ package Database;
 import com.example.proj.Admin;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin_Handler implements DatabaseConfig{
 
@@ -180,6 +182,25 @@ public class Admin_Handler implements DatabaseConfig{
             e.printStackTrace();
             return null;
         }
+    }
+    public List<String> getStaffNames() {
+        List<String> staffNames = new ArrayList<>();
+        String query = "SELECT first_name FROM staff"; // SQL query to get first names of staff members
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            // Iterate through the result set and add staff names to the list
+            while (resultSet.next()) {
+                staffNames.add(resultSet.getString("first_name"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle SQL exceptions
+        }
+
+        return staffNames; // Return the list of staff names
     }
 
 }
