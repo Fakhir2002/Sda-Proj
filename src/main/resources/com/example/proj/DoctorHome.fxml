@@ -64,13 +64,13 @@
         </AnchorPane>
 
         <!-- Notification Bar -->
-        <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #b2bdc1; -fx-text-fill: white;">
+        <MenuBar layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" styleClass="menu-bar">
             <menus>
-                <Menu fx:id="notificationMenu" style="-fx-text-fill: black;" text="Notifications">
-                    <!-- Notification items will go here -->
+                <Menu fx:id="notificationMenu" text="Notifications" styleClass="menu-item">
                 </Menu>
             </menus>
         </MenuBar>
+
 
         <!-- Text Labels and Footer -->
         <Text fill="WHITE" layoutX="241.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">

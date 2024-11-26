@@ -113,7 +113,7 @@ public class Admin_HomeController {
 
     public void handlehealthcare(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminHealthcarePackages.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_HealthcarePackages.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) healthcare.getScene().getWindow();
@@ -134,7 +134,7 @@ public class Admin_HomeController {
     public void handleAddHospital(ActionEvent actionEvent) {
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addHospital.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_addHospital.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) addHospital.getScene().getWindow();

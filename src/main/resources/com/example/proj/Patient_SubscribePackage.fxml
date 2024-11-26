@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane  stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.proj.Patient_SubscribePackageController">
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Patient_SubscribePackageController">
     <!-- Main Layout -->
     <VBox alignment="CENTER" prefHeight="430.0" prefWidth="659.0" spacing="10" style="-fx-background-color: #014D4E#014D4E;">
 
@@ -32,8 +32,8 @@
 
         <!-- Buttons for actions -->
         <HBox alignment="CENTER" spacing="20">
-            <Button fx:id="proceedButton" onAction="#proceedWithPackage" text="Proceed" />
-            <Button fx:id="muni" onAction="#backchal" text="Back" />
+            <Button fx:id="proceedButton" onAction="#proceedWithPackage" prefHeight="26.0" prefWidth="71.0" text="Proceed" />
+            <Button fx:id="muni" onAction="#backchal" prefHeight="25.0" prefWidth="67.0" text="Back" />
         </HBox>
     </VBox>
 </AnchorPane>

@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane  stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Register_StaffController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="434.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Register_StaffController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -121,14 +121,14 @@
                 </PasswordField>
                 <Button fx:id="StaffRegButton" layoutX="332.0" layoutY="172.0" mnemonicParsing="false" onAction="#handleStaffReg" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Register" />
                 <Button fx:id="staffRegCancel" layoutX="333.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleStaffRegCancel" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #d7e1e5;" text="Cancel" />
-                <Button fx:id="staffalready" layoutX="138.0" layoutY="375.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="14.0" prefWidth="151.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
-            <DatePicker fx:id="dobField" layoutX="138.0" layoutY="174.0" prefHeight="26.0" prefWidth="123.0" />
+                <Button fx:id="staffalready" layoutX="124.0" layoutY="366.0" mnemonicParsing="false" onAction="#StaffAlreadyAccount" prefHeight="29.0" prefWidth="151.0" style="-fx-background-color: #d7e1e5;" text="Already have an account?" />
+            <DatePicker fx:id="dobField" layoutX="136.0" layoutY="173.0" prefHeight="26.0" prefWidth="128.0" />
             <Label layoutX="32.0" layoutY="208.0" text="Hospital" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <ComboBox fx:id="hoscomb" layoutX="139.0" layoutY="206.0" prefHeight="26.0" prefWidth="126.0" />
+            <ComboBox fx:id="hoscomb" layoutX="137.0" layoutY="210.0" prefHeight="22.0" prefWidth="126.0" />
             </children>
         </AnchorPane>
     </center>

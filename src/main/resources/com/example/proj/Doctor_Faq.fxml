@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane  stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Doctor_FaqController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="672.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Doctor_FaqController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -42,12 +42,12 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="178.0">
                             <children>
                                 <TextField fx:id="answerText" layoutX="30.0" layoutY="52.0" prefHeight="158.0" prefWidth="174.0" promptText="Question" text="Answer" />
-                                <Button fx:id="answerbutton" layoutX="98.0" layoutY="237.0" mnemonicParsing="false" onAction="#HandleAnswer" text="Answer" />
+                                <Button fx:id="answerbutton" layoutX="88.0" layoutY="233.0" mnemonicParsing="false" onAction="#HandleAnswer" prefHeight="22.0" prefWidth="58.0" text="Answer" />
                             </children>
                         </AnchorPane>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="413.0" prefWidth="281.0">
                             <children>
-                                <TableView fx:id="faqTable"  layoutX="27.0" layoutY="55.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="faqTable" layoutX="27.0" layoutY="55.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <columns>
                                         <TableColumn fx:id="QuestionCol" prefWidth="120.80001527070999" text="Question" />
                                         <TableColumn fx:id="AnswerCol" prefWidth="132.0" text="Answer" />

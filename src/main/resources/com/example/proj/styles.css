@@ -16,24 +16,63 @@
     -fx-padding: 5px 10px; /* Adjust padding to give a more "pressed" look */
 }
 
-/* Style for the menu bar */
+/* MenuBar styling */
+/* MenuBar styling */
 .menu-bar {
-    -fx-background-color: #000000; /* Solid black color */
+    -fx-background-color: #014D4E; /* Dark teal background */
+    -fx-text-fill: white; /* White text for the menu bar */
+    -fx-padding: 5px; /* Padding around the menu bar */
+}
+
+/* Menu item styling */
+.menu-bar .menu {
+    -fx-background-color: #014D4E; /* Dark teal background for menu items */
     -fx-text-fill: white; /* White text for menu items */
-    -fx-font-size: 12px; /* Font size for menu items */
     -fx-padding: 5px 15px; /* Padding for menu items */
-    -fx-alignment: right;
-}
-.menu-bar .menu-item {
-
+    -fx-font-size: 12px; /* Optional: Font size for menu text */
 }
 
-.menu-bar .menu-item:hover {
-    -fx-background-color: rgba(0, 123, 124, 0.7); /* Lighter teal when hovering */
-    -fx-text-fill: white; /* White text on hover */
+/* Hover effect for Menu */
+.menu-bar .menu:hover {
+    -fx-background-color: #016A6B; /* Slightly lighter teal on hover */
+    -fx-text-fill: white; /* Keep text white */
 }
 
-.menu-bar .menu-item:pressed {
-    -fx-background-color: rgba(0, 100, 101, 0.8); /* Darker teal for pressed state */
-    -fx-text-fill: white; /* White text on pressed */
+/* Pressed effect for Menu */
+.menu-bar .menu:pressed {
+    -fx-background-color: #013B3C; /* Darker teal for pressed state */
+    -fx-text-fill: white; /* Keep text white */
 }
+
+/* Menu item hover effect */
+.menu-item:hover {
+    -fx-background-color: #016A6B; /* Lighter teal for menu item hover */
+    -fx-text-fill: white; /* Keep text white */
+}
+
+/* Optional: Styling for drop-down menu items */
+.menu-item {
+    -fx-background-color: #FFFFFF; /* Default background for menu items */
+    -fx-text-fill: black; /* White text for menu items */
+}
+
+.menu-item:pressed {
+    -fx-background-color: #013B3C; /* Darker teal for pressed state */
+    -fx-text-fill: white;
+}
+.menu{
+ -fx-background-color: #016A6B;
+}
+
+
+
+/* Scrollbar Styling */
+.table-view .scroll-bar {
+    -fx-background-color: #012E2F; /* Dark teal background for scrollbar track */
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #01868A; /* Teal for scrollbar thumb */
+    -fx-background-radius: 5px; /* Rounded scrollbar */
+}
+
