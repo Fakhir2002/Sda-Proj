@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class PatientHomeController implements InitializeUsername{
+public class PatientHomeController implements InitializeUsername {
 
     @FXML
     private Button faqsButton;
@@ -42,8 +42,10 @@ public class PatientHomeController implements InitializeUsername{
 
     @FXML
     private Patient currentPatient;
+
     @FXML
-    private Menu notificationMenu;
+    private Menu notificationMenu; // Updated to MenuButton
+
     @FXML
     private String username;
 
@@ -56,7 +58,8 @@ public class PatientHomeController implements InitializeUsername{
         loadNotifications();
 
         PatientName.setText("Welcome, " + username);
-        System.out.println("Patient logged in with username: " + currentPatient.getUsername() + " and name: " + currentPatient.getFirstName());
+        System.out.println("Patient logged in with username: " + currentPatient.getUsername() +
+                " and name: " + currentPatient.getFirstName());
     }
 
     // Load the corresponding page based on the button clicked
@@ -84,31 +87,31 @@ public class PatientHomeController implements InitializeUsername{
 
     // Event handlers for different buttons
     public void HandleBookAppointment(ActionEvent actionEvent) {
-        loadPage("BookAppointment.fxml", "Book Appointment", BookAppointment);
+        loadPage("Patient_BookAppointment.fxml", "Book Appointment", BookAppointment);
     }
 
     public void HandleCompare(ActionEvent actionEvent) {
-        loadPage("DoctorComparison.fxml", "Comparison", Compare);
-    }
-    public void chalochalo(ActionEvent actionEvent) {
-        loadPage("SubscribePackage.fxml", "Subscribe Package", hello);
+        loadPage("Paitent_Comparison.fxml", "Comparison", Compare);
     }
 
+    public void chalochalo(ActionEvent actionEvent) {
+        loadPage("Patient_SubscribePackage.fxml", "Subscribe Package", hello);
+    }
 
     public void HandleFeedback(ActionEvent actionEvent) {
-        loadPage("Submit-Feedback.fxml", "Feedback", Feedback);
+        loadPage("Patient_SubmitFeedback.fxml", "Feedback", Feedback);
     }
 
     public void HandleEmergency(ActionEvent actionEvent) {
-        loadPage("Emergency.fxml", "Emergency", emergency);
+        loadPage("Patient_Emergency.fxml", "Emergency", emergency);
     }
 
     public void HandleFaqs(ActionEvent actionEvent) {
-        loadPage("PatientFaq.fxml", "FAQs", faqsButton);
+        loadPage("Patient_Faq.fxml", "FAQs", faqsButton);
     }
 
     public void HandlePayments(ActionEvent actionEvent) {
-        loadPage("Pay-Bills.fxml", "Bills", payment);
+        loadPage("Patient_PayBills.fxml", "Bills", payment);
     }
 
     public void handlepatlogout(ActionEvent actionEvent) {
@@ -129,12 +132,12 @@ public class PatientHomeController implements InitializeUsername{
         }
     }
 
-
     // Load notifications for the current patient
     private void loadNotifications() {
         try {
-            // Retrieve notifications from the database
-            List<Notification> notifications = Notification.getNotificationsByPatientId(currentPatient.getId());
+            // Use polymorphic behavior to get notifications
+            PatientNotification notificationHandler = new PatientNotification(0, currentPatient.getId(), "", false);
+            List<Notification> notifications = notificationHandler.getNotifications(currentPatient.getId());
 
             notificationMenu.getItems().clear(); // Clear any previous items
             boolean hasUnread = false;
@@ -145,12 +148,11 @@ public class PatientHomeController implements InitializeUsername{
                 // Highlight if unread
                 if (!notification.isRead()) {
                     hasUnread = true;
-                    item.setStyle("-fx-text-fill: red;");
+                    item.setStyle("-fx-text-fill: red;"); // Highlight unread in red
                 }
 
                 // Add action to view notification
                 item.setOnAction(event -> viewNotification(notification));
-
                 notificationMenu.getItems().add(item);
 
                 // Add delete option
@@ -162,7 +164,7 @@ public class PatientHomeController implements InitializeUsername{
 
             // Update Notification menu style
             if (hasUnread) {
-                notificationMenu.setStyle("-fx-background-color: red;");
+                notificationMenu.setStyle("-fx-background-color: red;"); // Highlight if unread
             } else {
                 notificationMenu.setStyle("-fx-background-color: white;");
             }
@@ -173,28 +175,34 @@ public class PatientHomeController implements InitializeUsername{
 
     // Mark the notification as read and show its details
     private void viewNotification(Notification notification) {
-        // Mark as read in the database
-        Notification.markAsRead(notification.getNotificationId());
+        try {
+            notification.markAsRead(); // Polymorphic behavior
 
-        // Display the notification details (You can use an Alert or a separate FXML page)
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Notification");
-        alert.setHeaderText("Notification Details");
-        alert.setContentText(notification.getDescription());
-        alert.showAndWait();
+            // Display the notification details
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification");
+            alert.setHeaderText("Notification Details");
+            alert.setContentText(notification.getDescription());
+            alert.showAndWait();
 
-        // Reload notifications to update the UI
-        loadNotifications();
+            // Reload notifications to update the UI
+            loadNotifications();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Delete a notification
     private void deleteNotification(Notification notification) {
-        // Delete from the database
-        if (Notification.deleteNotification(notification.getNotificationId())) {
-            System.out.println("Notification deleted successfully.");
-            loadNotifications(); // Refresh the menu
-        } else {
-            System.out.println("Failed to delete the notification.");
+        try {
+            if (notification.delete()) { // Polymorphic behavior
+                System.out.println("Notification deleted successfully.");
+                loadNotifications(); // Refresh the menu
+            } else {
+                System.out.println("Failed to delete the notification.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

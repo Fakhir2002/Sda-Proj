@@ -118,9 +118,11 @@ public class Staff_ManageInventoryController implements InitializeUsername{
 
             // Set up the scene and stage
             Stage currentStage = (Stage) InventoryButton.getScene().getWindow();
-            Scene scene = new Scene(root);
-            currentStage.setScene(scene);
+            currentStage.setScene(new Scene(root));
+            currentStage.setTitle("Staff's Home Page");
+            currentStage.sizeToScene();
             currentStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

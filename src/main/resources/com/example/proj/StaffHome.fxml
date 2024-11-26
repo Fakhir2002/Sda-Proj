@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -16,23 +18,31 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.StaffHomeController">
     <children>
+        <!-- Background Image -->
         <ImageView fitHeight="457.0" fitWidth="481.0" layoutX="184.0" layoutY="-0.8" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
             <image>
                 <Image url="@images/hospital.jpg" />
             </image>
         </ImageView>
+
+        <!-- Logo -->
         <ImageView fitHeight="40.0" fitWidth="55.0" layoutX="-57.0" layoutY="-11.0">
             <image>
                 <Image url="@images/logo.png" />
             </image>
         </ImageView>
+
+        <!-- Sidebar Panel -->
         <AnchorPane layoutX="-2.0" prefHeight="400.0" prefWidth="166.0" style="-fx-background-color: #d7e1e5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
+                <!-- Logo on Sidebar -->
                 <ImageView fitHeight="48.0" fitWidth="70.0" layoutX="60.0" layoutY="7.0">
                     <image>
                         <Image url="@images/logo.png" />
                     </image>
                 </ImageView>
+
+                <!-- Sidebar Rectangle Button -->
                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#014d4e" height="48.0" layoutX="38.0" layoutY="62.0" stroke="#047b66" strokeType="INSIDE" width="114.0">
                     <effect>
                         <Bloom>
@@ -49,17 +59,23 @@
                         </Bloom>
                     </effect>
                 </Rectangle>
+
+                <!-- Sidebar Title Text -->
                 <Text fill="#0b0202" layoutX="50.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CureTrack">
                     <font>
                         <Font size="18.0" />
                     </font>
                 </Text>
-                <Button fx:id="InventoryButton" layoutY="160.0" mnemonicParsing="false" onAction="#HandleManageInventory" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Manage Inventroy" textFill="#fffdfd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                <Button fx:id="ResourcesButton" layoutY="213.0" mnemonicParsing="false" onAction="#AllocateResourceButton" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Allocate  Resources" textFill="WHITE" />
-            <Button fx:id="StaffLogoutButton" layoutX="62.0" layoutY="332.0" mnemonicParsing="false" onAction="#HandleStaffLogout" prefHeight="30.0" prefWidth="55.0" text="Logout" textFill="#181717" />
+
+                <!-- Sidebar Buttons -->
+                <Button fx:id="InventoryButton" layoutY="160.0" mnemonicParsing="false" onAction="#HandleManageInventory" prefHeight="30.0" prefWidth="188.0" style="-fx-background-color: #014D4E; -fx-border-radius: 0;" text="Manage Inventory" textFill="#fffdfd" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Button fx:id="ResourcesButton" layoutY="213.0" mnemonicParsing="false" onAction="#AllocateResourceButton" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Allocate Resources" textFill="WHITE" />
+                <Button fx:id="StaffLogoutButton" layoutX="62.0" layoutY="332.0" mnemonicParsing="false" onAction="#HandleStaffLogout" prefHeight="30.0" prefWidth="55.0" text="Logout" textFill="#181717" />
             </children>
         </AnchorPane>
-        <Text fill="WHITE" layoutX="286.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
+
+        <!-- Main Title Text -->
+        <Text fill="WHITE" layoutX="239.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -67,9 +83,12 @@
                 <Glow>
                     <input>
                         <Bloom />
-                    </input></Glow>
+                    </input>
+                </Glow>
             </effect>
         </Text>
+
+        <!-- Copyright Information -->
         <Text fill="WHITE" layoutX="494.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright (c).">
             <font>
                 <Font name="System Bold" size="14.0" />
@@ -80,11 +99,21 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Label fx:id="staffName" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="40.0" prefHeight="30.0" prefWidth="215.0" text="Staff Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+
+        <!-- Staff Name Label -->
+        <Label fx:id="staffName" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="94.0" prefHeight="30.0" prefWidth="215.0" text="Staff Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
 
+        <!-- Notification Bar (MenuBar) -->
+        <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #b2bdc1; -fx-text-fill: white;">
+            <menus>
+                <Menu fx:id="notificationMenu" style="-fx-text-fill: black;" text="Notifications">
+                    <!-- Add dynamic notification items here -->
+                </Menu>
+            </menus>
+        </MenuBar>
     </children>
 </AnchorPane>

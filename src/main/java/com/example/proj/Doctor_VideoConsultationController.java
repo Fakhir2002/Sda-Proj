@@ -99,7 +99,7 @@ public class Doctor_VideoConsultationController implements InitializeUsername {
             }
 
             // Load the FXML for the Medical History page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("MedicalHistory.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Doctor_MedicalHistory.fxml"));
             Parent newPage = loader.load();
 
             // Get the controller and pass the selected patient username and current doctor's username

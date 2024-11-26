@@ -53,7 +53,7 @@ public class Admin_HomeController {
 
     public void handleremovedoc(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveDoctor.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_RemoveDoctor.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) removedoc.getScene().getWindow();
@@ -73,7 +73,7 @@ public class Admin_HomeController {
 
     public void handleremovepatient(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemovePatient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_RemovePatient.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) removepatient.getScene().getWindow();
@@ -93,7 +93,7 @@ public class Admin_HomeController {
 
     public void handleremovestaff(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveStaff.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Admin_RemoveStaff.fxml"));
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) removestaff.getScene().getWindow();

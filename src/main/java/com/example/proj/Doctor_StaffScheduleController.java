@@ -104,10 +104,11 @@ public class Doctor_StaffScheduleController implements InitializeUsername {
                 String description = "Your appointment with Dr. " + doctorName +
                         " has been cancelled due to the unavailability of the doctor. Kindly reschedule.";
 
-                Notification notification = new Notification(patientId, currentDoctor.getId(), description);
+                Notification notification = NotificationFactory.createNotification(0, description, false, patientId, null, null);
 
                 // Save the notification to the database
                 boolean isNotificationSaved = notification.saveNotification();
+
 
                 if (isNotificationSaved) {
                     // Show confirmation alert that the appointment was deleted and the patient was notified

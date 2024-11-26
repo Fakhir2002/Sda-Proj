@@ -1,22 +1,23 @@
 package Database;
 
-import com.example.proj.Notification;
+import com.example.proj.*;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Notification_Handler implements DatabaseConfig{
+public class Notification_Handler implements DatabaseConfig {
 
     // Save a new notification in the database
-    public boolean saveNotification(int patientId, int doctorId, String description) {
-        String insertQuery = "INSERT INTO notification (patient_id, doctor_id, description, isRead) VALUES (?, ?, ?, 0)";
+    public boolean saveNotification(Integer patientId, Integer doctorId, Integer staffId, String description) {
+        String insertQuery = "INSERT INTO notification (patient_id, doctor_id, staff_id, description, isRead) VALUES (?, ?, ?, ?, 0)";
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setInt(1, patientId);
-            preparedStatement.setInt(2, doctorId);
-            preparedStatement.setString(3, description);
+            preparedStatement.setObject(1, patientId, Types.INTEGER);  // Allows null for patientId
+            preparedStatement.setObject(2, doctorId, Types.INTEGER);   // Allows null for doctorId
+            preparedStatement.setObject(3, staffId, Types.INTEGER);    // Allows null for staffId
+            preparedStatement.setString(4, description);
 
             int rowsAffected = preparedStatement.executeUpdate();
 
@@ -39,7 +40,7 @@ public class Notification_Handler implements DatabaseConfig{
     // Get all notifications for a specific patient
     public List<Notification> getNotificationsByPatient(int patientId) {
         List<Notification> notifications = new ArrayList<>();
-        String query = "SELECT * FROM notification WHERE patient_id = ?";
+        String query = "SELECT * FROM notification WHERE patient_id = ? AND doctor_id IS NULL AND staff_id IS NULL";
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -58,7 +59,7 @@ public class Notification_Handler implements DatabaseConfig{
     }
 
     // Get all notifications for a specific doctor
-    public List<Notification> getNotificationsByDoctor(int doctorId) {
+    public List<Notification> getNotificationsByDoctorId(int doctorId) {
         List<Notification> notifications = new ArrayList<>();
         String query = "SELECT * FROM notification WHERE doctor_id = ?";
 
@@ -78,58 +79,25 @@ public class Notification_Handler implements DatabaseConfig{
         return notifications;
     }
 
-    // Delete a notification by ID
-    public boolean deleteNotification(int notificationId) {
-        String deleteQuery = "DELETE FROM notification WHERE NotificationID = ?";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+    // Get all notifications for a specific staff member
+    public List<Notification> getNotificationsByStaffId(int staffId) {
+        List<Notification> notifications = new ArrayList<>();
+        String query = "SELECT * FROM notification WHERE staff_id = ?";
 
-            preparedStatement.setInt(1, notificationId);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.err.println("Error deleting notification: " + e.getMessage());
-            return false;
-        }
-    }
-
-    // Get a notification by its ID
-    public Notification getNotificationById(int notificationId) {
-        String query = "SELECT * FROM notification WHERE NotificationID = ?";
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setInt(1, notificationId);
+            preparedStatement.setInt(1, staffId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return mapToNotification(resultSet);
+            while (resultSet.next()) {
+                notifications.add(mapToNotification(resultSet));
             }
 
         } catch (SQLException e) {
-            System.err.println("Error retrieving notification by ID: " + e.getMessage());
+            System.err.println("Error retrieving notifications for staff: " + e.getMessage());
         }
-        return null;
-    }
-
-    // Update the description of a notification
-    public boolean updateNotificationDescription(int notificationId, String newDescription) {
-        String updateQuery = "UPDATE notification SET description = ? WHERE NotificationID = ?";
-        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery)) {
-
-            preparedStatement.setString(1, newDescription);
-            preparedStatement.setInt(2, notificationId);
-
-            int rowsAffected = preparedStatement.executeUpdate();
-            return rowsAffected > 0;
-
-        } catch (SQLException e) {
-            System.err.println("Error updating notification: " + e.getMessage());
-            return false;
-        }
+        return notifications;
     }
 
     // Mark a notification as read
@@ -149,13 +117,33 @@ public class Notification_Handler implements DatabaseConfig{
         }
     }
 
-    // Utility method to map a ResultSet row to a Notification object
+    // Map result set to Notification object
     private Notification mapToNotification(ResultSet resultSet) throws SQLException {
-        int id = resultSet.getInt("NotificationID");
-        int patientId = resultSet.getInt("patient_id");
-        int doctorId = resultSet.getInt("doctor_id");
+        int notificationId = resultSet.getInt("NotificationID");
         String description = resultSet.getString("description");
-        boolean isRead = resultSet.getBoolean("isRead");
-        return new Notification(id, patientId, doctorId, description, isRead);
+        boolean isRead = resultSet.getInt("isRead") == 1;
+
+        Integer patientId = (resultSet.getObject("patient_id") != null) ? resultSet.getInt("patient_id") : null;
+        Integer doctorId = (resultSet.getObject("doctor_id") != null) ? resultSet.getInt("doctor_id") : null;
+        Integer staffId = (resultSet.getObject("staff_id") != null) ? resultSet.getInt("staff_id") : null;
+
+        return NotificationFactory.createNotification(notificationId, description, isRead, patientId, doctorId, staffId);
+    }
+
+    // Delete a notification by ID
+    public boolean delete(int notificationId) {
+        String deleteQuery = "DELETE FROM notification WHERE NotificationID = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery)) {
+
+            preparedStatement.setInt(1, notificationId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Error deleting notification: " + e.getMessage());
+            return false;
+        }
     }
 }

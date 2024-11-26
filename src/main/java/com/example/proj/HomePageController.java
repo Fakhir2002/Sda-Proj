@@ -61,7 +61,7 @@ public class HomePageController {
     void handleRegisterDoctor(ActionEvent event) {
         try {
             // Load the FXML for the About Us application
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterDoctor.fxml")); // Ensure AboutUs.fxml exists in the same directory
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorRegister.fxml")); // Ensure AboutUs.fxml exists in the same directory
             Parent newPage = loader.load();
 
             Stage currentStage = (Stage) registerDoctorButton.getScene().getWindow();

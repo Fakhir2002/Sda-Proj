@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.Light.Distant?>
@@ -16,16 +18,14 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Doctor_HomeController">
     <children>
+        <!-- Background image -->
         <ImageView fitHeight="457.0" fitWidth="481.0" layoutX="184.0" layoutY="-0.8" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">
             <image>
                 <Image url="@images/hospital.jpg" />
             </image>
         </ImageView>
-        <ImageView fitHeight="40.0" fitWidth="55.0" layoutX="-57.0" layoutY="-11.0">
-            <image>
-                <Image url="@images/logo.png" />
-            </image>
-        </ImageView>
+
+        <!-- Sidebar -->
         <AnchorPane layoutX="-2.0" prefHeight="400.0" prefWidth="166.0" style="-fx-background-color: #d7e1e5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="48.0" fitWidth="70.0" layoutX="60.0" layoutY="7.0">
@@ -59,10 +59,21 @@
                 <Button fx:id="docfaq" layoutX="-2.0" layoutY="322.0" mnemonicParsing="false" onAction="#handledocfaq" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="FAQs" textFill="#ececec" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                 <Button fx:id="Feedback" layoutY="229.0" mnemonicParsing="false" onAction="#Gofeedback" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Feedback" textFill="WHITE" />
                 <Button fx:id="staff" layoutY="274.0" mnemonicParsing="false" onAction="#handlestaff" prefHeight="30.0" prefWidth="184.0" style="-fx-background-color: #014D4E;" text="Availability" textFill="WHITE" />
-            <Button fx:id="LogoutButton" layoutX="64.0" layoutY="395.0" mnemonicParsing="false" onAction="#HandleLogout" text="Log Out" />
+                <Button fx:id="LogoutButton" layoutX="64.0" layoutY="395.0" mnemonicParsing="false" onAction="#HandleLogout" text="Log Out" />
             </children>
         </AnchorPane>
-        <Text fill="WHITE" layoutX="286.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
+
+        <!-- Notification Bar -->
+        <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #b2bdc1; -fx-text-fill: white;">
+            <menus>
+                <Menu fx:id="notificationMenu" style="-fx-text-fill: black;" text="Notifications">
+                    <!-- Notification items will go here -->
+                </Menu>
+            </menus>
+        </MenuBar>
+
+        <!-- Text Labels and Footer -->
+        <Text fill="WHITE" layoutX="241.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Digital Healthcare Solution" wrappingWidth="289.60000000000014">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -70,7 +81,8 @@
                 <Glow>
                     <input>
                         <Bloom />
-                    </input></Glow>
+                    </input>
+                </Glow>
             </effect>
         </Text>
         <Text fill="WHITE" layoutX="494.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright (c).">
@@ -83,11 +95,12 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Text>
-        <Label fx:id="DoctorName" alignment="CENTER" contentDisplay="CENTER" layoutX="286.0" layoutY="40.0" prefHeight="30.0" prefWidth="215.0" text="Doctor Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+
+        <!-- Doctor Name Label -->
+        <Label fx:id="DoctorName" alignment="CENTER" contentDisplay="CENTER" layoutX="241.0" layoutY="82.0" prefHeight="30.0" prefWidth="215.0" text="Doctor Logged In!" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-
     </children>
 </AnchorPane>
