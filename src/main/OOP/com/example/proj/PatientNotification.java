@@ -24,4 +24,5 @@ class PatientNotification extends Notification {
         this.patientId = patientId;
     }
 
+
 }
