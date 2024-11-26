@@ -49,25 +49,30 @@ public class Emergency_Handler implements DatabaseConfig{
         }
     }
 
-    public List<Emergency> getEmergencyData() {
+    public List<Emergency> getEmergencyData(int hospitalID) {
         List<Emergency> emergencyList = new ArrayList<>();
-        String query = "SELECT * from emergency";
+        // Updated query to filter by hospital_id
+        String query = "SELECT * FROM emergency WHERE hospital_id = ?";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-            while (rs.next()) {
-                emergencyList.add(new Emergency(
-                        rs.getInt("emergency_id"),  // This should match the data type of emergency_id
-                        rs.getInt("patient_id"),     // Corrected to int
-                        rs.getInt("hospital_id"),    // Corrected to int (no need for String.valueOf)
-                        rs.getString("type"),
-                        rs.getString("status"),
-                        rs.getString("description")
-                ));
+            // Set the hospital_id parameter in the query
+            pstmt.setInt(1, hospitalID);
+
+            // Execute the query
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    emergencyList.add(new Emergency(
+                            rs.getInt("emergency_id"),  // Emergency ID
+                            rs.getInt("patient_id"),     // Patient ID
+                            rs.getInt("hospital_id"),    // Hospital ID
+                            rs.getString("type"),        // Emergency type
+                            rs.getString("status"),      // Emergency status
+                            rs.getString("description")  // Description of the emergency
+                    ));
+                }
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,6 +80,7 @@ public class Emergency_Handler implements DatabaseConfig{
 
         return emergencyList;
     }
+
 
     public boolean updateEmergencyStatus(int emergencyId, String newStatus) {
         String query = "UPDATE emergency SET status = ? WHERE emergency_id = ?";

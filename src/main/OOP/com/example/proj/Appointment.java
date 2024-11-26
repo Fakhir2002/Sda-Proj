@@ -75,12 +75,16 @@ public class Appointment {
         return manageAppointmentHandler.getAppointments(doctorId);
     }
 
-    public void updateAppointmentStatus(int appointmentId) {
-        manageAppointmentHandler.updateAppointmentStatus(appointmentId);
+    public boolean updateAppointmentStatus(int appointmentId) {
+
+        return  manageAppointmentHandler.updateAppointmentStatus(appointmentId);
     }
 
     public ObservableList<Object[]> getPendingAppointments(int doctorId) {
         return handler.getPendingAppointments(doctorId);  // Call the method in Appointment_Handler to fetch pending appointments
+    }
+    public int getPatientIdByAppointmentId(int appointmentId){
+        return manageAppointmentHandler.getPatientIdByAppointmentId(appointmentId);
     }
 
 

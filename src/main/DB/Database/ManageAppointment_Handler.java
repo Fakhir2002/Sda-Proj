@@ -50,9 +50,7 @@ public class ManageAppointment_Handler implements DatabaseConfig{
 
 
 
-    public void updateAppointmentStatus(int appointmentId) {
-
-
+    public boolean updateAppointmentStatus(int appointmentId) {
         // SQL query to update the status of an appointment
         String sql = "UPDATE appointment SET status = ? WHERE appointmentID = ?";
 
@@ -63,15 +61,47 @@ public class ManageAppointment_Handler implements DatabaseConfig{
             pstmt.setInt(2, appointmentId); // Set the appointment ID
 
             int rowsAffected = pstmt.executeUpdate();
+
+            // If rows were affected, return true indicating success
             if (rowsAffected > 0) {
                 System.out.println("Appointment status updated to confirmed.");
+                return true;
             } else {
                 System.out.println("Appointment not found.");
+                return false; // If no rows were updated, return false
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            return false; // Return false if there is a SQL exception
         }
     }
+
+
+    public int getPatientIdByAppointmentId(int appointmentId) {
+        String query = "SELECT patient_id FROM appointment WHERE appointmentID = ?";
+        int patientId = -1;  // Default value to return if no patient is found
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the appointmentId parameter for the query
+            preparedStatement.setInt(1, appointmentId);
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // If a result is found, get the patient_id
+            if (resultSet.next()) {
+                patientId = resultSet.getInt("patient_id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return patientId;  // Return the patientId (or -1 if not found)
+    }
+
+
 
 }
