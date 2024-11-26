@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Doctor_HomeController">
+<AnchorPane  stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Doctor_HomeController">
     <children>
         <!-- Background image -->
         <ImageView fitHeight="457.0" fitWidth="481.0" layoutX="184.0" layoutY="-0.8" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="-1.0">

@@ -25,4 +25,3 @@ class PatientNotification extends Notification {
     }
 
 }
-//hello how are you

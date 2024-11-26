@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class Staff_AllocateResourcesController implements InitializeUsername{
+public class Staff_AllocateResourcesController implements InitializeUsername {
 
     @FXML
     private Button back;
@@ -26,9 +26,7 @@ public class Staff_AllocateResourcesController implements InitializeUsername{
     @FXML
     private TableColumn<Emergency, Integer> columnId;
     @FXML
-    private TableColumn<Emergency, Integer> columnPatientid;
-    @FXML
-    private TableColumn<Emergency, Integer> columnHospitalid;
+    private TableColumn<Emergency, String> columnPatientName; // Column to display patient name
     @FXML
     private TableColumn<Emergency, String> columnType;
     @FXML
@@ -40,8 +38,14 @@ public class Staff_AllocateResourcesController implements InitializeUsername{
     public void initialize(String username) {
         currentStaff = new Staff(username);
 
-    }
+        columnId.setCellValueFactory(new PropertyValueFactory<>("emergency_id"));
+        columnPatientName.setCellValueFactory(new PropertyValueFactory<>("patientName")); // Set factory for patient name
+        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        // Load emergency data
+        loadEmergencyData();
+    }
 
     public void ConfirmThis(ActionEvent actionEvent) {
         // Get the selected emergency from the TableView
@@ -81,7 +85,6 @@ public class Staff_AllocateResourcesController implements InitializeUsername{
         }
     }
 
-
     public void GoBack(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffHome.fxml")); // Ensure StaffHome.fxml exists
@@ -101,24 +104,21 @@ public class Staff_AllocateResourcesController implements InitializeUsername{
         }
     }
 
-    @FXML
-    public void initialize() {
-        // Configure TableView columns to match Emergency fields
-        columnId.setCellValueFactory(new PropertyValueFactory<>("emergency_id"));
-        columnPatientid.setCellValueFactory(new PropertyValueFactory<>("patient_id"));
-        columnHospitalid.setCellValueFactory(new PropertyValueFactory<>("hospital_id"));
-        columnType.setCellValueFactory(new PropertyValueFactory<>("type"));
-        columnStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        // Load emergency data
-        loadEmergencyData();
-    }
-
     private void loadEmergencyData() {
-        List<Emergency> emergencies = Emergency.fetchEmergencyData(); // Fetch emergency data
+        String hospitalName = currentStaff.getHospital();
+        Hospital hospital = new Hospital();
+        int hospitalID = hospital.getHospitalIdByName(hospitalName);
+
+        List<Emergency> emergencies = Emergency.fetchEmergencyData(hospitalID); // Fetch emergency data
+
+        // Map patient IDs to patient names
+        Patient patient = new Patient();
+        for (Emergency emergency : emergencies) {
+            String patientName = patient.getPatientNameById(emergency.getPatient_id());
+            emergency.setPatientName(patientName); // Set patient name in the Emergency object
+        }
+
         emergencyTable.getItems().clear();
         emergencyTable.getItems().addAll(emergencies); // Add data to TableView
     }
-
-
 }

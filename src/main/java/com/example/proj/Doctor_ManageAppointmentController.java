@@ -1,6 +1,5 @@
 package com.example.proj;
 
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Doctor_ManageAppointmentController implements InitializeUsername{
+public class Doctor_ManageAppointmentController implements InitializeUsername {
 
     @FXML
     private TableColumn<Object[], Integer> ID;
@@ -33,26 +32,21 @@ public class Doctor_ManageAppointmentController implements InitializeUsername{
     @FXML
     private Label welcomeText;
     public Button backfromapp;
+
     @FXML
     private Doctor currentDoctor;
     @FXML
     private Appointment appointment;
 
-
     // This method is called when the FXML page is loaded
     @FXML
     public void initialize(String username) {
-        currentDoctor = new Doctor(username);
-        appointment = new Appointment();
-        // Call the method to fetch and display appointments as soon as the page is loaded
-        display();
+        currentDoctor = new Doctor(username);  // Initialize current doctor
+        appointment = new Appointment();  // Initialize appointment object
+        display();  // Call display method to show appointments
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
-
+    // Handle the back button click to navigate back to the Doctor's home page
     public void handlebackfromApp(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorHome.fxml"));
@@ -71,27 +65,13 @@ public class Doctor_ManageAppointmentController implements InitializeUsername{
         }
     }
 
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private TextField del;// FXML delete button
-
-    @FXML
-
-
+    // Display all appointments for the current doctor
     public void display() {
+        int doctorId = currentDoctor.getId(); // Retrieve doctor ID from currentDoctor object
+        ObservableList<Object[]> appointments = appointment.getAppointments(doctorId); // Fetch appointments for the doctor
+        appointmentTable.setItems(appointments); // Set the table items
 
-
-        // Retrieve the doctor ID from the currentDoctor object
-        int doctorId = currentDoctor.getId(); // Ensure this method exists in the Doctor class
-
-        // Retrieve the appointments for the logged-in doctor
-        ObservableList<Object[]> appointments = appointment.getAppointments(doctorId);
-
-        // Set the items in the table
-        appointmentTable.setItems(appointments);
-
-        // Set cell value factories to access the data in the Object array
+        // Set the cell value factories to display the data in the table
         ID.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty((Integer) cellData.getValue()[0]).asObject());
         Name.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty((String) cellData.getValue()[1]));
         Date.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty((String) cellData.getValue()[2]));
@@ -99,85 +79,55 @@ public class Doctor_ManageAppointmentController implements InitializeUsername{
         status.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty((String) cellData.getValue()[4]));
     }
 
-
+    // Handle the confirmation of an appointment
     @FXML
     public void HandleConfirm(ActionEvent actionEvent) {
         // Get the selected appointment from the TableView
         Object[] selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment != null) {
-            // Get the appointment ID from the selected row
-            int appointmentId = (Integer) selectedAppointment[0];
-
+            int appointmentId = (Integer) selectedAppointment[0];  // Get the appointment ID
 
             // Update the appointment status to "confirmed"
-            appointment.updateAppointmentStatus(appointmentId);
+            boolean isUpdated = appointment.updateAppointmentStatus(appointmentId);
+            if (isUpdated) {
+                // Prepare the notification message
+                String notificationMessage = "Your appointment with Dr. " + currentDoctor.getName() + " is confirmed. " +
+                        "Please make sure to be prepared for the consultation.";
 
-            // Refresh the table to show the updated status
-            display();
+                // Create and save the notification
+                Notification notification = NotificationFactory.createNotification(0, notificationMessage, false,
+                        appointment.getPatientIdByAppointmentId(appointmentId), null, null);
+                boolean isNotificationSaved = notification.saveNotification();
 
-            // Show confirmation message
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Appointment Status");
-            alert.setHeaderText(null);
-            alert.setContentText("The appointment has been confirmed.");
-            alert.showAndWait();
-        } else {
-            // If no appointment is selected
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("No Appointment Selected");
-            alert.setHeaderText(null);
-            alert.setContentText("Please select an appointment to confirm.");
-            alert.showAndWait();
-        }
-    }
-    public void handleDeleteAppointment(ActionEvent actionEvent) {
-        // Get the appointment ID from the TextField
-        String appointmentIdText = del.getText();
+                if (isNotificationSaved) {
+                    // Log and refresh the table after the notification is saved
+                    System.out.println("Notification sent to patient: " + notificationMessage);
+                    display();  // Refresh the appointment table
 
-        if (appointmentIdText.isEmpty()) {
-            // If the input field is empty, show an error message
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Input Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter an appointment ID to delete.");
-            alert.showAndWait();
-            return;
-        }
-
-        try {
-            int appointmentId = Integer.parseInt(appointmentIdText);
-
-
-            // Call the delete method
-            boolean isDeleted = Appointment.deleteAppointment(appointmentId);
-
-            if (isDeleted) {
-                // Refresh the table to reflect the deletion
-                display();
-
-                // Show a success message
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Appointment Deleted");
-                alert.setHeaderText(null);
-                alert.setContentText("The appointment has been deleted.");
-                alert.showAndWait();
+                    // Show confirmation message to the doctor
+                    showAlert(Alert.AlertType.INFORMATION, "Appointment Status", null, "The appointment has been confirmed.");
+                } else {
+                    // Show error if notification failed
+                    showAlert(Alert.AlertType.ERROR, "Error", "Notification Failed", "Failed to send notification to the patient.");
+                }
             } else {
-                // If the appointment was not found or not deleted
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Delete Failed");
-                alert.setHeaderText(null);
-                alert.setContentText("Failed to delete the appointment. Please check the ID and try again.");
-                alert.showAndWait();
+                // Show error if appointment status update failed
+                showAlert(Alert.AlertType.ERROR, "Error", "Appointment Update Failed", "Failed to confirm the appointment.");
             }
 
-        } catch (NumberFormatException e) {
-            // Handle invalid number format for the appointment ID
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Input");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter a valid numeric appointment ID.");
-            alert.showAndWait();
+        } else {
+            // If no appointment is selected
+            showAlert(Alert.AlertType.WARNING, "No Appointment Selected", null, "Please select an appointment to confirm.");
         }
+    }
+
+    // Helper method to show alerts
+    private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
     }
 }

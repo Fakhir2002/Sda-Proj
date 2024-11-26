@@ -11,6 +11,7 @@ public class Emergency {
     private String type;
     private String status;
     private String description;
+    private String patientName;
 
     private Emergency_Handler emergencyHandler;  // Declare emergencyHandler
 
@@ -95,13 +96,20 @@ public class Emergency {
         return emergencyHandler.getHospitalNames();  // This should no longer throw NullPointerException
     }
 
-    public static List<Emergency> fetchEmergencyData() {
+    public static List<Emergency> fetchEmergencyData(int hospital_id) {
         Emergency_Handler emergency_handler = new Emergency_Handler();  // Create an instance of Emergency_Handler
-        return emergency_handler.getEmergencyData();  // Call the function from the Emergency_Handler class
+        return emergency_handler.getEmergencyData(hospital_id);  // Call the function from the Emergency_Handler class
     }
 
     public boolean updateStatus(int emergencyId, String newStatus) {
         return emergencyHandler.updateEmergencyStatus(emergencyId, newStatus);
     }
 
+    public String getPatientName() { // Getter for patientName
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) { // Setter for patientName
+        this.patientName = patientName;
+    }
 }
