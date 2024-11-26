@@ -87,7 +87,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #b2bdc1; -fx-text-fill: white;">
+        <MenuBar blendMode="EXCLUSION" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" style="-fx-background-color: #014D4E; -fx-text-fill: white;">
             <menus>
                 <Menu fx:id="notificationMenu" style="-fx-text-fill: black;" text="Notifications">
 
