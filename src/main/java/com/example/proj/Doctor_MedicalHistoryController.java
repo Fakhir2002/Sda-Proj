@@ -90,6 +90,7 @@ public class Doctor_MedicalHistoryController {
         medicalHistoryTable.setItems(medicalRecords);
     }
 
+
     @FXML
     private void handleUpdate(ActionEvent event) {
         MedicalRecord selectedRecord = medicalHistoryTable.getSelectionModel().getSelectedItem();
@@ -108,6 +109,7 @@ public class Doctor_MedicalHistoryController {
 
         String currentDate = java.time.LocalDate.now().toString();
 
+        // Update the medical record
         boolean success = medicalRecord.updateMedicalHistory(
                 selectedRecord.getHistoryID(),
                 diagnosis,
@@ -116,7 +118,38 @@ public class Doctor_MedicalHistoryController {
         );
 
         if (success) {
-            showAlert("Success", "Medical record updated successfully!", Alert.AlertType.INFORMATION);
+            // Create the notification message for the patient
+            String notificationMessage = "Video consultation with Dr. " + currentDoctor.getName() + " concluded. Symptoms: " + selectedRecord.getSymptoms() +
+                    ", Diagnosis: " + diagnosis + ", Treatment: " + treatment + ".\n\n" +
+                    "Kindly pay your bill for the consultation at your earliest convenience.";
+
+
+            // Create and save the notification
+            Notification notification = NotificationFactory.createNotification(0, notificationMessage, false, currentPatient.getId(), null, null);
+            boolean isNotificationSaved = notification.saveNotification();
+
+            // Log the notification sent to the patient (optional)
+            System.out.println("Notification sent to patient: " + notificationMessage);
+
+            // Create a payment of 5000 for the consultation
+            double consultationFee = 5000;
+            String paymentDescription = "Medical Consultation Fee for Video Consultation with Dr. " + currentDoctor.getName();
+            String paymentStatus = "Unpaid"; // Initially marked as unpaid
+
+            // Create a new payment object (assuming a Payment class exists)
+            Bill payment = new Bill();
+            boolean paymentCreated = payment.addPayment(currentPatient.getId(),paymentDescription, consultationFee, paymentStatus);
+
+            if (paymentCreated) {
+                System.out.println("Payment of " + consultationFee + " created for the consultation.");
+            } else {
+                System.out.println("Failed to create payment.");
+            }
+
+            // Show success alert
+            showAlert("Success", "Medical record updated and payment created successfully!", Alert.AlertType.INFORMATION);
+
+            // Reload the medical history table
             loadMedicalHistory();
             diagnosisTextArea.clear();
             treatmentTextArea.clear();
@@ -124,6 +157,8 @@ public class Doctor_MedicalHistoryController {
             showAlert("Error", "Failed to update medical record.", Alert.AlertType.ERROR);
         }
     }
+
+
 
     @FXML
     private void handleBack(ActionEvent event) {

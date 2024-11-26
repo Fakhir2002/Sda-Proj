@@ -26,13 +26,14 @@ public class PayBill_Handler implements DatabaseConfig{
     }
 
     // Method to add a payment to the database
-    public boolean addPayment(String description, double amount, String status) {
-        String sql = "INSERT INTO Payment (Description, Amount, Status) VALUES (?, ?, ?)";
+    public boolean addPayment(int PaitientID, String description, double amount, String status) {
+        String sql = "INSERT INTO Payment (paitentID,Description, Amount, Status) VALUES (?,?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, description);
-            statement.setDouble(2, amount);
-            statement.setString(3, status);
+            statement.setInt(1, PaitientID);
+            statement.setString(2, description);
+            statement.setDouble(3, amount);
+            statement.setString(4, status);
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
@@ -42,21 +43,25 @@ public class PayBill_Handler implements DatabaseConfig{
         }
     }
 
-    // Method to get all payments from the database
-    public List<Bill> getAllPayments() {
+    // Method to get all payments for a specific patient ID
+    public List<Bill> getAllPayments(int patientID) {
         List<Bill> payments = new ArrayList<>();
-        String sql = "SELECT * FROM Payment";
+        String sql = "SELECT * FROM Payment WHERE paitentID = ?";
 
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            // Set the patientID parameter in the query
+            statement.setInt(1, patientID);
 
-            while (resultSet.next()) {
-                int paymentID = resultSet.getInt("paymentID");
-                String description = resultSet.getString("Description");
-                double amount = resultSet.getDouble("Amount");
-                String status = resultSet.getString("Status");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int paymentID = resultSet.getInt("paymentID");
+                    String description = resultSet.getString("Description");
+                    double amount = resultSet.getDouble("Amount");
+                    String status = resultSet.getString("Status");
 
-                payments.add(new Bill(paymentID, description, amount, status));
+                    // Create a Bill object and add it to the list
+                    payments.add(new Bill(paymentID, description, amount, status));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

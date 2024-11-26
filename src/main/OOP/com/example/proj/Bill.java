@@ -9,22 +9,31 @@ import java.util.List;
 
 public class Bill {
 
-    private  SimpleIntegerProperty paymentID; // Change to SimpleIntegerProperty for paymentID
-    private  SimpleStringProperty description;
-    private  SimpleDoubleProperty amount;
-    private  SimpleStringProperty status;
+    private SimpleIntegerProperty paymentID; // Payment ID
+    private SimpleIntegerProperty patientID; // Patient ID
+    private SimpleStringProperty description;
+    private SimpleDoubleProperty amount;
+    private SimpleStringProperty status;
     private PayBill_Handler paymentHandler;
 
-    // Constructor to initialize the Bill object
-    public Bill(int paymentID, String description, double amount, String status) {
-        this.paymentID = new SimpleIntegerProperty(paymentID); // Initialize paymentID as integer
+    // Constructor to initialize the Bill object with all required properties
+    public Bill(int paymentID, int patientID, String description, double amount, String status) {
+        this.paymentID = new SimpleIntegerProperty(paymentID);
+        this.patientID = new SimpleIntegerProperty(patientID);
         this.description = new SimpleStringProperty(description);
         this.amount = new SimpleDoubleProperty(amount);
         this.status = new SimpleStringProperty(status);
     }
 
     public Bill() {
-        paymentHandler= new PayBill_Handler();
+        paymentHandler = new PayBill_Handler();
+    }
+
+    public Bill(int paymentID, String description, double amount, String status) {
+        this.paymentID = new SimpleIntegerProperty(paymentID);  // Initialize paymentID as an integer
+        this.description = new SimpleStringProperty(description); // Initialize description as a string
+        this.amount = new SimpleDoubleProperty(amount);  // Initialize amount as a double
+        this.status = new SimpleStringProperty(status);  // Initialize status as a string
     }
 
     // Getter and Setter for paymentID
@@ -40,6 +49,19 @@ public class Bill {
         this.paymentID.set(paymentID);
     }
 
+    // Getter and Setter for patientID
+    public int getPatientID() {
+        return patientID.get();
+    }
+
+    public SimpleIntegerProperty patientIDProperty() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID.set(patientID);
+    }
+
     // Getter and Setter for description
     public String getDescription() {
         return description.get();
@@ -51,11 +73,6 @@ public class Bill {
 
     public void setDescription(String description) {
         this.description.set(description);
-    }
-
-    // Getter and Setter for amount
-    public double getAmount() {
-        return amount.get();
     }
 
     public SimpleDoubleProperty amountProperty() {
@@ -79,15 +96,18 @@ public class Bill {
         this.status.set(status);
     }
 
-    public List<Bill> getAllPayments() {
-        return paymentHandler.getAllPayments();
+    // Method to retrieve all payments
+    public List<Bill> getAllPayments(int PaitientID) {
+        return paymentHandler.getAllPayments(PaitientID);
     }
 
-    public boolean updatePaymentStatus(int paymentID, String paid) {
-        return paymentHandler.updatePaymentStatus(paymentID,paid);
+    // Method to update the payment status
+    public boolean updatePaymentStatus(int paymentID, String status) {
+        return paymentHandler.updatePaymentStatus(paymentID, status);
     }
 
-    public boolean addPayment(String description, double amount, String status) {
-        return paymentHandler.addPayment(description, amount, status);
+    // Method to add a new payment, using patientID and other relevant fields
+    public boolean addPayment(int patientID, String description, double amount, String status) {
+        return paymentHandler.addPayment(patientID, description, amount, status);
     }
 }

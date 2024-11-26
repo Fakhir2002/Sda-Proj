@@ -220,4 +220,6 @@ public class Hospital_Handler implements DatabaseConfig{
         return hospitalId;  // Return the hospital ID, or -1 if not found
     }
 
+
+
 }

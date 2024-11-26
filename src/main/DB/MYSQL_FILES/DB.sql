@@ -74,7 +74,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15),(14,'Pending','2024-12-07','04:00 PM - 05:00 PM',12,9),(16,'Pending','2024-12-06','11:00 AM - 12:00 PM',7,16),(17,'confirmed','2024-11-25','09:00 AM - 10:00 AM',8,9),(19,'Pending','2024-11-28','09:00 AM - 10:00 AM',8,17),(20,'Pending','2024-11-27','09:00 AM - 10:00 AM',8,9),(21,'Pending','2024-11-27','09:00 AM - 10:00 AM',8,9),(22,'Pending','2025-11-13','09:00 AM - 10:00 AM',8,9);
+INSERT INTO `appointment` VALUES (9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15),(14,'Pending','2024-12-07','04:00 PM - 05:00 PM',12,9),(16,'Pending','2024-12-06','11:00 AM - 12:00 PM',7,16),(17,'confirmed','2024-11-25','09:00 AM - 10:00 AM',8,9),(21,'Pending','2024-11-27','09:00 AM - 10:00 AM',8,9),(22,'Pending','2025-11-13','09:00 AM - 10:00 AM',8,9);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +125,7 @@ CREATE TABLE `emergency` (
   `status` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`emergency_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `emergency` (
 
 LOCK TABLES `emergency` WRITE;
 /*!40000 ALTER TABLE `emergency` DISABLE KEYS */;
-INSERT INTO `emergency` VALUES (1,9,2,'Heart Attack','Pending','i am dead'),(2,9,4,'Heart Attack','ALLOCATED','oi'),(3,16,2,'Broken Bone','ALLOCATED','oho saad haddi toot gayi'),(4,9,4,'Heart Attack','ALLOCATED','efwhoiwd');
+INSERT INTO `emergency` VALUES (1,9,2,'Heart Attack','Pending','i am dead'),(2,9,4,'Heart Attack','ALLOCATED','oi'),(3,16,2,'Broken Bone','ALLOCATED','oho saad haddi toot gayi'),(4,9,4,'Heart Attack','ALLOCATED','efwhoiwd'),(5,9,4,'Heart Attack','ALLOCATED','fuck'),(6,9,2,'Heart Attack','ALLOCATED','fuck'),(7,9,4,'Accident','Pending',','),(8,9,4,'Heart Attack','Pending',','),(9,9,4,'Accident','Pending','l');
 /*!40000 ALTER TABLE `emergency` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,10 +284,11 @@ CREATE TABLE `notification` (
   `NotificationID` int NOT NULL AUTO_INCREMENT,
   `patient_id` int DEFAULT NULL,
   `doctor_id` int DEFAULT NULL,
+  `staff_id` int DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `isRead` tinyint DEFAULT '0',
   PRIMARY KEY (`NotificationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -296,7 +297,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (4,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1),(5,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1);
+INSERT INTO `notification` VALUES (8,0,NULL,NULL,'An emergency has been reported: Heart Attack. Please attend to the patient. Description: fuck',0),(9,0,NULL,NULL,'An emergency has been reported: Heart Attack. Please attend to the patient. Description: fuck',0),(10,0,NULL,NULL,'An emergency has been reported: Heart Attack. Please attend to the patient. Description: fuck',0),(11,0,NULL,NULL,'An emergency has been reported: Accident. Please attend to the patient. Description: ,',0),(12,0,NULL,NULL,'An emergency has been reported: Heart Attack. Please attend to the patient. Description: ,',0),(14,9,NULL,NULL,'Video consultation concluded. Symptoms: yes, Diagnosis: yes, Treatment: yes',1);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -340,11 +341,12 @@ DROP TABLE IF EXISTS `payment`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `payment` (
   `paymentID` int NOT NULL AUTO_INCREMENT,
+  `paitentID` int NOT NULL,
   `Description` varchar(500) NOT NULL,
   `Amount` int NOT NULL,
   `Status` varchar(255) NOT NULL,
   PRIMARY KEY (`paymentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,7 +355,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid'),(2,'HealthCare Package: package1',2500,'Paid'),(3,'HealthCare Package: package1',2500,'Paid');
+INSERT INTO `payment` VALUES (1,0,'HealthCare Package: package1',2500,'Paid'),(2,0,'HealthCare Package: package1',2500,'Paid'),(3,0,'HealthCare Package: package1',2500,'Paid'),(4,9,'HealthCare Package: package1',2500,'Paid');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +408,7 @@ CREATE TABLE `videoconsulations` (
   `patientID` int NOT NULL,
   `doctorID` int NOT NULL,
   PRIMARY KEY (`historyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,7 +417,7 @@ CREATE TABLE `videoconsulations` (
 
 LOCK TABLES `videoconsulations` WRITE;
 /*!40000 ALTER TABLE `videoconsulations` DISABLE KEYS */;
-INSERT INTO `videoconsulations` VALUES (1,'yes','iws','is','2024-11-26',1,9,8);
+INSERT INTO `videoconsulations` VALUES (1,'yes','iws','is','2024-11-26',1,9,8),(2,'yes','yes','yes','2024-11-26',1,9,8),(3,'yes','yes','yes','2024-11-26',1,9,8);
 /*!40000 ALTER TABLE `videoconsulations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -428,4 +430,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-26 18:06:28
+-- Dump completed on 2024-11-26 21:22:08

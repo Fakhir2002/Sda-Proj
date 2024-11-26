@@ -193,7 +193,18 @@ public class Patient_BookAppointmentController implements InitializeUsername {
         int patientId = currentPatient.getId();
 
         if (Appointment.saveAppointment("Pending", selectedDate, selectedTime, doctorId, patientId)) {
+
+
+            String notificationMessage = "You have a new Booked Appointment from " + currentPatient.getFirstName() + ". Please review the details and respond promptly.";
+
+
+            Notification notification = NotificationFactory.createNotification(0, notificationMessage, false, null, doctorId, null);
+
+            // Save the notification to the database
+            boolean isNotificationSaved = notification.saveNotification();
+
             showAlert("Success", "Appointment confirmed successfully.");
+
 
 
         } else {
@@ -228,7 +239,19 @@ public class Patient_BookAppointmentController implements InitializeUsername {
 
         // If no existing consultation, proceed with saving the new video consultation
         if (medicalRecord.saveMedicalHistory(symptoms, currentPatient.getId(), doctorId)) {
+
+
+            String notificationMessage = "You have a new video consultation request from " + currentPatient.getFirstName() + ". Please review the details and respond promptly.";
+
+
+
+            Notification notification = NotificationFactory.createNotification(0, notificationMessage, false, null, doctorId, null);
+
+            // Save the notification to the database
+            boolean isNotificationSaved = notification.saveNotification();
+
             showAlert("Success", "Video consultation requested successfully.");
+
         } else {
             showAlert("Error", "Failed to request video consultation. Please try again.");
         }

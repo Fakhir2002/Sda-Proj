@@ -63,18 +63,21 @@ public abstract class Notification {
         return "NotificationID: " + notificationId + ", Description: " + description + ", IsRead: " + isRead;
     }
 
-    // Save the notification to the database
     public boolean saveNotification() {
         if (this instanceof PatientNotification) {
             PatientNotification patientNotification = (PatientNotification) this;
-            return notificationHandler.saveNotification(patientNotification.getPatientId(), null, null, description);
+            System.out.println("Saving Patient Notification: " + patientNotification.getDescription());
+            return notificationHandler.saveNotification(patientNotification.getPatientId(), null, null, patientNotification.getDescription());
         } else if (this instanceof DoctorNotification) {
             DoctorNotification doctorNotification = (DoctorNotification) this;
-            return notificationHandler.saveNotification(null, doctorNotification.getDoctorId(), null, description);
+            System.out.println("Saving Doctor Notification: " + doctorNotification.getDescription());
+            return notificationHandler.saveNotification(null, doctorNotification.getDoctorId(), null, doctorNotification.getDescription());
         } else if (this instanceof StaffNotification) {
             StaffNotification staffNotification = (StaffNotification) this;
-            return notificationHandler.saveNotification(null, null, staffNotification.getStaffId(), description);
+            System.out.println("Saving Staff Notification: " + staffNotification.getDescription());
+            return notificationHandler.saveNotification(null, null, staffNotification.getStaffId(), staffNotification.getDescription());
         }
+        System.out.println("Notification type not matched.");
         return false;
     }
 

@@ -99,7 +99,7 @@ public class Patient_SubscribePackageController implements InitializeUsername {
             String status = "Unpaid";
 
             // Add payment to the database
-            boolean paymentAdded = payment.addPayment(description, amount, status);
+            boolean paymentAdded = payment.addPayment(currentPatient.getId(),description, amount, status);
 
             if (paymentAdded) {
                 // Payment successfully added to the database

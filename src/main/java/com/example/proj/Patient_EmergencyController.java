@@ -90,7 +90,6 @@ public class Patient_EmergencyController implements InitializeUsername {
         // Debugging: Verify if the combo box is populated
         System.out.println("Emergency types populated: " + emergencyTypes);
     }
-
     public void handleEmergency(ActionEvent actionEvent) {
         // Get data from UI elements
         String description = descriptionBox.getText();  // Get the description from the text field
@@ -116,11 +115,33 @@ public class Patient_EmergencyController implements InitializeUsername {
         boolean isInserted = emergency.insertEmergency(patientId, hospitalId, emergencyType, status, description);
 
         if (isInserted) {
-            showAlert(Alert.AlertType.INFORMATION, "Success", "Emergency record inserted successfully.");
+            // Get the list of staff members in the selected hospital
+            List<Staff> staffList = Staff.getStaffByHospital(selectedHospital);
+
+            // Create and save notifications for each staff member
+            for (Staff staff : staffList) {
+                // Create a notification for the staff member
+                String notificationDescription = "An emergency has been reported: " + emergencyType +
+                        ". Please attend to the patient. Description: " + description;
+
+                Notification notification = NotificationFactory.createNotification(0, notificationDescription, false, 0,0 , staff.getId());
+
+                // Save the notification
+                boolean isNotificationSaved = notification.saveNotification();
+
+                if (isNotificationSaved) {
+                    System.out.println("Notification sent to staff: " + staff.getFirstName() + " " + staff.getLastName());
+                } else {
+                    System.out.println("Failed to send notification to staff: " + staff.getFirstName() + " " + staff.getLastName());
+                }
+            }
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "Emergency record inserted and notifications sent to staff.");
         } else {
             showAlert(Alert.AlertType.ERROR, "Error", "Error inserting emergency record.");
         }
     }
+
 
     /**
      * Show an alert with a specific type, title, and message.

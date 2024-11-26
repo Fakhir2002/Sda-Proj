@@ -76,7 +76,7 @@ public class StaffHomeController implements InitializeUsername {
     }
 
     public void AllocateResourceButton(ActionEvent actionEvent) {
-        loadPage("AllocateResources.fxml", "Allocate Resources", ResourcesButton);
+        loadPage("Staff_AllocateResources.fxml", "Allocate Resources", ResourcesButton);
     }
 
     public void HandleStaffLogout(ActionEvent actionEvent) {

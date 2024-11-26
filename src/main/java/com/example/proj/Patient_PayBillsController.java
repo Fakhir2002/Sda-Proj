@@ -45,7 +45,7 @@ public class Patient_PayBillsController implements InitializeUsername {
 
     // Load all bills into the TableView
     private void loadBills() {
-        List<Bill> bills = payment.getAllPayments(); // Fetch all bills from the DB
+        List<Bill> bills = payment.getAllPayments(currentPatient.getId()); // Fetch all bills from the DB
         ObservableList<Bill> billObservableList = FXCollections.observableArrayList(bills);
 
         // Set up the columns to bind to the Bill properties
