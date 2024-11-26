@@ -282,6 +282,37 @@ public class Doctor_Handler implements DatabaseConfig{
 
     }
 
+    /**
+     * Retrieves the DoctorID for a given doctor's name.
+     *
+     * @param name The name of the doctor.
+     * @return The DoctorID if the doctor exists, or -1 if not found.
+     */
+    public int getDoctorIdByName(String name) {
+        String query = "SELECT DoctorID FROM doctors WHERE name = ?";
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            // Set the name parameter in the query
+            preparedStatement.setString(1, name);
+
+            // Execute the query
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Return the DoctorID if found
+                    return resultSet.getInt("DoctorID");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Return -1 if the doctor is not found or an error occurs
+        return -1;
+    }
+
+
 
 
 

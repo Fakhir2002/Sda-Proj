@@ -78,6 +78,9 @@ public class Doctor extends User {
     public static Doctor getDoctorbyName(String name) {
         return doctorHandler.getDoctorByName(name);
     }
+    public int getDoctorIdByName(String name){
+        return doctorHandler.getDoctorIdByName(name);
+    }
 
 
 

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `user` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `user`;
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: user
@@ -63,7 +65,7 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`appointmentID`),
   KEY `doctor_id` (`doctor_id`),
   KEY `patient_id` (`patient_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +74,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15),(14,'Pending','2024-12-07','04:00 PM - 05:00 PM',12,9),(16,'Pending','2024-12-06','11:00 AM - 12:00 PM',7,16);
+INSERT INTO `appointment` VALUES (9,'confirmed','2024-11-30','03:00 PM - 04:00 PM',3,9),(10,'confirmed','2024-11-27','11:00 AM - 12:00 PM',3,9),(11,'confirmed','2024-11-29','03:00 PM - 04:00 PM',8,15),(14,'Pending','2024-12-07','04:00 PM - 05:00 PM',12,9),(16,'Pending','2024-12-06','11:00 AM - 12:00 PM',7,16),(17,'confirmed','2024-11-25','09:00 AM - 10:00 AM',8,9),(19,'Pending','2024-11-28','09:00 AM - 10:00 AM',8,17),(20,'Pending','2024-11-27','09:00 AM - 10:00 AM',8,9),(21,'Pending','2024-11-27','09:00 AM - 10:00 AM',8,9),(22,'Pending','2025-11-13','09:00 AM - 10:00 AM',8,9);
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +125,7 @@ CREATE TABLE `emergency` (
   `status` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`emergency_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +134,7 @@ CREATE TABLE `emergency` (
 
 LOCK TABLES `emergency` WRITE;
 /*!40000 ALTER TABLE `emergency` DISABLE KEYS */;
-INSERT INTO `emergency` VALUES (1,9,2,'Heart Attack','Pending','i am dead'),(2,9,4,'Heart Attack','Pending','oi'),(3,16,2,'Broken Bone','ALLOCATED','oho saad haddi toot gayi');
+INSERT INTO `emergency` VALUES (1,9,2,'Heart Attack','Pending','i am dead'),(2,9,4,'Heart Attack','ALLOCATED','oi'),(3,16,2,'Broken Bone','ALLOCATED','oho saad haddi toot gayi'),(4,9,4,'Heart Attack','ALLOCATED','efwhoiwd');
 /*!40000 ALTER TABLE `emergency` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +159,7 @@ CREATE TABLE `faq` (
 
 LOCK TABLES `faq` WRITE;
 /*!40000 ALTER TABLE `faq` DISABLE KEYS */;
-INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool','yoyo'),(15,8,'hello','hi'),(0,10,'yo mama whats up','im good'),(9,10,'hi mama','hi beta jee'),(0,9,'is ur chaddi paseena full','yes');
+INSERT INTO `faq` VALUES (9,3,'geyy','true'),(0,8,'why so cool','yoyo'),(15,8,'hello','hi'),(0,10,'yo mama whats up','im good'),(9,10,'hi mama','hi beta jee'),(0,9,'is ur chaddi paseena full','yes'),(9,8,'jfbejksd','jtyj');
 /*!40000 ALTER TABLE `faq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +179,7 @@ CREATE TABLE `feedback` (
   `recommendations` text,
   `feedback_comments` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +188,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool'),(9,'Fakhir','Mama','Shifa','0','very cool mama','whatsup maa'),(15,'Afrah','Shabbir ','CMH','0','everything good','perfect'),(16,'Fakhir','Shabbir ','CMH','0','very cool','awesome'),(17,'Inam','Shabbir ','CMH','Excellent','hihi','yoyoy');
+INSERT INTO `feedback` VALUES (2,'Fakhir','munhim','CMH','0','very cool','not cool'),(9,'Fakhir','Mama','Shifa','0','very cool mama','whatsup maa'),(15,'Afrah','Shabbir ','CMH','0','everything good','perfect'),(16,'Fakhir','Shabbir ','CMH','0','very cool','awesome'),(17,'Inam','Shabbir ','CMH','Excellent','hihi','yoyoy'),(18,'Fakhir','Shabbir ','CMH','Excellent','ljnl','lkn');
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -272,33 +274,6 @@ INSERT INTO `inventory` VALUES (1,NULL,204,325,172),(2,NULL,301,541,622),(3,NULL
 UNLOCK TABLES;
 
 --
--- Table structure for table `medicalhistory`
---
-
-DROP TABLE IF EXISTS `medicalhistory`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `medicalhistory` (
-  `historyID` int NOT NULL AUTO_INCREMENT,
-  `Diagnosis` varchar(500) NOT NULL,
-  `Treatment` varchar(500) NOT NULL,
-  `Date` date NOT NULL,
-  `patientID` int NOT NULL,
-  PRIMARY KEY (`historyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `medicalhistory`
---
-
-LOCK TABLES `medicalhistory` WRITE;
-/*!40000 ALTER TABLE `medicalhistory` DISABLE KEYS */;
-INSERT INTO `medicalhistory` VALUES (1,'lknk','okno','2024-11-25',0),(2,'dsaasad','sdav','2024-11-25',9),(3,'dfser','erdg','2024-11-25',9);
-/*!40000 ALTER TABLE `medicalhistory` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `notification`
 --
 
@@ -312,7 +287,7 @@ CREATE TABLE `notification` (
   `description` varchar(500) DEFAULT NULL,
   `isRead` tinyint DEFAULT '0',
   PRIMARY KEY (`NotificationID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -321,7 +296,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-INSERT INTO `notification` VALUES (4,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1);
+INSERT INTO `notification` VALUES (4,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1),(5,9,8,'Your appointment with Dr. Shabbir  has been cancelled due to the unavailability of the doctor. Kindly reschedule.',1);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -343,7 +318,7 @@ CREATE TABLE `patients` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +327,7 @@ CREATE TABLE `patients` (
 
 LOCK TABLES `patients` WRITE;
 /*!40000 ALTER TABLE `patients` DISABLE KEYS */;
-INSERT INTO `patients` VALUES (9,'Fakhir','Ali','03335080003','2002-10-05','Bahria Town','username','password'),(13,'hamza','Aslam','99999999999','2024-10-27','fdsfsd','dwcscs','abcdefgh'),(16,'Inam','habibi','03001111111','2024-10-27','i8 islamabad','yoyo','password');
+INSERT INTO `patients` VALUES (9,'Fakhir','Ali','03335080003','2002-10-05','Bahria Town','username','password'),(13,'hamza','Aslam','99999999999','2024-10-27','fdsfsd','dwcscs','abcdefgh'),(16,'Inam','habibi','03001111111','2024-10-27','i8 islamabad','yoyo','password'),(17,'hello','lastname','03335080003','2024-11-26','kjn','user','password');
 /*!40000 ALTER TABLE `patients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +344,7 @@ CREATE TABLE `payment` (
   `Amount` int NOT NULL,
   `Status` varchar(255) NOT NULL,
   PRIMARY KEY (`paymentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +353,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid'),(2,'HealthCare Package: package1',2500,'Paid');
+INSERT INTO `payment` VALUES (1,'HealthCare Package: package1',2500,'Paid'),(2,'HealthCare Package: package1',2500,'Paid'),(3,'HealthCare Package: package1',2500,'Paid');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,29 +390,33 @@ INSERT INTO `staff` VALUES (12,'habibi','dubai','03002222222','2000-11-23','duba
 UNLOCK TABLES;
 
 --
--- Table structure for table `videoconsultation`
+-- Table structure for table `videoconsulations`
 --
 
-DROP TABLE IF EXISTS `videoconsultation`;
+DROP TABLE IF EXISTS `videoconsulations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `videoconsultation` (
-  `consultation_id` int NOT NULL AUTO_INCREMENT,
-  `status` varchar(50) NOT NULL,
-  `patient_id` int NOT NULL,
-  `doctor_id` int NOT NULL,
-  PRIMARY KEY (`consultation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `videoconsulations` (
+  `historyID` int NOT NULL AUTO_INCREMENT,
+  `symptoms` varchar(500) NOT NULL,
+  `Diagnosis` varchar(500) DEFAULT NULL,
+  `Treatment` varchar(500) DEFAULT NULL,
+  `Date` date DEFAULT NULL,
+  `isUpdated` tinyint(1) NOT NULL DEFAULT '0',
+  `patientID` int NOT NULL,
+  `doctorID` int NOT NULL,
+  PRIMARY KEY (`historyID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `videoconsultation`
+-- Dumping data for table `videoconsulations`
 --
 
-LOCK TABLES `videoconsultation` WRITE;
-/*!40000 ALTER TABLE `videoconsultation` DISABLE KEYS */;
-INSERT INTO `videoconsultation` VALUES (1,'Pending',9,7),(2,'Pending',9,8);
-/*!40000 ALTER TABLE `videoconsultation` ENABLE KEYS */;
+LOCK TABLES `videoconsulations` WRITE;
+/*!40000 ALTER TABLE `videoconsulations` DISABLE KEYS */;
+INSERT INTO `videoconsulations` VALUES (1,'yes','iws','is','2024-11-26',1,9,8);
+/*!40000 ALTER TABLE `videoconsulations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -449,4 +428,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-25  5:52:11
+-- Dump completed on 2024-11-26 17:51:06
