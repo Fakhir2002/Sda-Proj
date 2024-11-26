@@ -1,0 +1,41 @@
+.button {
+
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.7), 5, 0.0, 0, 5 ); /* Drop shadow effect */
+    -fx-border: none;
+    -fx-cursor: hand;
+    -fx-padding: 0px 0px; /* Adjust padding */
+    -fx-border-radius: 10px;
+    -fx-position-shape: false;
+    -fx-background-radius: 10px; /* Match border-radius */
+}
+
+.button:hover {
+
+    -fx-effect: dropshadow( three-pass-box, rgba(0,0,0,0.5), 5, 0.0, 0, 5 ); /* Reduce shadow on hover */
+    -fx-border-color: white; /* White border on hover */
+    -fx-padding: 5px 10px; /* Adjust padding to give a more "pressed" look */
+}
+
+/* Style for the menu bar */
+.menu-bar {
+    -fx-background-color: rgba(1, 77, 78, 0.8); /* Teal green color with 80% opacity */
+    -fx-text-fill: white; /* White text color */
+    -fx-font-size: 12px; /* Font size for menu items */
+    -fx-padding: 5px 15px; /* Padding for menu items */
+    -fx-alignment: right;
+}
+
+.menu-bar .menu-item {
+
+    -fx-text-fill: white; /* White text color for menu items */
+}
+
+.menu-bar .menu-item:hover {
+    -fx-background-color: rgba(0, 123, 124, 0.7); /* Lighter teal when hovering */
+    -fx-text-fill: white; /* White text on hover */
+}
+
+.menu-bar .menu-item:pressed {
+    -fx-background-color: rgba(0, 100, 101, 0.8); /* Darker teal for pressed state */
+    -fx-text-fill: white; /* White text on pressed */
+}

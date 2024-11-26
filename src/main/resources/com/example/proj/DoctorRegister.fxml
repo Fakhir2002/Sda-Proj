@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane  stylesheets="@styles.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Register_DoctorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.Register_DoctorController">
     <left>
         <AnchorPane prefHeight="400.0" prefWidth="160.0" style="-fx-background-color: #d7e1e5;" BorderPane.alignment="CENTER">
             <children>
@@ -35,19 +35,6 @@
                     <effect>
                         <Bloom />
                     </effect></Line>
-                <Label layoutX="27.0" layoutY="265.0" text="Register">
-                    <font>
-                        <Font name="System Bold" size="28.0" />
-                    </font>
-                    <effect>
-                        <Bloom />
-                    </effect>
-                </Label>
-                <Label layoutX="27.0" layoutY="305.0" text="NOW !">
-                    <font>
-                        <Font name="System Bold" size="28.0" />
-                    </font>
-                </Label>
                 <Circle fill="#1f93ff03" layoutX="80.0" layoutY="174.0" radius="72.0" stroke="#0b7b63" strokeType="INSIDE">
                     <effect>
                         <Bloom />
