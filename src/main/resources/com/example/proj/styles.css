@@ -18,16 +18,14 @@
 
 /* Style for the menu bar */
 .menu-bar {
-    -fx-background-color: rgba(1, 77, 78, 0.8); /* Teal green color with 80% opacity */
-    -fx-text-fill: white; /* White text color */
+    -fx-background-color: #000000; /* Solid black color */
+    -fx-text-fill: white; /* White text for menu items */
     -fx-font-size: 12px; /* Font size for menu items */
     -fx-padding: 5px 15px; /* Padding for menu items */
     -fx-alignment: right;
 }
-
 .menu-bar .menu-item {
 
-    -fx-text-fill: white; /* White text color for menu items */
 }
 
 .menu-bar .menu-item:hover {
