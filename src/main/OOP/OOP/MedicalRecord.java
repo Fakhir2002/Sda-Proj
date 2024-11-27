@@ -15,7 +15,7 @@ public class MedicalRecord {
     private SimpleStringProperty date; // Date of the record
     private SimpleBooleanProperty isUpdated; // Indicates if the record is updated
 
-    private final MedicalHistory_Handler dbHandler = new MedicalHistory_Handler(); // Database handler instance
+    private static final MedicalHistory_Handler dbHandler = new MedicalHistory_Handler(); // Database handler instance
 
     // Constructor to initialize all fields
     public MedicalRecord(int historyID, String symptoms, String diagnosis, String treatment, String date, boolean isUpdated) {
@@ -38,6 +38,10 @@ public class MedicalRecord {
 
     // Default constructor
     public MedicalRecord() {
+    }
+
+    public static List<MedicalRecord> getReport(int id) {
+        return dbHandler.getReport(id);
     }
 
     // Getters and setters for historyID
@@ -115,7 +119,7 @@ public class MedicalRecord {
     }
 
     // Retrieve medical history for a specific patient
-    public List<MedicalRecord> getMedicalHistory(int patientId) {
+    public static List<MedicalRecord> getMedicalHistory(int patientId) {
         return dbHandler.getMedicalHistory(patientId);
     }
 

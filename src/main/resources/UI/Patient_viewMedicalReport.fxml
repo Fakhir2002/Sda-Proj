@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Patient_ViewMedicalReportController">
+    <children>
+        <AnchorPane prefHeight="400.0" prefWidth="713.0" style="-fx-background-color: #014D4E;">
+            <!-- ScrollPane containing TableView -->
+            <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="304.0" prefWidth="678.0">
+                <TableView fx:id="medicalReportTable" prefHeight="306.0" prefWidth="676.0">
+                    <columns>
+                        <!-- Column for Symptoms -->
+                        <TableColumn fx:id="symptomsColumn" prefWidth="150.0" text="Symptoms">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="symptoms" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!-- Column for Diagnosis -->
+                        <TableColumn fx:id="diagnosisColumn" prefWidth="150.0" text="Diagnosis">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="diagnosis" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!-- Column for Treatment -->
+                        <TableColumn fx:id="treatmentColumn" prefWidth="150.0" text="Treatment">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="treatment" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!-- Column for Date -->
+                        <TableColumn fx:id="dateDiagnosedColumn" prefWidth="116.8" text="Date of Diagnosis">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="dateDiagnosed" />
+                            </cellValueFactory>
+                        </TableColumn>
+                        <!-- Column for Updated status -->
+                        <TableColumn fx:id="isUpdatedColumn" prefWidth="100.0" text="Updated">
+                            <cellValueFactory>
+                                <PropertyValueFactory property="isUpdated" />
+                            </cellValueFactory>
+                        </TableColumn>
+                    </columns>
+                </TableView>
+            </ScrollPane>
+
+            <!-- Back Button -->
+            <Button fx:id="backButton" layoutX="31.0" layoutY="339.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="26.0" prefWidth="58.0" text="Back" />
+        </AnchorPane>
+    </children>
+</AnchorPane>

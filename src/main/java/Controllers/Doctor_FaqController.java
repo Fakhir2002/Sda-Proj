@@ -52,6 +52,8 @@ public class Doctor_FaqController implements InitializeUsername{
 
         // Set up the table view
         setupTableView();
+        answerbutton.setDisable(true);
+
 
         // Load FAQs for the current doctor
         loadDoctorFAQs();
@@ -71,10 +73,26 @@ public class Doctor_FaqController implements InitializeUsername{
         // Listener for TableView selection
         faqTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                answerText.setText(newValue.getAnswer());
+                String answer = newValue.getAnswer();
+                boolean isAnswerEmpty = (answer == null || answer.trim().isEmpty());
+
+                // Enable the Answer button only if the answer is empty
+                answerbutton.setDisable(!isAnswerEmpty);
+
+                // Clear the answer field if there's no answer; otherwise, show the existing answer
+                if (isAnswerEmpty) {
+                    answerText.clear();
+                } else {
+                    answerText.setText(answer);
+                }
+            } else {
+                // If no item is selected, disable the Answer button
+                answerbutton.setDisable(true);
+                answerText.clear();
             }
         });
     }
+
 
     private void loadDoctorFAQs() {
         // Fetch FAQs assigned to the current doctor

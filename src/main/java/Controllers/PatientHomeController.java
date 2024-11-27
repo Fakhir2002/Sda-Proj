@@ -6,6 +6,7 @@ import OOP.PatientNotification;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -47,7 +48,13 @@ public class PatientHomeController implements InitializeUsername {
     private Patient currentPatient;
 
     @FXML
-    private Menu notificationMenu; // Updated to MenuButton
+    private Menu notificationMenu;
+
+    @FXML
+    private MenuItem viewMedicalReport;
+
+    @FXML
+    private MenuBar menuBar;
 
     @FXML
     private String username;
@@ -208,4 +215,28 @@ public class PatientHomeController implements InitializeUsername {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void handleViewMedicalReport(ActionEvent event) {
+        try {
+            // Load the FXML for the medical report
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/Patient_viewMedicalReport.fxml"));
+            Parent reportPage = loader.load();
+
+            // Get the current patient's username and pass it to the controller
+            Patient_ViewMedicalReportController controller = loader.getController();
+            controller.initialize(currentPatient.getUsername());
+
+            // Get the Stage from the MenuItem's Scene (avoid casting)
+            Stage currentStage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
+            currentStage.setScene(new Scene(reportPage));
+            currentStage.setTitle("Medical Report");
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }

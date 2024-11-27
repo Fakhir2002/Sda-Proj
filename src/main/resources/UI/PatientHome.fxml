@@ -16,6 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.MenuItem?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.PatientHomeController">
     <children>
         <ImageView fitHeight="460.0" fitWidth="481.0" layoutX="184.0" layoutY="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="40.0">
@@ -87,9 +88,12 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <MenuBar layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" styleClass="menu-bar">
+        <MenuBar fx:id="menuBar" layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" styleClass="menu-bar">
             <menus>
                 <Menu fx:id="notificationMenu" styleClass="menu-item" text="Notifications">
+                </Menu>
+                <Menu  styleClass="menu-item" text="Medical History">
+                    <MenuItem fx:id="viewMedicalReport" onAction="#handleViewMedicalReport" text="Report" />
                 </Menu>
             </menus>
         </MenuBar>

@@ -79,7 +79,7 @@ public class Doctor_HomeController implements InitializeUsername {
     }
 
     public void handledocfaq(ActionEvent actionEvent) {
-        loadPage("Doctor_Faq.fxml", "FAQs", docfaq);
+        loadPage("/UI/Doctor_Faq.fxml", "FAQs", docfaq);
     }
 
     public void Gofeedback(ActionEvent actionEvent) {

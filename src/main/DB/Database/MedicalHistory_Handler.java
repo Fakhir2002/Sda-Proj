@@ -35,6 +35,35 @@ public class MedicalHistory_Handler implements DatabaseConfig {
         return medicalRecords;
     }
 
+    public List<MedicalRecord> getReport(int patientId) {
+        List<MedicalRecord> medicalRecords = new ArrayList<>();
+        // Updated query to check for 'isUpdated' being true
+        String query = "SELECT * FROM videoconsulations WHERE patientID = ? AND isUpdated = true";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, patientId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                medicalRecords.add(new MedicalRecord(
+                        resultSet.getInt("historyID"),
+                        resultSet.getString("symptoms"),
+                        resultSet.getString("Diagnosis"),
+                        resultSet.getString("Treatment"),
+                        resultSet.getString("Date"),
+                        resultSet.getBoolean("isUpdated")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return medicalRecords;
+    }
+
+
     // Save new medical history record (initially without diagnosis and treatment)
     public boolean saveMedicalHistory(String symptoms, int patientId, int doctorId) {
         String query = "INSERT INTO videoconsulations (symptoms, patientID, doctorID, isUpdated) VALUES (?, ?, ?, ?)";
