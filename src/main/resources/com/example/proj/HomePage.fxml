@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.HomePageController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="479.0" layoutX="184.8" layoutY="-5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="459.0" fitWidth="479.0" layoutX="184.8" layoutY="40.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="185.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="41.0">
          <image>
             <Image url="@images/hospital.jpg" />
          </image>

@@ -18,7 +18,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="664.0" style="-fx-background-color: #014D4E;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proj.PatientHomeController">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="481.0" layoutX="184.0" layoutY="-0.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+        <ImageView fitHeight="460.0" fitWidth="481.0" layoutX="184.0" layoutY="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="184.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="40.0">
             <image>
                 <Image url="@images/hospital.jpg" />
             </image>
@@ -89,7 +89,7 @@
         </Label>
         <MenuBar layoutX="184.0" layoutY="0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="480.0" styleClass="menu-bar">
             <menus>
-                <Menu fx:id="notificationMenu" text="Notifications" styleClass="menu-item">
+                <Menu fx:id="notificationMenu" styleClass="menu-item" text="Notifications">
                 </Menu>
             </menus>
         </MenuBar>
