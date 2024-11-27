@@ -26,7 +26,7 @@
 
 /* Menu item styling */
 .menu-bar .menu {
-    -fx-background-color: #014D4E; /* Dark teal background for menu items */
+     -fx-background-color: #FFFFFF; /* Dark teal background for menu items */
     -fx-text-fill: white; /* White text for menu items */
     -fx-padding: 5px 15px; /* Padding for menu items */
     -fx-font-size: 12px; /* Optional: Font size for menu text */

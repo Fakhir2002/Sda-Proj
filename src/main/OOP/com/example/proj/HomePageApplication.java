@@ -10,7 +10,7 @@ public class HomePageApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HomePageApplication.class.getResource("HomePage.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 620, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 664, 500);
         stage.setTitle("Home Page");
         stage.setScene(scene);
         stage.show();

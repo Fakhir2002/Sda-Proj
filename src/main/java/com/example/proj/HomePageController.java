@@ -6,10 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +27,20 @@ public class HomePageController {
 
     @FXML
     private Button registerAdminButton;
+
+    @FXML
+    private MenuItem patientLoginMenuItem;
+    @FXML
+    private MenuItem doctorLoginMenuItem;
+    @FXML
+    private MenuItem staffLoginMenuItem;
+    @FXML
+    private MenuItem adminLoginMenuItem;
+
+
+    @FXML
+    private MenuBar menuBar;
+
 
 
     @FXML
@@ -144,4 +156,62 @@ public class HomePageController {
             e.printStackTrace(); // Debugging in case of issues loading the FXML
         }
     }
+
+
+    public void handlePatientLogin(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientLogin.fxml"));
+            Parent newPage = loader.load();
+            Stage currentStage = (Stage) menuBar.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Patient's Login Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleDoctorLogin(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("DoctorLogin.fxml"));
+            Parent newPage = loader.load();
+            Stage currentStage = (Stage) menuBar.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Doctor's Login Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleStaffLogin(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StaffLogin.fxml"));
+            Parent newPage = loader.load();
+            Stage currentStage = (Stage) menuBar.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Staff's Login Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleAdminLogin(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminLogin.fxml"));
+            Parent newPage = loader.load();
+            Stage currentStage = (Stage) menuBar.getScene().getWindow();
+            currentStage.setScene(new Scene(newPage));
+            currentStage.setTitle("Admin's Login Page");
+            currentStage.sizeToScene();
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
