@@ -107,6 +107,8 @@ public interface DatabaseConfig {
 
   ```  
 Make sure to replace "user", "root", and "12345678" with your actual MySQL database name, username, and password.
+
+
 ---
 
 ## Running the Application  
