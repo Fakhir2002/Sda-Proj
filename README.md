@@ -89,11 +89,32 @@ You must import this file into MySQL Workbench to set up the database.
 
 ---
 
+
+
+## Database Configuration  
+
+The database configuration is handled in the following interface:  
+`src/main/DB/Database/DatabaseConfig.java`  
+
+You can modify the database connection details by editing the interface:  
+
+```java
+public interface DatabaseConfig {
+  String URL = "jdbc:mysql://localhost:3306/user"; 
+  String USER = "root";
+  String PASSWORD = "12345678";
+}
+
+  ```  
+Make sure to replace "user", "root", and "12345678" with your actual MySQL database name, username, and password.
+---
+
 ## Running the Application  
 
 1. Navigate to the `src/main/App/Application` directory.  
 2. Locate the file `HomePageApplication.java`.  
 3. Run the application directly from the IDE.  
+
 
 ---
 
