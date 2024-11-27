@@ -1,6 +1,7 @@
 package Database;
 
-import com.example.proj.*;
+import OOP.Notification;
+import OOP.NotificationFactory;
 
 import java.sql.*;
 import java.util.ArrayList;

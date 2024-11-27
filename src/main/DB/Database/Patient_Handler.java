@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Patient;
+import OOP.Patient;
 
 import java.sql.*;
 import java.util.ArrayList;

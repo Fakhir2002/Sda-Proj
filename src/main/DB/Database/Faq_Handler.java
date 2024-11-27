@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Faq;
+import OOP.Faq;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Bill;
+import OOP.Bill;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

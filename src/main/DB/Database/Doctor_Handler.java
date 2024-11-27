@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Doctor;
+import OOP.Doctor;
 
 import java.sql.*;
 import java.util.List;

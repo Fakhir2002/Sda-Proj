@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.HealthCarePackages;
+import OOP.HealthCarePackages;
 
 import java.sql.*;
 import java.util.ArrayList;

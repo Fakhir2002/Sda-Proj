@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Admin;
+import OOP.Admin;
 import javafx.util.Pair;
 
 import java.sql.*;

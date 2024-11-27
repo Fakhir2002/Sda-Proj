@@ -1,4 +1,4 @@
-module com.example.proj {
+module Controllers {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -6,6 +6,10 @@ module com.example.proj {
     requires java.desktop;
 
 
-    opens com.example.proj to javafx.fxml;
-    exports com.example.proj;
+    exports Controllers;
+    opens Controllers to javafx.fxml;
+    exports OOP;
+    opens OOP to javafx.fxml;
+    exports Application;
+    opens Application to javafx.fxml;
 }

@@ -1,5 +1,5 @@
 package Database;
-import com.example.proj.Feedback;
+import OOP.Feedback;
 
 import java.sql.*;
 import java.util.ArrayList;

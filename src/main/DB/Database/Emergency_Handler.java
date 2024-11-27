@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Emergency;
+import OOP.Emergency;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package Database;
 
-import com.example.proj.Staff;
+import OOP.Staff;
 
 import java.sql.*;
 import java.util.ArrayList;
