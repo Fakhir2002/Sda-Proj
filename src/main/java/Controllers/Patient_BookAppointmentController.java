@@ -194,10 +194,7 @@ public class Patient_BookAppointmentController implements InitializeUsername {
         int patientId = currentPatient.getId();
 
         if (Appointment.saveAppointment("Pending", selectedDate, selectedTime, doctorId, patientId)) {
-
-
             String notificationMessage = "You have a new Booked Appointment from " + currentPatient.getFirstName() + ". Please review the details and respond promptly.";
-
 
             Notification notification = NotificationFactory.createNotification(0, notificationMessage, false, null, doctorId, null);
 
@@ -206,13 +203,14 @@ public class Patient_BookAppointmentController implements InitializeUsername {
 
             showAlert("Success", "Appointment confirmed successfully.");
 
-
-
+            // Clear all fields and refresh ComboBoxes
+            clearFields();
+            refreshComboBoxes();
         } else {
             showAlert("Error", "Failed to save the appointment. Please try again.");
         }
-        refreshComboBoxes();
     }
+
 
     @FXML
     public void handleVideoButton(ActionEvent event) {

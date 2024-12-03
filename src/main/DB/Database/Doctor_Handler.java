@@ -15,7 +15,8 @@ public class Doctor_Handler implements DatabaseConfig{
 
     // SQL query for verifying doctor login credentials
     private static final String LOGIN_QUERY =
-            "SELECT * FROM doctors WHERE username = ? AND password = ?";
+            "SELECT * FROM doctors WHERE BINARY username = ? AND BINARY password = ?";
+
 
     // SQL query for getting all doctors
     private static final String GET_ALL_DOCTORS_QUERY =

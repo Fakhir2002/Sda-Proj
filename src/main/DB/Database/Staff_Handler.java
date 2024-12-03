@@ -14,7 +14,7 @@ public class Staff_Handler implements DatabaseConfig{
             "INSERT INTO staff (first_name, last_name, contact_no, dob, address, username, password, hospital) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String VALIDATE_LOGIN_QUERY =
-            "SELECT * FROM staff WHERE username = ? AND password = ?";
+            "SELECT * FROM staff WHERE BINARY username = ? AND BINARY password = ?";
     private static final String SELECT_ALL_STAFF_QUERY =
             "SELECT * FROM staff";
     private static final String SELECT_STAFF_BY_HOSPITAL_QUERY =

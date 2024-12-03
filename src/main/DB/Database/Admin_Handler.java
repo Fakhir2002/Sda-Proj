@@ -20,7 +20,7 @@ public class Admin_Handler implements DatabaseConfig{
             "DELETE FROM staff WHERE first_name = ?";  // Query to delete staff by first_name
 
     private static final String LOGIN_QUERY =
-            "SELECT * FROM admin WHERE username = ? AND password = ?";
+            "SELECT * FROM admin WHERE BINARY username = ? AND BINARY password = ?";
 
     private static final String INSERT_ADMIN_QUERY =
             "INSERT INTO admin (first_name, last_name, contact_no, dob, address, username, password) " +

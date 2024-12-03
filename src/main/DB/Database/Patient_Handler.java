@@ -14,7 +14,7 @@ public class Patient_Handler implements DatabaseConfig{
             "INSERT INTO patients (first_name, last_name, contact_no, dob, address, username, password) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String LOGIN_QUERY =
-            "SELECT * FROM patients WHERE username = ? AND password = ?";
+            "SELECT * FROM patients WHERE BINARY username = ? AND BINARY password = ?";
     private static final String GET_PATIENT_DETAILS_QUERY =
             "SELECT id, first_name, last_name, contact_no, dob, address, username, password FROM patients WHERE username = ?";
     private static final String GET_USERNAME_QUERY =
